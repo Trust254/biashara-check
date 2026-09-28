@@ -1,14 +1,201 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="BiasharaCheck helps Kenyan entrepreneurs test business ideas, estimate costs and plan next steps."><title>BiasharaCheck — Test Your Business Idea</title><style>
-:root{--g:#0b6b4f;--d:#084f3c;--bg:#f7faf8;--ink:#10201a;--mut:#65736d;--line:#e3ebe7;--card:#fff;--gold:#f2b544}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}a{text-decoration:none;color:inherit}.container{width:min(1160px,92%);margin:auto}header{position:sticky;top:0;z-index:20;background:#ffffffee;backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}.nav{height:72px;display:flex;align-items:center;justify-content:space-between;gap:20px}.logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:20px}.mark{width:38px;height:38px;border-radius:12px;background:var(--g);color:#fff;display:grid;place-items:center}.navlinks{display:flex;gap:23px;font-size:14px;font-weight:750;color:#42514b}.actions{display:flex;gap:8px}.btn{border:0;border-radius:12px;padding:12px 17px;font-weight:800;cursor:pointer;font-size:14px}.primary{background:var(--g);color:#fff}.primary:hover{background:var(--d)}.light{background:#eaf5f0;color:var(--g)}.outline{background:#fff;border:1px solid var(--line)}.menu{display:none;border:0;background:none;font-size:25px}.hero{padding:72px 0 52px;background:linear-gradient(#fff,#f1faf6)}.hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:48px;align-items:center}.eyebrow{display:inline-block;background:#eaf6f1;color:var(--g);padding:8px 12px;border-radius:999px;font-size:12px;font-weight:900;margin-bottom:18px}.hero h1{font-size:clamp(42px,6vw,68px);line-height:1.02;letter-spacing:-2.8px;margin:0 0 20px}.hero h1 span{color:var(--g)}.hero p{font-size:18px;color:var(--mut);max-width:650px;margin:0 0 28px}.hero-buttons{display:flex;gap:10px;flex-wrap:wrap}.trust{display:flex;gap:20px;flex-wrap:wrap;margin-top:27px;color:#53615b;font-size:13px;font-weight:700}.trust span:before{content:'✓';color:var(--g);margin-right:6px}.check{background:#fff;border:1px solid var(--line);box-shadow:0 18px 45px #10201a17;border-radius:24px;padding:24px}.checkhead{display:flex;justify-content:space-between;margin-bottom:20px}.pill{background:#fff5d9;color:#825900;border-radius:99px;padding:6px 9px;font-size:10px;font-weight:900}.field{margin:0 0 13px}.field label{display:block;font-size:12px;font-weight:800;margin-bottom:6px;color:#45534e}.field input,.field select{width:100%;padding:12px;border:1px solid #d9e4df;border-radius:11px;background:#fff;font:inherit;outline:0}.field input:focus,.field select:focus{border-color:var(--g);box-shadow:0 0 0 3px #0b6b4f15}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.result{display:none;margin-top:15px;background:#eaf6f1;border-radius:14px;padding:15px}.result b{display:block;color:var(--g);font-size:20px}.small{font-size:12px;color:var(--mut)}section{padding:76px 0}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.stat,.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px}.stat b{font-size:27px;display:block}.stat span{font-size:13px;color:var(--mut)}.head{max-width:700px;margin-bottom:34px}.head h2{font-size:38px;line-height:1.1;letter-spacing:-1.4px;margin:0 0 10px}.head p{margin:0;color:var(--mut)}.cats{display:grid;grid-template-columns:repeat(5,1fr);gap:13px}.cat{background:#fff;border:1px solid var(--line);border-radius:17px;padding:18px;cursor:pointer;transition:.2s}.cat:hover{transform:translateY(-3px);box-shadow:0 10px 25px #10201a10}.icon{font-size:27px;margin-bottom:8px}.cat b{font-size:14px}.cat p{font-size:12px;color:var(--mut);margin:4px 0}.white{background:#fff}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.step{padding:25px;border:1px solid var(--line);border-radius:18px}.num{width:35px;height:35px;border-radius:50%;display:grid;place-items:center;background:var(--g);color:#fff;font-weight:900}.dash{background:var(--d);color:#fff}.dashgrid{display:grid;grid-template-columns:1fr 1fr;gap:22px}.dashcard{background:#fff;color:var(--ink);border-radius:20px;padding:22px}.progress{height:9px;background:#e6eeeb;border-radius:20px;overflow:hidden}.progress i{display:block;height:100%;width:62%;background:var(--g)}.todo{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);font-size:13px}.todo:last-child{border:0}.pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.price{position:relative}.featured{border:2px solid var(--g);box-shadow:0 18px 45px #10201a12}.tag{position:absolute;right:15px;top:15px;background:var(--g);color:#fff;border-radius:99px;padding:6px 9px;font-size:10px;font-weight:900}.amount{font-size:35px;font-weight:900;margin:8px 0}.amount small{font-size:12px;color:var(--mut)}.features{list-style:none;padding:0;margin:20px 0}.features li{font-size:13px;color:#52615b;margin:9px 0}.features li:before{content:'✓';color:var(--g);font-weight:900;margin-right:8px}.cta{background:linear-gradient(135deg,#eaf6f1,#fff);border:1px solid var(--line);border-radius:25px;padding:45px;text-align:center}.cta h2{font-size:38px;line-height:1.1;margin:0 0 12px}.cta p{color:var(--mut);max-width:650px;margin:0 auto 22px}footer{background:#0b1713;color:#c9d4cf;padding:45px 0 25px}.foot{display:grid;grid-template-columns:2fr 1fr 1fr;gap:35px}.foot h4{color:#fff}.foot a{display:block;color:#aebbb5;font-size:13px;margin:9px 0}.copy{border-top:1px solid #26352f;margin-top:30px;padding-top:18px;font-size:12px;color:#81918a}.modal{display:none;position:fixed;inset:0;background:#06100ccc;z-index:50;align-items:center;justify-content:center;padding:18px}.modal.open{display:flex}.box{background:#fff;width:min(600px,100%);max-height:90vh;overflow:auto;border-radius:22px;padding:25px}.modalhead{display:flex;justify-content:space-between;align-items:center}.close{border:0;background:#eef3f0;border-radius:10px;padding:8px 11px;font-weight:900}.notice{background:#fff8e7;border:1px solid #f0d99c;color:#745000;padding:12px;border-radius:12px;font-size:12px;margin-top:12px}@media(max-width:900px){.hero-grid,.dashgrid{grid-template-columns:1fr}.cats{grid-template-columns:repeat(2,1fr)}.stats{grid-template-columns:repeat(2,1fr)}.pricing,.steps{grid-template-columns:1fr}.navlinks{display:none}.menu{display:block}.actions .light{display:none}}@media(max-width:520px){.hero{padding-top:45px}.hero h1{font-size:43px}.row{grid-template-columns:1fr}.cta{padding:30px 18px}.cta h2{font-size:30px}}
-</style></head><body>
-<header><div class="container nav"><a class="logo" href="#"><span class="mark">B</span>BiasharaCheck</a><nav class="navlinks"><a href="#how">How it works</a><a href="#categories">Businesses</a><a href="#pricing">Pricing</a><a href="#dashboard">Dashboard</a></nav><div class="actions"><button class="btn light" onclick="modal('login')">Log in</button><button class="btn primary" onclick="modal('signup')">Create account</button></div><button class="menu" onclick="toggleNav()">☰</button></div></header>
-<main><section class="hero"><div class="container hero-grid"><div><div class="eyebrow">🇰🇪 Built for Kenyan entrepreneurs</div><h1>Before you invest, <span>check the business.</span></h1><p>BiasharaCheck helps you estimate startup costs, monthly expenses, risks and practical next steps before you put your money into a business idea.</p><div class="hero-buttons"><button class="btn primary" onclick="document.getElementById('checker').scrollIntoView({behavior:'smooth'})">Check my business idea →</button><button class="btn outline" onclick="document.getElementById('how').scrollIntoView({behavior:'smooth'})">See how it works</button></div><div class="trust"><span>Kenya-focused</span><span>Simple estimates</span><span>Action plan</span></div></div><div class="check" id="checker"><div class="checkhead"><strong>Quick Business Check</strong><span class="pill">FREE</span></div><div class="field"><label>What business are you considering?</label><input id="idea" placeholder="e.g. car wash, poultry, salon"></div><div class="row"><div class="field"><label>Category</label><select id="cat"><option>Auto Services</option><option>Food & Beverage</option><option>Beauty</option><option>Poultry</option><option>Agriculture</option><option>Construction</option><option>Laundry</option><option>Retail</option><option>Energy</option><option>Digital Services</option></select></div><div class="field"><label>County</label><select><option>Nairobi</option><option>Mombasa</option><option>Kisumu</option><option>Nakuru</option><option>Kiambu</option><option>Machakos</option><option>Uasin Gishu</option><option>Kakamega</option><option>Other</option></select></div></div><div class="row"><div class="field"><label>Capital available (KSh)</label><input id="capital" type="number" min="0" placeholder="e.g. 150000"></div><div class="field"><label>Monthly rent (KSh)</label><input id="rent" type="number" min="0" placeholder="e.g. 15000"></div></div><button class="btn primary" style="width:100%" onclick="checkIdea()">Check my idea</button><div class="result" id="result"><span class="small">Illustrative planning estimate</span><b id="r1"></b><span id="r2" class="small"></span></div></div></div></section>
-<section><div class="container"><div class="stats"><div class="stat"><b>10+</b><span>Business categories</span></div><div class="stat"><b>47</b><span>Counties to plan around</span></div><div class="stat"><b>3</b><span>Planning levels</span></div><div class="stat"><b>24/7</b><span>Access to your plan</span></div></div></div></section>
-<section id="categories"><div class="container"><div class="head"><h2>Start with the business you understand.</h2><p>Choose a category and build a practical plan around your location, capital and goals.</p></div><div class="cats"><div class="cat" onclick="pick('Auto Services')"><div class="icon">🚗</div><b>Auto Services</b><p>Car wash, garage, tyres</p></div><div class="cat" onclick="pick('Food & Beverage')"><div class="icon">🍲</div><b>Food & Beverage</b><p>Hotel, café, snacks</p></div><div class="cat" onclick="pick('Beauty')"><div class="icon">💇</div><b>Beauty</b><p>Salon, barbershop, spa</p></div><div class="cat" onclick="pick('Poultry')"><div class="icon">🐔</div><b>Poultry</b><p>Layers, broilers, eggs</p></div><div class="cat" onclick="pick('Agriculture')"><div class="icon">🌱</div><b>Agriculture</b><p>Farming and agribusiness</p></div><div class="cat" onclick="pick('Construction')"><div class="icon">🏗️</div><b>Construction</b><p>Hardware and services</p></div><div class="cat" onclick="pick('Laundry')"><div class="icon">🧺</div><b>Laundry</b><p>Laundry and cleaning</p></div><div class="cat" onclick="pick('Retail')"><div class="icon">🛒</div><b>Retail</b><p>Shops and distribution</p></div><div class="cat" onclick="pick('Energy')"><div class="icon">☀️</div><b>Energy</b><p>Solar and power services</p></div><div class="cat" onclick="pick('Digital Services')"><div class="icon">💻</div><b>Digital Services</b><p>Online and tech services</p></div></div></div></section>
-<section class="white" id="how"><div class="container"><div class="head"><h2>From idea to action plan.</h2><p>BiasharaCheck is being designed around the decisions a new entrepreneur actually needs to make.</p></div><div class="steps"><div class="step"><div class="num">1</div><h3>Describe your idea</h3><p class="small">Tell us the business, county, town, available capital and basic setup.</p></div><div class="step"><div class="num">2</div><h3>Understand the numbers</h3><p class="small">See estimated setup costs, monthly costs, break-even thinking and planning risks.</p></div><div class="step"><div class="num">3</div><h3>Follow your plan</h3><p class="small">Save the idea, track tasks and eventually connect with relevant suppliers and services.</p></div></div></div></section>
-<section class="dash" id="dashboard"><div class="container"><div class="head"><h2>Your business journey in one place.</h2><p style="color:#c9d8d2">The dashboard will keep your ideas, calculations, tasks, reports and supplier requests together.</p></div><div class="dashgrid"><div class="dashcard"><h3>My business plan</h3><p class="small">Example: Car Wash — Nakuru</p><div class="progress"><i></i></div><b>62% planned</b><div class="todo"><input type="checkbox" checked>Choose business location</div><div class="todo"><input type="checkbox" checked>Estimate equipment</div><div class="todo"><input type="checkbox">Compare suppliers</div><div class="todo"><input type="checkbox">Prepare launch budget</div></div><div class="dashcard"><h3>What comes next</h3><p class="small">Personalized tasks will appear here after your business check.</p><button class="btn light" style="width:100%;margin:8px 0" onclick="modal('signup')">Create my free account</button><button class="btn outline" style="width:100%" onclick="modal('report')">See sample detailed report</button></div></div></div></section>
-<section id="pricing"><div class="container"><div class="head"><h2>Simple pricing.</h2><p>Start free. Pay only when you need deeper planning tools. M-Pesa payment will be connected in a later stage.</p></div><div class="pricing"><div class="card price"><h3>Free</h3><div class="amount">KSh 0</div><p class="small">For exploring an idea.</p><ul class="features"><li>Quick business check</li><li>Basic cost estimate</li><li>Save one idea</li></ul><button class="btn outline" style="width:100%" onclick="modal('signup')">Start free</button></div><div class="card price featured"><span class="tag">POPULAR</span><h3>Detailed Report</h3><div class="amount">KSh 299 <small>/ report</small></div><p class="small">For serious planning.</p><ul class="features"><li>Detailed startup estimate</li><li>Monthly cost planning</li><li>Risk checklist</li><li>Action plan</li></ul><button class="btn primary" style="width:100%" onclick="modal('report')">View report option</button></div><div class="card price"><h3>Pro</h3><div class="amount">KSh 499 <small>/ month</small></div><p class="small">For entrepreneurs with multiple ideas.</p><ul class="features"><li>Multiple business plans</li><li>Progress dashboard</li><li>Supplier tools</li><li>Future alerts and insights</li></ul><button class="btn outline" style="width:100%" onclick="modal('signup')">Join waitlist</button></div></div></div></section>
-<section><div class="container"><div class="cta"><h2>Don't guess with your capital.</h2><p>Test the idea, understand the numbers and make your next step with a plan.</p><button class="btn primary" onclick="document.getElementById('checker').scrollIntoView({behavior:'smooth'})">Check a business idea</button></div></div></section></main>
-<footer><div class="container foot"><div><div class="logo"><span class="mark">B</span>BiasharaCheck</div><p style="max-width:430px;font-size:13px">A Kenya-focused business planning platform. This first website stage is a frontend; accounts, database, supplier marketplace and M-Pesa will be connected in later stages.</p></div><div><h4>Platform</h4><a href="#how">How it works</a><a href="#categories">Business categories</a><a href="#pricing">Pricing</a></div><div><h4>Account</h4><a href="#" onclick="modal('login');return false">Log in</a><a href="#" onclick="modal('signup');return false">Create account</a></div></div><div class="container copy">© <span id="year"></span> BiasharaCheck. Planning estimates are illustrative until connected to verified local data.</div></footer>
-<div class="modal" id="modal"><div class="box"><div class="modalhead"><h2 id="mt">Create account</h2><button class="close" onclick="closeModal()">✕</button></div><div id="mb"></div></div></div>
-<script>const $=x=>document.getElementById(x);$('year').textContent=new Date().getFullYear();function pick(n){$('cat').value=n;$('checker').scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>$('idea').focus(),400)}function checkIdea(){let idea=$('idea').value.trim()||'Your business idea',c=Number($('capital').value||0),r=Number($('rent').value||0),setup=Math.max(25000,Math.round((c||100000)*.62)),monthly=Math.max(5000,r+Math.round((c||100000)*.08));$('r1').textContent='Planning estimate: KSh '+setup.toLocaleString()+' setup';$('r2').textContent='Estimated monthly operating budget: about KSh '+monthly.toLocaleString()+'. Save the idea later for a detailed plan.';$('result').style.display='block'}function modal(t){$('modal').classList.add('open');if(t==='login'){$('mt').textContent='Log in';$('mb').innerHTML='<div class="field"><label>Email</label><input type="email" placeholder="you@example.com"></div><div class="field"><label>Password</label><input type="password" placeholder="••••••••"></div><button class="btn primary" style="width:100%" onclick="alert(\'Real login will be connected in the next stage.\')">Log in</button><div class="notice">This button is not pretending to create a real account yet. We will connect it to the database later.</div>'}else if(t==='signup'){$('mt').textContent='Create your free account';$('mb').innerHTML='<div class="field"><label>Full name</label><input placeholder="Your name"></div><div class="field"><label>Phone</label><input placeholder="07XX XXX XXX"></div><div class="field"><label>Email</label><input type="email" placeholder="you@example.com"></div><div class="field"><label>Password</label><input type="password" placeholder="Create a password"></div><button class="btn primary" style="width:100%" onclick="alert(\'Account creation will be connected in the next stage.\')">Create account</button><div class="notice">This first version is the website interface only. Your data will not be stored yet.</div>'}else{$('mt').textContent='Detailed Report — KSh 299';$('mb').innerHTML='<p>Later, you will be able to request a detailed report for KSh 299 and receive confirmation after M-Pesa payment.</p><div class="notice">M-Pesa/Daraja is NOT connected on this page yet. Never enter your M-Pesa PIN on this website.</div><button class="btn primary" style="width:100%;margin-top:14px" onclick="closeModal()">Understood</button>'}}function closeModal(){$('modal').classList.remove('open')}function toggleNav(){let n=document.querySelector('.navlinks');n.style.display=n.style.display==='flex'?'none':'flex'}$('modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal()});</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="BiasharaCheck helps Kenyan entrepreneurs check business ideas, estimate starting costs and understand monthly expenses.">
+<title>BiasharaCheck — Check Your Business Idea</title>
+<style>
+:root{--green:#087f5b;--dark:#056044;--soft:#eaf7f2;--ink:#14231d;--muted:#66756f;--line:#dfe9e4;--bg:#f7faf8}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}button,input,select{font:inherit}button{cursor:pointer}a{text-decoration:none;color:inherit}.container{width:min(1120px,92%);margin:auto}
+header{position:sticky;top:0;z-index:20;background:#fffffff5;border-bottom:1px solid var(--line);backdrop-filter:blur(10px)}.nav{min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:18px}.logo{display:flex;align-items:center;gap:9px;font-weight:900;font-size:20px}.logo-mark{width:38px;height:38px;display:grid;place-items:center;border-radius:11px;color:#fff;background:var(--green);font-weight:900}.nav-links{display:flex;gap:22px;color:#43524c;font-size:14px;font-weight:700}.nav-actions{display:flex;gap:8px}.menu{display:none;border:0;background:transparent;font-size:25px}.btn{border:0;border-radius:11px;padding:12px 17px;font-weight:800;font-size:14px}.btn-green{background:var(--green);color:#fff}.btn-green:hover{background:var(--dark)}.btn-light{background:var(--soft);color:var(--dark)}.btn-white{background:#fff;color:var(--dark);border:1px solid var(--line)}
+.hero{padding:64px 0 58px;background:linear-gradient(180deg,#fff,#eef9f4)}.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}.badge{display:inline-flex;padding:7px 12px;border-radius:50px;background:var(--soft);color:var(--dark);font-size:12px;font-weight:900;margin-bottom:17px}.hero h1{margin:0 0 17px;font-size:clamp(40px,6vw,65px);line-height:1.02;letter-spacing:-2.5px}.hero h1 span{color:var(--green)}.hero-text{max-width:650px;color:var(--muted);font-size:18px;margin:0 0 25px}.hero-points{display:flex;flex-wrap:wrap;gap:10px 18px;color:#4f5e58;font-size:13px;font-weight:700;margin-top:21px}.hero-points span:before{content:"✓";color:var(--green);margin-right:6px}
+.checker{background:#fff;border:1px solid var(--line);border-radius:23px;padding:25px;box-shadow:0 20px 50px rgba(20,35,29,.10)}.checker-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:19px}.checker-title h2{margin:0;font-size:21px}.free{background:#fff4d8;color:#805700;border-radius:30px;padding:5px 9px;font-size:10px;font-weight:900}.field{margin-bottom:14px}.field label{display:block;font-size:12px;font-weight:800;color:#45534d;margin-bottom:6px}.field input,.field select{width:100%;border:1px solid #d5e1db;border-radius:10px;padding:12px 13px;background:#fff;color:var(--ink);outline:none}.field input:focus,.field select:focus{border-color:var(--green);box-shadow:0 0 0 3px #087f5b1a}.two{display:grid;grid-template-columns:1fr 1fr;gap:11px}.check-button{width:100%;margin-top:3px}.helper{margin:9px 0 0;color:#7a8782;font-size:11px;text-align:center}.result{display:none;margin-top:16px;padding:17px;border-radius:14px;background:var(--soft);border:1px solid #cce9dc}.result.show{display:block}.result h3{margin:0 0 5px;font-size:18px}.main-number{color:var(--dark);font-size:25px;font-weight:900}.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:13px}.result-box{background:#fff;border-radius:10px;padding:10px}.result-box small{display:block;color:var(--muted);font-size:10px}.result-box b{font-size:15px}.result-note{margin:12px 0 0;font-size:11px;color:#607069}
+section{padding:70px 0}.section-title{max-width:680px;margin-bottom:32px}.section-title h2{margin:0 0 9px;font-size:36px;line-height:1.12;letter-spacing:-1.2px}.section-title p{margin:0;color:var(--muted)}.quick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}.info-card,.business,.step{background:#fff;border:1px solid var(--line);border-radius:17px}.info-card{padding:20px}.info-icon{font-size:27px;margin-bottom:8px}.info-card h3{font-size:15px;margin:0 0 4px}.info-card p{font-size:12px;color:var(--muted);margin:0}.white{background:#fff}.business-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}.business{padding:17px;transition:.18s}.business:hover{transform:translateY(-2px);box-shadow:0 10px 25px #14231d14}.business-icon{font-size:25px}.business h3{font-size:14px;margin:7px 0 3px}.business p{font-size:11px;color:var(--muted);margin:0}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.step{padding:23px}.step-number{width:34px;height:34px;display:grid;place-items:center;border-radius:50%;background:var(--green);color:#fff;font-weight:900;margin-bottom:13px}.step h3{margin:0 0 6px;font-size:17px}.step p{margin:0;color:var(--muted);font-size:13px}
+.example{background:var(--dark);color:#fff}.example-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:stretch}.example-text h2{font-size:38px;line-height:1.1;margin:0 0 12px}.example-text p{color:#cce1d9;margin:0 0 22px}.example-card{background:#fff;color:var(--ink);border-radius:20px;padding:22px}.example-card h3{margin:0 0 4px}.muted{color:var(--muted);font-size:12px}.money{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0}.money div{background:var(--bg);border-radius:12px;padding:13px}.money small{display:block;color:var(--muted);font-size:10px}.money b{font-size:19px}.check-list{list-style:none;padding:0;margin:14px 0}.check-list li{padding:8px 0;border-bottom:1px solid var(--line);font-size:13px}.check-list li:last-child{border-bottom:0}.check-list li:before{content:"✓";color:var(--green);font-weight:900;margin-right:8px}
+.faq{display:grid;gap:10px;max-width:800px}details{background:#fff;border:1px solid var(--line);border-radius:13px;padding:15px 17px}summary{font-weight:800;cursor:pointer}details p{color:var(--muted);font-size:13px;margin:10px 0 0}.cta{background:var(--soft);border:1px solid #cde8dc;border-radius:23px;padding:42px 25px;text-align:center}.cta h2{font-size:35px;line-height:1.1;margin:0 0 10px}.cta p{color:var(--muted);max-width:620px;margin:0 auto 20px}
+footer{background:#0b1713;color:#c9d4cf;padding:40px 0 22px}.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:35px}footer h4{color:#fff;margin:0 0 12px}footer a{display:block;color:#aebbb5;font-size:13px;margin:8px 0}.footer-about{font-size:12px;max-width:470px;color:#aebbb5}.copy{border-top:1px solid #26352f;margin-top:28px;padding-top:17px;color:#82918b;font-size:11px}
+@media(max-width:900px){.hero-grid,.example-grid{grid-template-columns:1fr}.quick-grid{grid-template-columns:repeat(2,1fr)}.business-grid{grid-template-columns:repeat(2,1fr)}.steps{grid-template-columns:1fr}.nav-links,.nav-actions{display:none}.menu{display:block}}
+@media(max-width:560px){.hero{padding:43px 0}.hero h1{font-size:43px;letter-spacing:-1.8px}.hero-text{font-size:16px}section{padding:55px 0}.two,.result-grid{grid-template-columns:1fr}.quick-grid,.business-grid{grid-template-columns:1fr 1fr}.section-title h2{font-size:30px}.example-text h2{font-size:31px}.cta h2{font-size:29px}.checker{padding:19px}}
+</style>
+</head>
+<body>
+
+<header>
+<div class="container nav">
+<a class="logo" href="#"><span class="logo-mark">B</span>BiasharaCheck</a>
+<nav class="nav-links">
+<a href="#check">Check an idea</a>
+<a href="#businesses">Businesses</a>
+<a href="#how">How it works</a>
+<a href="#questions">Questions</a>
+</nav>
+<div class="nav-actions"><button class="btn btn-light" onclick="goToCheck()">Check my idea</button></div>
+<button class="menu" onclick="mobileMenu()">☰</button>
+</div>
+</header>
+
+<main>
+<section class="hero" id="check">
+<div class="container hero-grid">
+<div>
+<div class="badge">🇰🇪 Made for people starting businesses in Kenya</div>
+<h1>Before you spend your money, <span>check the idea.</span></h1>
+<p class="hero-text">Tell us what business you want to start, where you want to start it and how much money you have. We will give you a simple starting estimate.</p>
+<button class="btn btn-green" onclick="focusBusiness()">Check my business idea →</button>
+<div class="hero-points"><span>Simple to understand</span><span>Kenya-focused</span><span>Free to try</span></div>
+</div>
+
+<div class="checker" id="business-checker">
+<div class="checker-title"><h2>Check your business idea</h2><span class="free">FREE</span></div>
+<div class="field"><label for="business">What business do you want to start?</label><input id="business" type="text" placeholder="e.g. salon, poultry, car wash"></div>
+<div class="two">
+<div class="field"><label for="county">County</label><select id="county"><option>Nairobi</option><option>Mombasa</option><option>Kisumu</option><option>Nakuru</option><option>Kiambu</option><option>Machakos</option><option>Uasin Gishu</option><option>Kakamega</option><option>Meru</option><option>Other county</option></select></div>
+<div class="field"><label for="money">Money you have (KSh)</label><input id="money" type="number" min="0" placeholder="e.g. 100000"></div>
+</div>
+<div class="field"><label for="rent">Expected monthly rent (KSh)</label><input id="rent" type="number" min="0" placeholder="e.g. 10000"></div>
+<button class="btn btn-green check-button" onclick="checkBusiness()">Check my idea</button>
+<p class="helper">This is an early estimate, not a promise of profit.</p>
+
+<div class="result" id="result">
+<h3 id="result-title">Your starting estimate</h3>
+<div class="main-number" id="result-main"></div>
+<div class="result-grid">
+<div class="result-box"><small>Estimated monthly costs</small><b id="monthly-cost"></b></div>
+<div class="result-box"><small>Money left after setup</small><b id="money-left"></b></div>
+</div>
+<p class="result-note" id="result-note"></p>
+</div>
+</div>
+</div>
+</section>
+
+<section>
+<div class="container">
+<div class="section-title"><h2>What can BiasharaCheck help you understand?</h2><p>We want to answer the questions people ask before putting their savings into a business.</p></div>
+<div class="quick-grid">
+<div class="info-card"><div class="info-icon">💰</div><h3>How much do I need?</h3><p>Get an estimated amount needed to get started.</p></div>
+<div class="info-card"><div class="info-icon">🧾</div><h3>What will I spend?</h3><p>See the main costs you may face every month.</p></div>
+<div class="info-card"><div class="info-icon">⚠️</div><h3>What could go wrong?</h3><p>Understand common risks before you commit your money.</p></div>
+<div class="info-card"><div class="info-icon">📝</div><h3>What should I do first?</h3><p>Get practical steps to help you prepare.</p></div>
+</div>
+</div>
+</section>
+
+<section class="white" id="businesses">
+<div class="container">
+<div class="section-title"><h2>Choose the business you are thinking about.</h2><p>Start with a business category. More businesses and more detailed local information will be added over time.</p></div>
+<div class="business-grid">
+<div class="business" onclick="chooseBusiness('M-Pesa / Mobile Money')"><div class="business-icon">📱</div><h3>M-Pesa / Mobile Money</h3><p>Agent and mobile money shop</p></div>
+<div class="business" onclick="chooseBusiness('Salon / Barbershop')"><div class="business-icon">💇</div><h3>Salon / Barbershop</h3><p>Hair and beauty services</p></div>
+<div class="business" onclick="chooseBusiness('Food Business')"><div class="business-icon">🍲</div><h3>Food Business</h3><p>Hotel, café, snacks and takeaway</p></div>
+<div class="business" onclick="chooseBusiness('Poultry')"><div class="business-icon">🐔</div><h3>Poultry</h3><p>Layers, broilers and eggs</p></div>
+<div class="business" onclick="chooseBusiness('Car Wash')"><div class="business-icon">🚗</div><h3>Car Wash</h3><p>Car cleaning and detailing</p></div>
+<div class="business" onclick="chooseBusiness('Grocery Shop')"><div class="business-icon">🛒</div><h3>Grocery Shop</h3><p>Food, household and daily goods</p></div>
+<div class="business" onclick="chooseBusiness('Chemist')"><div class="business-icon">💊</div><h3>Chemist</h3><p>Retail health and pharmacy business</p></div>
+<div class="business" onclick="chooseBusiness('Hardware')"><div class="business-icon">🔨</div><h3>Hardware</h3><p>Building materials and supplies</p></div>
+<div class="business" onclick="chooseBusiness('Mitumba')"><div class="business-icon">👕</div><h3>Mitumba</h3><p>Clothes and second-hand goods</p></div>
+<div class="business" onclick="chooseBusiness('Laundry')"><div class="business-icon">🧺</div><h3>Laundry</h3><p>Washing, ironing and cleaning</p></div>
+<div class="business" onclick="chooseBusiness('Printing / Cyber')"><div class="business-icon">🖨️</div><h3>Printing / Cyber</h3><p>Printing, internet and computer services</p></div>
+<div class="business" onclick="chooseBusiness('Farming')"><div class="business-icon">🌱</div><h3>Farming</h3><p>Crops, livestock and agribusiness</p></div>
+</div>
+</div>
+</section>
+
+<section id="how">
+<div class="container">
+<div class="section-title"><h2>How it works</h2><p>No complicated process. Just answer a few questions.</p></div>
+<div class="steps">
+<div class="step"><div class="step-number">1</div><h3>Tell us your idea</h3><p>Choose or type the business you want to start.</p></div>
+<div class="step"><div class="step-number">2</div><h3>Tell us your situation</h3><p>Give us your county, available money and expected rent.</p></div>
+<div class="step"><div class="step-number">3</div><h3>Understand the numbers</h3><p>See a simple estimate and learn what you should consider next.</p></div>
+</div>
+</div>
+</section>
+
+<section class="example">
+<div class="container example-grid">
+<div class="example-text"><h2>Make the numbers easier to understand.</h2><p>A future BiasharaCheck report will break a business idea into simple parts: starting money, monthly expenses, possible risks and the steps needed before opening.</p><button class="btn btn-white" onclick="goToCheck()">Try a free check</button></div>
+<div class="example-card">
+<h3>Example: Small car wash</h3><div class="muted">Example figures only — not a market quotation.</div>
+<div class="money"><div><small>Starting money</small><b>KSh 150,000</b></div><div><small>Monthly costs</small><b>KSh 25,000</b></div></div>
+<strong>Things to prepare for</strong>
+<ul class="check-list"><li>Location and rent</li><li>Water and equipment</li><li>Business permits</li><li>Workers and daily expenses</li><li>Customers and competition</li></ul>
+</div>
+</div>
+</section>
+
+<section id="questions" class="white">
+<div class="container">
+<div class="section-title"><h2>Questions people may ask</h2><p>We will keep improving these answers as the platform grows.</p></div>
+<div class="faq">
+<details><summary>Is the result a guarantee that my business will make money?</summary><p>No. The result is a planning estimate. Real business results depend on location, prices, customers, competition, management and many other factors.</p></details>
+<details><summary>Does BiasharaCheck know the exact cost of every business?</summary><p>Not yet. This first version uses simple estimates. Later we can connect verified local information and improve the estimates by business and location.</p></details>
+<details><summary>Do I have to pay to check my idea?</summary><p>The basic business check is intended to be free. More detailed tools may be offered later.</p></details>
+<details><summary>Will BiasharaCheck ask for my M-Pesa PIN?</summary><p>No. Never give your M-Pesa PIN to a website. Any future payment connection will be designed so that your PIN remains private.</p></details>
+</div>
+</div>
+</section>
+
+<section><div class="container"><div class="cta"><h2>Have a business idea?</h2><p>Before you spend your money, take a minute to check the idea.</p><button class="btn btn-green" onclick="goToCheck()">Check my business idea →</button></div></div></section>
+</main>
+
+<footer>
+<div class="container footer-grid">
+<div><div class="logo"><span class="logo-mark">B</span>BiasharaCheck</div><p class="footer-about">A Kenya-focused tool designed to help entrepreneurs think through a business idea before spending their money.</p></div>
+<div><h4>BiasharaCheck</h4><a href="#check">Check an idea</a><a href="#businesses">Businesses</a><a href="#how">How it works</a></div>
+<div><h4>Information</h4><a href="#questions">Questions</a><a href="#check">Start a check</a></div>
+</div>
+<div class="container copy">© <span id="year"></span> BiasharaCheck. Estimates are for planning purposes.</div>
+</footer>
+
+<script>
+const businessInput=document.getElementById("business");
+const moneyInput=document.getElementById("money");
+const rentInput=document.getElementById("rent");
+const result=document.getElementById("result");
+document.getElementById("year").textContent=new Date().getFullYear();
+
+function goToCheck(){
+ document.getElementById("check").scrollIntoView({behavior:"smooth"});
+ setTimeout(()=>businessInput.focus(),500);
+}
+function focusBusiness(){goToCheck()}
+function chooseBusiness(name){businessInput.value=name;goToCheck()}
+function money(value){return "KSh "+Math.round(value).toLocaleString("en-KE")}
+
+function checkBusiness(){
+ const idea=businessInput.value.trim()||"your business";
+ const available=Number(moneyInput.value||0);
+ const rent=Number(rentInput.value||0);
+ const setupEstimate=Math.max(60000,available>0?Math.round(available*.70):100000);
+ const monthlyEstimate=Math.max(8000,rent+(available>0?Math.round(available*.08):12000));
+ const remaining=available-setupEstimate;
+
+ document.getElementById("result-title").textContent="Starting estimate for "+idea;
+ document.getElementById("result-main").textContent=money(setupEstimate)+" to prepare";
+ document.getElementById("monthly-cost").textContent=money(monthlyEstimate);
+ document.getElementById("money-left").textContent=available>0?money(Math.max(0,remaining)):"Enter your money";
+
+ const note=document.getElementById("result-note");
+ if(available===0){
+  note.textContent="Enter the amount of money you have to see whether your available money is close to the estimated starting amount.";
+ }else if(available<setupEstimate){
+  note.textContent="Your current money is below this simple starting estimate. You may need to start smaller, increase your starting money, or adjust the business.";
+ }else{
+  note.textContent="Your available money is above this simple starting estimate. Keep some money aside for unexpected costs and the first months of operation.";
+ }
+ result.classList.add("show");
+ result.scrollIntoView({behavior:"smooth",block:"nearest"});
+}
+
+function mobileMenu(){
+ const nav=document.querySelector(".nav-links");
+ if(nav.style.display==="flex"){nav.style.display="none"}
+ else{
+  nav.style.display="flex";nav.style.position="absolute";nav.style.top="70px";nav.style.left="0";nav.style.right="0";nav.style.padding="18px 4%";nav.style.background="#fff";nav.style.flexDirection="column";nav.style.borderBottom="1px solid #dfe9e4";
+ }
+}
+</script>
+</body>
+</html>
