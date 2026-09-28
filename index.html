@@ -88,7 +88,7 @@ function setup(){business.innerHTML=BUSINESS_NAMES.map(x=>`<option>${esc(x)}</op
 function openModal(type){const m=document.getElementById('modal'),b=document.getElementById('modalBody');m.classList.add('show');
 if(type==='register') b.innerHTML=`<h3>Create your account</h3><p class="muted">Get 2 detailed business checks free.</p><input id="rname" placeholder="Full name"><input id="remail" type="email" placeholder="Email address"><input id="rpass" type="password" placeholder="Password (8+ characters)"><button class="btn btn-primary" style="width:100%" onclick="register()">Create account</button><div class="notice">Your free checks are tied to your account.</div><p>Already have an account? <a href="#" onclick="openModal('login');return false">Log in</a></p>`;
 if(type==='login') b.innerHTML=`<h3>Log in</h3><input id="lemail" type="email" placeholder="Email address"><input id="lpass" type="password" placeholder="Password"><button class="btn btn-primary" style="width:100%" onclick="login()">Log in</button><p>New here? <a href="#" onclick="openModal('register');return false">Create an account</a></p>`;
-if(type==='subscribe') b.innerHTML=`<h3>Subscribe to BiasharaCheck Plus</h3><p class="muted">Continue after your 2 free checks.</p><div class="big">KSh 299 / month</div><input id="mpesa" inputmode="tel" placeholder="M-Pesa phone number, e.g. 07XXXXXXXX"><button class="btn btn-primary" style="width:100%" onclick="startMpesa()">Pay with M-Pesa</button><div class="notice">This page is ready for Daraja integration. Real payment confirmation must happen on the private backend before Plus is activated.</div>`;
+if(type==='subscribe') b.innerHTML=`<h3>Subscribe to BiasharaCheck Plus</h3><p class="muted">Continue after your 2 free checks.</p><div class="big">KSh 299 / month</div><input id="mpesa" inputmode="tel" placeholder="M-Pesa phone number, e.g. 07XXXXXXXX"><button class="btn btn-primary" style="width:100%" onclick="startMpesa()">Pay with M-Pesa</button><div class="notice" id="paymentStatus">Enter your M-Pesa number and continue. BiasharaCheck will wait for payment confirmation before activating Plus.</div>`;
 }
 function closeModal(){modal.classList.remove('show')}
 function register(){const name=rname.value.trim(),email=remail.value.trim().toLowerCase(),pass=rpass.value;if(!name||!email||pass.length<8)return alert('Enter your name, a valid email and a password of at least 8 characters.');const u=getUsers();if(u[email])return alert('An account with this email already exists. Please log in.');u[email]={name,email,pass,freeChecks:2,plus:false,saved:[]};saveUsers(u);currentUser=u[email];localStorage.setItem('bc_user',JSON.stringify(currentUser));closeModal();renderAccount();alert('Account created. You have 2 free business checks.');}
@@ -99,7 +99,50 @@ function runCheck(){if(!currentUser){openModal('register');return}if(!currentUse
 function saveCheck(){if(!currentUser)return openModal('login');currentUser.saved=currentUser.saved||[];currentUser.saved.push({business:business.value,county:county.value,date:new Date().toISOString()});syncUser();alert('Business check saved to your account.');}
 function syncUser(){const u=getUsers();u[currentUser.email]=currentUser;saveUsers(u);localStorage.setItem('bc_user',JSON.stringify(currentUser));renderAccount()}
 function renderDashboard(){const saved=(currentUser.saved||[]).map(x=>`<li>${esc(x.business)} — ${esc(x.county)} — ${new Date(x.date).toLocaleDateString()}</li>`).join('')||'<li>No saved checks yet.</li>';accountPanel.innerHTML=`<div class="account-grid"><div><b>Account</b><p>${esc(currentUser.email)}</p></div><div><b>Status</b><p>${currentUser.plus?'Plus':'Free · '+currentUser.freeChecks+' checks left'}</p></div></div><h3>Saved checks</h3><ul>${saved}</ul><button class="btn btn-dark" onclick="logout()">Log out</button>`;accountPanel.classList.remove('hidden')}
-function startMpesa(){const phone=mpesa.value.trim();if(!/^0?7\d{8}$/.test(phone)&&!/^2547\d{8}$/.test(phone))return alert('Enter a valid Kenyan M-Pesa phone number.');alert('M-Pesa subscription is prepared for Daraja integration. The real STK Push and payment confirmation will be handled by the private backend.');}
+async function startMpesa(){
+const phone=mpesa.value.trim().replace(/\s+/g,'');
+if(!/^0?7\d{8}$/.test(phone)&&!/^2547\d{8}$/.test(phone))return alert('Enter a valid Kenyan M-Pesa phone number.');
+if(!currentUser)return openModal('login');
+const status=document.getElementById('paymentStatus');
+status.textContent='Starting your M-Pesa payment request…';
+try{
+ const res=await fetch('/api/subscription/stkpush',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({phone,plan:'plus_monthly',email:currentUser.email})});
+ const data=await res.json().catch(()=>({}));
+ if(!res.ok||!data.checkoutRequestId)throw new Error(data.message||'Payment request could not be started.');
+ status.textContent='M-Pesa prompt sent. Enter your M-Pesa PIN on your phone. Waiting for confirmation…';
+ pollPayment(data.checkoutRequestId);
+}catch(err){
+ status.textContent='Payment service is not connected yet. Your account has not been upgraded.';
+ alert('The secure payment server is not connected yet. No Plus access was given.');
+}}
+async function pollPayment(checkoutRequestId){
+ let attempts=0;
+ const timer=setInterval(async()=>{
+  attempts++;
+  try{
+   const res=await fetch('/api/subscription/status/'+encodeURIComponent(checkoutRequestId));
+   const data=await res.json().catch(()=>({}));
+   if(data.status==='paid'){
+    clearInterval(timer);
+    currentUser.plus=true;
+    syncUser();
+    closeModal();
+    paywall.classList.remove('show');
+    trialBadge.textContent='Plus';
+    checkerLock.innerHTML='Your Plus account is active. You can run detailed checks.';
+    alert('Payment confirmed. BiasharaCheck Plus is now active.');
+   }else if(data.status==='failed'||data.status==='cancelled'){
+    clearInterval(timer);
+    document.getElementById('paymentStatus').textContent='The M-Pesa payment was not completed. Your account has not been upgraded.';
+   }else if(attempts>=30){
+    clearInterval(timer);
+    document.getElementById('paymentStatus').textContent='We are still waiting for payment confirmation. Please check your account before trying again.';
+   }
+  }catch(e){
+   if(attempts>=30){clearInterval(timer);document.getElementById('paymentStatus').textContent='We could not confirm the payment yet. Please try again later.';}
+  }
+ },4000);
+}
 setup();
 </script>
 </body>
