@@ -50,7 +50,7 @@ footer{background:#0b1713;color:#c9d4cf;padding:40px 0 22px}.footer-grid{display
 <div class="checker-title"><h2>Check your business idea</h2><span class="free">FREE</span></div>
 <div class="field"><label for="business">What business do you want to start?</label><input id="business" type="text" placeholder="e.g. salon, poultry, car wash"></div>
 <div class="two">
-<div class="field"><label for="county">County</label><select id="county"><option>Nairobi</option><option>Mombasa</option><option>Kisumu</option><option>Nakuru</option><option>Kiambu</option><option>Machakos</option><option>Uasin Gishu</option><option>Kakamega</option><option>Meru</option><option>Other county</option></select></div>
+<div class="field"><label for="county">County</label><select id="county"></select></div>
 <div class="field"><label for="money">Money you have (KSh)</label><input id="money" type="number" min="0" placeholder="e.g. 100000"></div>
 </div>
 <div class="field"><label for="rent">Expected monthly rent (KSh)</label><input id="rent" type="number" min="0" placeholder="e.g. 10000"></div>
@@ -84,21 +84,11 @@ footer{background:#0b1713;color:#c9d4cf;padding:40px 0 22px}.footer-grid{display
 
 <section class="white" id="businesses">
 <div class="container">
-<div class="section-title"><h2>Choose the business you are thinking about.</h2><p>Start with a business category. More businesses and more detailed local information will be added over time.</p></div>
-<div class="business-grid">
-<div class="business" onclick="chooseBusiness('M-Pesa / Mobile Money')"><div class="business-icon">📱</div><h3>M-Pesa / Mobile Money</h3><p>Agent and mobile money shop</p></div>
-<div class="business" onclick="chooseBusiness('Salon / Barbershop')"><div class="business-icon">💇</div><h3>Salon / Barbershop</h3><p>Hair and beauty services</p></div>
-<div class="business" onclick="chooseBusiness('Food Business')"><div class="business-icon">🍲</div><h3>Food Business</h3><p>Hotel, café, snacks and takeaway</p></div>
-<div class="business" onclick="chooseBusiness('Poultry')"><div class="business-icon">🐔</div><h3>Poultry</h3><p>Layers, broilers and eggs</p></div>
-<div class="business" onclick="chooseBusiness('Car Wash')"><div class="business-icon">🚗</div><h3>Car Wash</h3><p>Car cleaning and detailing</p></div>
-<div class="business" onclick="chooseBusiness('Grocery Shop')"><div class="business-icon">🛒</div><h3>Grocery Shop</h3><p>Food, household and daily goods</p></div>
-<div class="business" onclick="chooseBusiness('Chemist')"><div class="business-icon">💊</div><h3>Chemist</h3><p>Retail health and pharmacy business</p></div>
-<div class="business" onclick="chooseBusiness('Hardware')"><div class="business-icon">🔨</div><h3>Hardware</h3><p>Building materials and supplies</p></div>
-<div class="business" onclick="chooseBusiness('Mitumba')"><div class="business-icon">👕</div><h3>Mitumba</h3><p>Clothes and second-hand goods</p></div>
-<div class="business" onclick="chooseBusiness('Laundry')"><div class="business-icon">🧺</div><h3>Laundry</h3><p>Washing, ironing and cleaning</p></div>
-<div class="business" onclick="chooseBusiness('Printing / Cyber')"><div class="business-icon">🖨️</div><h3>Printing / Cyber</h3><p>Printing, internet and computer services</p></div>
-<div class="business" onclick="chooseBusiness('Farming')"><div class="business-icon">🌱</div><h3>Farming</h3><p>Crops, livestock and agribusiness</p></div>
+<div class="section-title">
+<h2>Businesses Kenyans are actually starting</h2>
+<p>Choose a business to put it into the calculator. More business models can be added over time.</p>
 </div>
+<div class="business-grid" id="businessGrid"></div>
 </div>
 </section>
 
@@ -113,14 +103,41 @@ footer{background:#0b1713;color:#c9d4cf;padding:40px 0 22px}.footer-grid{display
 </div>
 </section>
 
-<section class="example">
-<div class="container example-grid">
-<div class="example-text"><h2>Make the numbers easier to understand.</h2><p>A future BiasharaCheck report will break a business idea into simple parts: starting money, monthly expenses, possible risks and the steps needed before opening.</p><button class="btn btn-white" onclick="goToCheck()">Try a free check</button></div>
-<div class="example-card">
-<h3>Example: Small car wash</h3><div class="muted">Example figures only — not a market quotation.</div>
-<div class="money"><div><small>Starting money</small><b>KSh 150,000</b></div><div><small>Monthly costs</small><b>KSh 25,000</b></div></div>
-<strong>Things to prepare for</strong>
-<ul class="check-list"><li>Location and rent</li><li>Water and equipment</li><li>Business permits</li><li>Workers and daily expenses</li><li>Customers and competition</li></ul>
+<section class="example" id="plan">
+<div class="container">
+<div class="section-title" style="color:#fff">
+<h2>Understand the whole business — not just one number.</h2>
+<p style="color:#cce1d9">After the check, BiasharaCheck explains what you may need, where the money goes, how sales can turn into income, what can reduce earnings and how to grow.</p>
+</div>
+<div class="dashgrid">
+<div class="dashcard">
+<h3>What you may need</h3>
+<ul class="features" id="needsList"></ul>
+</div>
+<div class="dashcard">
+<h3>Money breakdown</h3>
+<div class="money" id="moneyBreakdown"></div>
+</div>
+</div>
+<div class="dashgrid" style="margin-top:20px">
+<div class="dashcard">
+<h3>How you could earn</h3>
+<div class="amount" id="salesEstimate"></div>
+<p class="small" id="salesExplanation"></p>
+<div class="todo" id="profitLine"></div>
+<div class="todo" id="breakEvenLine"></div>
+</div>
+<div class="dashcard">
+<h3>What can reduce your income?</h3>
+<ul class="features" id="riskList"></ul>
+</div>
+</div>
+<div class="dashcard" style="margin-top:20px">
+<h3>How to grow step by step</h3>
+<div class="steps" id="growthSteps"></div>
+</div>
+<div class="notice" style="background:#fff8e7;border-color:#f0d99c;color:#745000;margin-top:15px">
+These are planning estimates, not guaranteed prices or profits. Before spending money, verify local prices, supplier quotations, permits and county requirements.
 </div>
 </div>
 </section>
@@ -150,52 +167,74 @@ footer{background:#0b1713;color:#c9d4cf;padding:40px 0 22px}.footer-grid{display
 </footer>
 
 <script>
-const businessInput=document.getElementById("business");
-const moneyInput=document.getElementById("money");
-const rentInput=document.getElementById("rent");
-const result=document.getElementById("result");
+const counties=['Mombasa','Kwale','Kilifi','Tana River','Lamu','Taita-Taveta','Garissa','Wajir','Mandera','Marsabit','Isiolo','Meru','Tharaka-Nithi','Embu','Kitui','Machakos','Makueni','Nyandarua','Nyeri','Kirinyaga',"Murang'a",'Kiambu','Turkana','West Pokot','Samburu','Trans Nzoia','Uasin Gishu','Elgeyo-Marakwet','Nandi','Baringo','Laikipia','Nakuru','Narok','Kajiado','Kericho','Bomet','Kakamega','Vihiga','Bungoma','Busia','Siaya','Kisumu','Homa Bay','Migori','Kisii','Nyamira','Nairobi City'];
+const businesses=[['M-Pesa / Mobile Money','📱','Mobile money shop'],['Smokie & Egg Selling','🌭','Smokies, eggs, sausages and snacks'],['Salon','💇','Hair and beauty'],['Barbershop','💈',"Men's grooming"],['Chemist','💊','Retail health business'],['Poultry','🐔','Layers, broilers and eggs'],['Car Wash','🚗','Car cleaning'],['Grocery Shop','🛒','Fresh produce and household goods'],['Mitumba','👕','Second-hand clothes'],['Hardware','🔨','Building materials'],['Laundry','🧺','Washing and ironing'],['Food Kiosk','🍲','Meals, tea and snacks'],['Boda Boda','🏍️','Motorbike transport'],['Restaurant','🍛','Meals and local dining'],['Printing & Cyber','🖨️','Printing and computer services'],['Phone Accessories','📱','Covers, chargers and accessories'],['Phone Repair','📲','Mobile phone repair'],['Welding','⚙️','Metal fabrication'],['Carpentry','🪚','Furniture and woodwork'],['Tailoring','🧵','Sewing and alterations'],['Baking','🧁','Cakes and baked goods'],['Farming','🌱','Crops and agribusiness'],['Dairy','🐄','Milk production'],['Fish Selling','🐟','Fish trade'],['Butchery','🥩','Meat retail'],['Water Refill','💧','Water treatment and refill'],['Solar Services','☀️','Solar sales and installation'],['Cleaning Services','🧹','Home and office cleaning'],['Photography','📷','Events and portraits'],['Graphic Design','🎨','Design and branding'],['Online Selling','🛍️','Social media and online sales'],['Motorbike Repair','🏍️','Motorcycle repair'],['Tyre & Puncture Shop','🛞','Tyres and puncture repair'],['Delivery Business','🚚','Local delivery'],['Juice & Water','🥤','Drinks and refreshments'],['Cereal Shop','🌾','Grains and pulses'],['Egg Distribution','🥚','Egg supply and delivery'],['Fresh Juice Kiosk','🧃','Juice and refreshments'],['Carpet Cleaning','🧽','Deep cleaning'],['Event Decoration','🎉','Events and decorations']];
+const jobs=[['Barber','service'],['Cleaner','service'],['Mechanic','service'],['Welder','service'],['Carpenter','service'],['Tailor','service'],['Painter','service'],['Electrician','service'],['Plumber','service'],['Mason','service'],['Cook','food'],['Smokie seller','food'],['Baker','food'],['Food delivery rider','service'],['Vegetable seller','trade'],['Clothes seller','trade'],['Phone accessory seller','trade'],['Online seller','digital'],['Graphic designer','digital'],['Photographer','service'],['Videographer','digital'],['Tutor','service'],['Hairdresser','service'],['Makeup artist','service'],['Motorbike repairer','service'],['Poultry keeper','farm'],['Vegetable farmer','farm'],['Milk seller','farm'],['Fish seller','trade'],['Laundry worker','service'],['Gardener','service'],['Pest-control worker','service'],['Phone repairer','service'],['Computer technician','digital'],['Printing operator','digital'],['Solar technician','service'],['Welder assistant','service'],['Delivery rider','service'],['Shop attendant','trade'],['Farm worker','farm'],['Construction worker','service'],['Event decorator','service']];
+
+const profiles={
+"Smokie & Egg Selling":{setup:35000,monthly:18000,sales:45000,needs:["Cart or table and shade","Jiko/gas and utensils","Smokies, eggs and sausage stock","Packaging and serving supplies","Food-handling/local requirements to verify","Cash for daily restocking"],risks:["Food spoilage","Poor location","Changing supplier prices","Low customer traffic"]},
+"Salon":{setup:85000,monthly:30000,sales:65000,needs:["Salon chair and mirror","Dryer and hair tools","Hair products","Water and electricity","Suitable premises","Business/local requirements to verify"],risks:["High rent","Low customer traffic","Product wastage","Competition"]},
+"Barbershop":{setup:65000,monthly:22000,sales:55000,needs:["Barber chair","Clippers and tools","Mirror and lighting","Cleaning supplies","Suitable premises","Working cash"],risks:["Low traffic","Equipment breakdown","Price competition"]},
+"Poultry":{setup:120000,monthly:30000,sales:60000,needs:["Poultry housing","Chicks or stock","Feed and water equipment","Animal-health plan","Reliable water","Market for birds or eggs"],risks:["Disease","Feed price changes","Mortality","Weak market prices"]},
+"M-Pesa / Mobile Money":{setup:100000,monthly:18000,sales:35000,needs:["Approved agency setup","Secure location","Transaction float","Cash controls","Record keeping","Provider requirements"],risks:["Low transaction volume","Insufficient float","Security","Provider requirements"]},
+"Car Wash":{setup:110000,monthly:35000,sales:75000,needs:["Suitable location","Water source/storage","Pressure washer","Vacuum and brushes","Cleaning products","Local requirements to verify"],risks:["Water shortage","Bad location","Seasonal demand","Equipment breakdown"]},
+"Chemist":{setup:250000,monthly:55000,sales:140000,needs:["Appropriate professional setup","Suitable premises","Approved suppliers","Secure storage","Required licenses/inspections to verify","Working capital"],risks:["Regulatory non-compliance","Expired stock","Wrong location","Slow stock"]},
+"Grocery Shop":{setup:90000,monthly:32000,sales:90000,needs:["Shop or stall","Shelves/display","Opening stock","Cash/payment system","Supplier contacts","Local requirements"],risks:["Spoilage","Credit sales","Theft","Low margins"]},
+"Hardware":{setup:300000,monthly:65000,sales:200000,needs:["Shop/yard","Storage","Opening stock","Supplier accounts","Security","County/business requirements"],risks:["Large capital need","Slow stock","Price changes","Credit customers"]},
+"Laundry":{setup:120000,monthly:38000,sales:90000,needs:["Washing equipment","Water/drainage","Ironing equipment","Detergents","Collection plan","Premises"],risks:["Water/power interruptions","Damaged clothes","Low repeat customers"]},
+"Printing & Cyber":{setup:140000,monthly:40000,sales:100000,needs:["Computer","Printer","Internet","Power backup","Furniture","Relevant requirements"],risks:["Equipment breakdown","Power outages","Low traffic","Competition"]},
+"Tailoring":{setup:90000,monthly:24000,sales:70000,needs:["Sewing machine","Cutting table","Fabric/tools","Iron","Workspace","Order records"],risks:["Poor workmanship","Late delivery","Material price changes"]},
+"Farming":{setup:100000,monthly:30000,sales:75000,needs:["Land/access to land","Seeds or stock","Water plan","Tools","Inputs","Market before production"],risks:["Weather","Pests/disease","Market prices","Transport"]}
+};
+
+function money(n){return "KSh "+Math.round(n).toLocaleString("en-KE")}
 document.getElementById("year").textContent=new Date().getFullYear();
 
-function goToCheck(){
- document.getElementById("check").scrollIntoView({behavior:"smooth"});
- setTimeout(()=>businessInput.focus(),500);
+const countySelect=document.getElementById("county");
+counties.forEach(c=>{let o=document.createElement("option");o.value=c;o.textContent=c;countySelect.appendChild(o)});
+
+const grid=document.getElementById("businessGrid");
+businesses.forEach(b=>{
+ let d=document.createElement("div");d.className="cat";d.innerHTML=`<div class="icon">${b[1]}</div><b>${b[0]}</b><p>${b[2]}</p>`;
+ d.onclick=()=>{document.getElementById("idea").value=b[0];focusCheck()};
+ grid.appendChild(d);
+});
+
+function focusCheck(){document.getElementById("check").scrollIntoView({behavior:"smooth"});setTimeout(()=>document.getElementById("idea").focus(),400)}
+function toggleNav(){let n=document.querySelector(".navlinks");n.style.display=n.style.display==="flex"?"none":"flex"}
+
+function runCheck(){
+ const idea=document.getElementById("idea").value.trim()||"Your business idea";
+ const capital=Number(document.getElementById("capital").value||0);
+ const rent=Number(document.getElementById("rent").value||0);
+ const county=document.getElementById("county").value;
+ let p=profiles[idea]||{setup:70000,monthly:22000,sales:60000,needs:["Suitable working space","Basic equipment","Starting stock/materials","Supplier or source","Record keeping","Money kept aside"],risks:["Low demand","Unexpected costs","Competition","Supplier price changes"]};
+ let setup=p.setup;
+ let monthly=Math.max(p.monthly,rent+p.monthly*.45);
+ let sales=p.sales;
+ let profit=Math.max(0,sales-monthly);
+ let breakEven=Math.ceil(monthly/Math.max(1,(sales*.45)/Math.max(1, sales/100)));
+
+ document.getElementById("planTitle") && (document.getElementById("planTitle").textContent=idea);
+ document.getElementById("needsList").innerHTML=p.needs.map(x=>`<li>${x}</li>`).join("");
+ document.getElementById("riskList").innerHTML=p.risks.map(x=>`<li>${x}</li>`).join("");
+ document.getElementById("moneyBreakdown").innerHTML=`
+ <div><small>Starting setup</small><b>${money(setup)}</b></div>
+ <div><small>Monthly costs</small><b>${money(monthly)}</b></div>
+ <div><small>Suggested emergency reserve</small><b>${money(monthly*1.5)}</b></div>`;
+ document.getElementById("salesEstimate").textContent=money(sales)+" possible monthly sales";
+ document.getElementById("salesExplanation").textContent=`Example model for ${idea} in ${county}. This is not a promise of sales.`;
+ document.getElementById("profitLine").innerHTML=`<span>Example sales</span><b>${money(sales)}</b>`;
+ document.getElementById("breakEvenLine").innerHTML=`<span>Example amount left after monthly costs</span><b>${money(profit)}</b>`;
+ document.getElementById("growthSteps").innerHTML=["Start with the smallest version you can operate well","Get repeat customers and track every sale and expense","Add related products or services only after demand is proven","Reinvest part of the surplus to increase capacity"].map((x,i)=>`<div class="step"><div class="num">${i+1}</div><h3>Stage ${i+1}</h3><p>${x}</p></div>`).join("");
+
+ let status=capital===0?"Enter your capital to compare":capital<setup?"Your capital is below this example setup":"Your capital covers this example setup";
+ document.getElementById("result").innerHTML=`<span class="small">${county} • ${idea}</span><b>${money(setup)} estimated starting budget</b><span class="small">Monthly costs: ${money(monthly)} • Example monthly sales: ${money(sales)}</span><div class="notice">${status}. See the full explanation below.</div>`;
+ document.getElementById("result").style.display="block";
+ document.getElementById("plan").scrollIntoView({behavior:"smooth"});
 }
-function focusBusiness(){goToCheck()}
-function chooseBusiness(name){businessInput.value=name;goToCheck()}
-function money(value){return "KSh "+Math.round(value).toLocaleString("en-KE")}
 
-function checkBusiness(){
- const idea=businessInput.value.trim()||"your business";
- const available=Number(moneyInput.value||0);
- const rent=Number(rentInput.value||0);
- const setupEstimate=Math.max(60000,available>0?Math.round(available*.70):100000);
- const monthlyEstimate=Math.max(8000,rent+(available>0?Math.round(available*.08):12000));
- const remaining=available-setupEstimate;
-
- document.getElementById("result-title").textContent="Starting estimate for "+idea;
- document.getElementById("result-main").textContent=money(setupEstimate)+" to prepare";
- document.getElementById("monthly-cost").textContent=money(monthlyEstimate);
- document.getElementById("money-left").textContent=available>0?money(Math.max(0,remaining)):"Enter your money";
-
- const note=document.getElementById("result-note");
- if(available===0){
-  note.textContent="Enter the amount of money you have to see whether your available money is close to the estimated starting amount.";
- }else if(available<setupEstimate){
-  note.textContent="Your current money is below this simple starting estimate. You may need to start smaller, increase your starting money, or adjust the business.";
- }else{
-  note.textContent="Your available money is above this simple starting estimate. Keep some money aside for unexpected costs and the first months of operation.";
- }
- result.classList.add("show");
- result.scrollIntoView({behavior:"smooth",block:"nearest"});
-}
-
-function mobileMenu(){
- const nav=document.querySelector(".nav-links");
- if(nav.style.display==="flex"){nav.style.display="none"}
- else{
-  nav.style.display="flex";nav.style.position="absolute";nav.style.top="70px";nav.style.left="0";nav.style.right="0";nav.style.padding="18px 4%";nav.style.background="#fff";nav.style.flexDirection="column";nav.style.borderBottom="1px solid #dfe9e4";
- }
-}
+document.getElementById("year").textContent=new Date().getFullYear();
 </script>
 </body>
 </html>
