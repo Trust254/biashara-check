@@ -6,385 +6,343 @@
 <title>BiasharaCheck — Know Before You Invest</title>
 <meta name="description" content="BiasharaCheck helps Kenyan entrepreneurs understand what they need, what it may cost, where to source and how to start a business.">
 <style>
-:root{--bg:#07140f;--panel:#10221a;--panel2:#f5f8f5;--green:#1db954;--lime:#b8f34a;--text:#f6faf7;--muted:#a8b9ae;--ink:#112018;--line:#dfe8e1;--danger:#e65f5f;--shadow:0 20px 60px rgba(0,0,0,.18)}
-*{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:#f6f8f5;color:var(--ink)} button,input,select{font:inherit} button{cursor:pointer;border:0}
-.top{background:var(--bg);color:white;position:sticky;top:0;z-index:20;border-bottom:1px solid #183128}
-.nav{max-width:1180px;margin:auto;padding:15px 20px;display:flex;align-items:center;justify-content:space-between;gap:15px}
-.brand{font-size:22px;font-weight:900;letter-spacing:-.6px} .brand span{color:var(--lime)}
-.navlinks{display:flex;gap:18px;align-items:center} .navlinks a{color:#dce9e1;text-decoration:none;font-size:14px}
-.btn{padding:12px 17px;border-radius:12px;font-weight:800} .btn-primary{background:var(--lime);color:#08110c} .btn-dark{background:#173328;color:white} .btn-outline{background:transparent;color:white;border:1px solid #355345}
-.hero{background:var(--bg);color:white;padding:70px 20px 85px;overflow:hidden}
-.hero-inner{max-width:1180px;margin:auto;display:grid;grid-template-columns:1.15fr .85fr;gap:45px;align-items:center}
-.eyebrow{color:var(--lime);font-weight:900;letter-spacing:1.5px;text-transform:uppercase;font-size:12px}
-h1{font-size:clamp(42px,7vw,76px);line-height:.96;margin:14px 0 20px;letter-spacing:-3px} .hero p{font-size:18px;line-height:1.65;color:#b9c9c0;max-width:680px}
-.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
-.hero-card{background:#10241a;border:1px solid #284538;border-radius:26px;padding:25px;box-shadow:var(--shadow)}
-.mini{display:flex;gap:12px;padding:14px 0;border-bottom:1px solid #244135} .mini:last-child{border-bottom:0} .mini b{display:block} .mini span{font-size:13px;color:#9db2a5}
-.section{max-width:1180px;margin:auto;padding:70px 20px} .section-head{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:25px}
-h2{font-size:34px;margin:0;letter-spacing:-1.4px} .muted{color:#64756b}
-.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px} .step{background:white;border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:0 8px 25px rgba(20,50,35,.05)} .num{width:34px;height:34px;border-radius:10px;background:#e9f9dd;display:grid;place-items:center;font-weight:900;margin-bottom:15px}
-.checker{background:var(--bg);color:white;border-radius:30px;padding:30px;box-shadow:var(--shadow)} .checker-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.field label{display:block;color:#b7c8be;font-size:13px;font-weight:800;margin-bottom:7px} .field select,.field input{width:100%;padding:14px;border-radius:12px;border:1px solid #395247;background:#0d1d16;color:white;outline:none}
-.locked{margin-top:20px;padding:18px;border:1px dashed #536d60;border-radius:17px;background:#0d1c15;color:#c7d5cd}
-.result{margin-top:22px;background:#f3f7f3;color:var(--ink);border-radius:24px;padding:25px;display:none} .result.show{display:block}
-.plan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px} .plan-card{background:white;border:1px solid #dfe8e1;border-radius:17px;padding:18px;min-width:0} .plan-card h3{margin:0 0 8px} .big{font-size:25px;font-weight:950}
-.table-wrap{overflow:auto;margin-top:15px} table{width:100%;border-collapse:collapse;background:white;border-radius:14px;overflow:hidden} th,td{padding:13px;border-bottom:1px solid #e6ece7;text-align:left;vertical-align:top;font-size:14px} th{background:#edf5ee;font-size:12px;text-transform:uppercase;letter-spacing:.4px}
-.advice{margin-top:18px;background:#e8f8dc;border-left:5px solid #78b82e;padding:16px;border-radius:12px;color:#172217;line-height:1.55} 
-.paywall{margin-top:20px;background:linear-gradient(135deg,#11271d,#173c29);color:white;border-radius:24px;padding:26px;display:none} .paywall.show{display:block} .price{font-size:38px;font-weight:950;color:var(--lime)}
-.account{background:white;border:1px solid var(--line);border-radius:24px;padding:25px} .account-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.modal-back{position:fixed;inset:0;background:rgba(0,0,0,.68);display:none;place-items:center;z-index:100;padding:20px} .modal-back.show{display:grid} .modal{background:white;border-radius:24px;padding:25px;width:min(440px,100%);max-height:90vh;overflow:auto} .modal h3{margin-top:0;font-size:27px} .modal input{width:100%;padding:13px;margin:7px 0 12px;border:1px solid #d8e2da;border-radius:11px} .close{float:right;background:#eef2ee;border-radius:9px;padding:7px 10px}
-.notice{padding:12px 14px;background:#fff6dc;border:1px solid #eed58b;border-radius:12px;margin:10px 0;font-size:13px}
-.footer{background:var(--bg);color:#aebfb5;padding:40px 20px;text-align:center} .footer b{color:white}
-.hidden{display:none!important}
-@media(max-width:850px){.hero-inner,.checker-grid,.account-grid{grid-template-columns:1fr}.steps,.plan-grid{grid-template-columns:1fr 1fr}.navlinks{display:none}}
-@media(max-width:560px){h1{font-size:43px;letter-spacing:-2px}.steps,.plan-grid{grid-template-columns:1fr}.section{padding:50px 15px}.hero{padding:50px 15px 65px}.nav{padding:12px 15px}h2{font-size:28px}}
+:root{--bg:#07140f;--panel:#10221a;--green:#1db954;--lime:#b8f34a;--text:#f6faf7;--muted:#a8b9ae;--ink:#112018;--line:#dfe8e1;--shadow:0 20px 60px rgba(0,0,0,.18)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:#f6f8f5;color:var(--ink)}button,input,select{font:inherit}button{cursor:pointer;border:0}
+.top{background:var(--bg);color:white;position:sticky;top:0;z-index:20;border-bottom:1px solid #183128}.nav{max-width:1180px;margin:auto;padding:15px 20px;display:flex;align-items:center;justify-content:space-between;gap:15px}.brand{font-size:22px;font-weight:900}.brand span{color:var(--lime)}.navlinks{display:flex;gap:18px;align-items:center}.navlinks a{color:#dce9e1;text-decoration:none;font-size:14px}.nav-account{display:flex;gap:8px;align-items:center}
+.btn{padding:12px 17px;border-radius:12px;font-weight:800}.btn-primary{background:var(--lime);color:#08110c}.btn-dark{background:#173328;color:white}.btn-outline{background:transparent;color:white;border:1px solid #355345}.btn-danger{background:#fee9e9;color:#9b2424}
+.hero{background:var(--bg);color:white;padding:70px 20px 85px}.hero-inner{max-width:1180px;margin:auto;display:grid;grid-template-columns:1.15fr .85fr;gap:45px;align-items:center}.eyebrow{color:var(--lime);font-weight:900;letter-spacing:1.5px;text-transform:uppercase;font-size:12px}
+h1{font-size:clamp(42px,7vw,76px);line-height:.96;margin:14px 0 20px;letter-spacing:-3px}.hero p{font-size:18px;line-height:1.65;color:#b9c9c0;max-width:680px}.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}.hero-card{background:#10241a;border:1px solid #284538;border-radius:26px;padding:25px;box-shadow:var(--shadow)}.mini{display:flex;gap:12px;padding:14px 0;border-bottom:1px solid #244135}.mini:last-child{border-bottom:0}.mini b{display:block}.mini span{font-size:13px;color:#9db2a5}
+.section{max-width:1180px;margin:auto;padding:70px 20px}.section-head{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:25px}h2{font-size:34px;margin:0;letter-spacing:-1.4px}.muted{color:#64756b}.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.step{background:white;border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:0 8px 25px rgba(20,50,35,.05)}.num{width:34px;height:34px;border-radius:10px;background:#e9f9dd;display:grid;place-items:center;font-weight:900;margin-bottom:15px}
+.checker{background:var(--bg);color:white;border-radius:30px;padding:30px;box-shadow:var(--shadow)}.checker-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.field label{display:block;color:#b7c8be;font-size:13px;font-weight:800;margin-bottom:7px}.field select,.field input{width:100%;padding:14px;border-radius:12px;border:1px solid #395247;background:#0d1d16;color:white;outline:none}.locked{margin-top:20px;padding:18px;border:1px dashed #536d60;border-radius:17px;background:#0d1c15;color:#c7d5cd}
+.result{margin-top:22px;background:#f3f7f3;color:var(--ink);border-radius:24px;padding:25px;display:none}.result.show{display:block}.plan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}.plan-card{background:white;border:1px solid #dfe8e1;border-radius:17px;padding:18px;min-width:0}.plan-card h3{margin:0 0 8px}.big{font-size:25px;font-weight:950}.table-wrap{overflow:auto;margin-top:15px}table{width:100%;border-collapse:collapse;background:white;border-radius:14px;overflow:hidden}th,td{padding:13px;border-bottom:1px solid #e6ece7;text-align:left;vertical-align:top;font-size:14px}th{background:#edf5ee;font-size:12px;text-transform:uppercase;letter-spacing:.4px}.advice{margin-top:18px;background:#e8f8dc;border-left:5px solid #78b82e;padding:16px;border-radius:12px;color:#172217;line-height:1.55}.result-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.paywall{margin-top:20px;background:linear-gradient(135deg,#11271d,#173c29);color:white;border-radius:24px;padding:26px;display:none}.paywall.show{display:block}.price{font-size:38px;font-weight:950;color:var(--lime)}
+.account{background:white;border:1px solid var(--line);border-radius:24px;padding:25px}.account-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.account-card{background:#f5f8f5;border:1px solid var(--line);border-radius:16px;padding:16px}.saved-list{padding:0;margin:12px 0;list-style:none}.saved-item{display:flex;justify-content:space-between;gap:15px;align-items:center;padding:14px;border:1px solid var(--line);border-radius:14px;background:white;margin-bottom:9px}.saved-item small{color:#68786e}
+.modal-back{position:fixed;inset:0;background:rgba(0,0,0,.68);display:none;place-items:center;z-index:100;padding:20px}.modal-back.show{display:grid}.modal{background:white;border-radius:24px;padding:25px;width:min(460px,100%);max-height:90vh;overflow:auto}.modal h3{margin-top:0;font-size:27px}.modal input{width:100%;padding:13px;margin:7px 0 12px;border:1px solid #d8e2da;border-radius:11px}.close{float:right;background:#eef2ee;border-radius:9px;padding:7px 10px}.notice{padding:12px 14px;background:#fff6dc;border:1px solid #eed58b;border-radius:12px;margin:10px 0;font-size:13px}.success{background:#e8f8dc;border-color:#b9df8d}.error{background:#fee9e9;border-color:#efb2b2}
+.source-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.source{background:white;border:1px solid var(--line);border-radius:17px;padding:18px}.source a{color:#176a3d;font-weight:800;text-decoration:none}.footer{background:var(--bg);color:#aebfb5;padding:40px 20px;text-align:center}.footer b{color:white}.hidden{display:none!important}
+.spinner{display:inline-block;width:14px;height:14px;border:2px solid #173328;border-top-color:transparent;border-radius:50%;animation:spin .7s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:850px){.hero-inner,.checker-grid,.account-grid{grid-template-columns:1fr}.steps,.plan-grid,.source-grid{grid-template-columns:1fr 1fr}.navlinks{display:none}.nav-account .btn{padding:9px 10px;font-size:12px}}
+@media(max-width:560px){h1{font-size:43px;letter-spacing:-2px}.steps,.plan-grid,.source-grid{grid-template-columns:1fr}.section{padding:50px 15px}.hero{padding:50px 15px 65px}.nav{padding:12px 15px}.nav-account{gap:5px}h2{font-size:28px}.saved-item{align-items:flex-start;flex-direction:column}}
 </style>
 </head>
 <body>
 <header class="top"><nav class="nav">
 <div class="brand">Biashara<span>Check</span></div>
-<div class="navlinks"><a href="#how">How it works</a><a href="#checker">Business Check</a><a href="#pricing">Pricing</a></div>
-<div id="navAccount"><button class="btn btn-outline" onclick="openModal('login')">Log in</button><button class="btn btn-primary" onclick="openModal('register')">Create account</button></div>
+<div class="navlinks"><a href="#how">How it works</a><a href="#checker">Business Check</a><a href="#sources">Sourcing</a><a href="#pricing">Pricing</a></div>
+<div id="navAccount" class="nav-account"><button class="btn btn-outline" onclick="openModal('login')">Log in</button><button class="btn btn-primary" onclick="openModal('register')">Create account</button></div>
 </nav></header>
 
 <section class="hero"><div class="hero-inner">
 <div><div class="eyebrow">Built for Kenyan entrepreneurs</div><h1>Know what you need before you spend.</h1>
-<p>BiasharaCheck turns a business idea into a simple practical plan: the equipment, materials, estimated costs, where to look for supplies, how to start and how to grow.</p>
+<p>Turn a business idea into a practical plan: what you need, example costs, where to look for supplies, how to start and how to grow.</p>
 <div class="hero-actions"><button class="btn btn-primary" onclick="openModal('register')">Get 2 free business checks</button><a class="btn btn-outline" href="#how">See how it works</a></div></div>
-<div class="hero-card"><div class="mini"><b>01 · Requirements</b><span>See the equipment and materials you may need.</span></div><div class="mini"><b>02 · Cost breakdown</b><span>Understand where your starting money can go.</span></div><div class="mini"><b>03 · Sourcing</b><span>See practical places to look for each item.</span></div><div class="mini"><b>04 · Start & grow</b><span>Get simple next steps and growth ideas.</span></div></div>
+<div class="hero-card"><div class="mini"><b>01 · Requirements</b><span>See equipment, materials and important setup needs.</span></div><div class="mini"><b>02 · Cost breakdown</b><span>Understand where your starting money can go.</span></div><div class="mini"><b>03 · Sourcing</b><span>See practical places to look for supplies.</span></div><div class="mini"><b>04 · Start & grow</b><span>Get simple next steps for building the business.</span></div></div>
 </div></section>
 
 <section class="section" id="how"><div class="section-head"><div><h2>From idea to action</h2><p class="muted">Simple information instead of complicated business language.</p></div></div>
-<div class="steps"><div class="step"><div class="num">1</div><h3>Create your account</h3><p class="muted">Your checks belong to your account. You get two detailed checks free.</p></div><div class="step"><div class="num">2</div><h3>Choose a business</h3><p class="muted">Pick from practical Kenyan business ideas and choose your county.</p></div><div class="step"><div class="num">3</div><h3>Get your checklist</h3><p class="muted">See what you need, example costs, sourcing options and advice.</p></div><div class="step"><div class="num">4</div><h3>Continue with Plus</h3><p class="muted">After two free checks, subscribe through M-Pesa to continue.</p></div></div></section>
+<div class="steps"><div class="step"><div class="num">1</div><h3>Create your account</h3><p class="muted">Your checks belong to your account. You get two detailed checks free.</p></div><div class="step"><div class="num">2</div><h3>Choose a business</h3><p class="muted">Pick a practical business idea and choose your county.</p></div><div class="step"><div class="num">3</div><h3>Get your checklist</h3><p class="muted">See what you need, example costs, sourcing options and advice.</p></div><div class="step"><div class="num">4</div><h3>Continue with Plus</h3><p class="muted">After two free checks, subscribe through M-Pesa to continue.</p></div></div></section>
 
 <section class="section" id="checker"><div class="checker">
-<div class="section-head"><div><div class="eyebrow">Business planner</div><h2>Check your business idea</h2><p style="color:#aebfb5">The full checklist is available to registered users.</p></div><div id="trialBadge" class="btn btn-dark">2 free checks</div></div>
+<div class="section-head"><div><div class="eyebrow">Business planner</div><h2>Check your business idea</h2><p style="color:#aebfb5">Choose a business and county to create your practical checklist.</p></div><div id="trialBadge" class="btn btn-dark">2 free checks</div></div>
 <div class="checker-grid"><div class="field"><label>Business idea</label><select id="business"></select></div><div class="field"><label>County</label><select id="county"></select></div></div>
 <div class="locked" id="checkerLock">Create an account to unlock your detailed business checklist. You receive <b>2 free checks</b>.</div>
 <button class="btn btn-primary" style="margin-top:14px" onclick="runCheck()">Check this business</button>
 <div class="result" id="result"></div>
-<div class="paywall" id="paywall"><div class="eyebrow">BiasharaCheck Plus</div><h2>Keep building your plan</h2><p>You have used your 2 free checks. Subscribe to continue using detailed business checks and future premium tools.</p><div class="price">KSh 299 <small style="font-size:14px;color:#b9c9c0">/ month</small></div><button class="btn btn-primary" onclick="openModal('subscribe')">Subscribe with M-Pesa</button></div>
+<div class="paywall" id="paywall"><div class="eyebrow">BiasharaCheck Plus</div><h2>Keep building your plan</h2><p>You have used your two free checks. Subscribe to continue using detailed business checks and premium planning features.</p><div class="price">KSh 299 <small style="font-size:14px;color:#b9c9c0">/ month</small></div><button class="btn btn-primary" onclick="openModal('subscribe')">Subscribe with M-Pesa</button></div>
+</div></section>
+
+<section class="section" id="sources"><div class="section-head"><div><h2>Where to look for supplies</h2><p class="muted">Examples of sourcing destinations. Compare prices and confirm supplier details before paying.</p></div></div>
+<div class="source-grid">
+<div class="source"><h3>Samwest Distributors</h3><p class="muted">Wholesale distribution option for business supplies.</p><a href="https://samwest-distributors.co.ke/" target="_blank" rel="noopener">Visit website →</a></div>
+<div class="source"><h3>Eggcom</h3><p class="muted">Marketplace option for finding egg-related supply connections.</p><a href="https://eggcom.app/" target="_blank" rel="noopener">Visit website →</a></div>
+<div class="source"><h3>Airsoko Business</h3><p class="muted">Business sourcing marketplace option.</p><a href="https://business.airsoko.com/" target="_blank" rel="noopener">Visit website →</a></div>
+<div class="source"><h3>Wholesale Kenya</h3><p class="muted">Wholesale shopping destination.</p><a href="https://wholesalekenya.com/Home" target="_blank" rel="noopener">Visit website →</a></div>
+<div class="source"><h3>Jumia Wholesale</h3><p class="muted">Online option for comparing wholesale products.</p><a href="https://www.jumia.co.ke/slp/wholesale-supplier" target="_blank" rel="noopener">View wholesale options →</a></div>
+<div class="source"><h3>Business Registration Service</h3><p class="muted">Official Kenyan business registration portal.</p><a href="https://brsv2.ecitizen.go.ke/" target="_blank" rel="noopener">Visit BRS →</a></div>
 </div></section>
 
 <section class="section" id="pricing"><div class="section-head"><div><h2>Simple pricing</h2><p class="muted">Try BiasharaCheck before paying.</p></div></div>
-<div class="plan-grid"><div class="plan-card"><h3>Free</h3><div class="big">2 checks</div><p class="muted">Create an account and receive two detailed business checks.</p></div><div class="plan-card" style="border:2px solid #91c84c"><h3>Plus</h3><div class="big">KSh 299/month</div><p class="muted">Continue checking businesses and access premium planning features.</p><button class="btn btn-dark" onclick="openModal('subscribe')">Subscribe with M-Pesa</button></div><div class="plan-card"><h3>Future tools</h3><div class="big">More value</div><p class="muted">Supplier leads, comparisons, reports and other features can be added as the platform grows.</p></div></div></section>
+<div class="plan-grid"><div class="plan-card"><h3>Free</h3><div class="big">2 checks</div><p class="muted">Create an account and receive two detailed business checks.</p></div><div class="plan-card" style="border:2px solid #91c84c"><h3>Plus</h3><div class="big">KSh 299/month</div><p class="muted">Continue checking businesses and access premium planning features.</p><button class="btn btn-dark" onclick="openModal('subscribe')">Subscribe with M-Pesa</button></div><div class="plan-card"><h3>Growing platform</h3><div class="big">More tools</div><p class="muted">Supplier leads, comparisons, reports and other useful features can be added as the platform grows.</p></div></div></section>
 
-<section class="section"><div class="account"><h2>Your account</h2><p class="muted" id="accountStatus">Not logged in. Create an account to start your 2 free checks.</p><div id="accountPanel" class="hidden"></div></div></section>
-
+<section class="section"><div class="account"><div class="section-head"><div><h2>Your account</h2><p class="muted" id="accountStatus">Not logged in. Create an account to start your two free checks.</p></div><div id="accountActions"></div></div><div id="accountPanel" class="hidden"></div></div></section>
 <footer class="footer"><b>BiasharaCheck</b><br><span>Before you invest, check the business.</span></footer>
 
 <div class="modal-back" id="modal"><div class="modal"><button class="close" onclick="closeModal()">×</button><div id="modalBody"></div></div></div>
 
 <script>
- const BACKEND_URL = "https://biashara-check-backend.onrender.com";
-const PROFILES = {"Smokie & Egg Selling": {"icon": "\ud83c\udf2d", "range": "KSh 15,000\u201345,000", "items": [["Smokie trolley", "KSh 8,000\u201320,000", "Local welder/fabricator", "Strong frame, wheels that move easily, covered food area"], ["Jiko / cooker", "KSh 1,500\u20134,000", "Jua kali shops / kitchen shops", "Stable cooker suitable for your fuel choice"], ["Starter smokies", "KSh 2,000\u20135,000", "Wholesale food suppliers", "Buy from a reputable supplier and keep chilled"], ["Eggs", "KSh 1,500\u20134,000", "Egg wholesalers / farmers", "Clean, uncracked eggs"], ["Serving supplies", "KSh 500\u20132,000", "Wholesale shops", "Food-safe packaging and clean utensils"]], "advice": "Start with a manageable stock level. Keep food covered, clean and at safe temperatures, and check local food requirements."}, "Barbershop": {"icon": "\u2702\ufe0f", "range": "KSh 35,000\u2013100,000", "items": [["Barber chair", "KSh 15,000\u201335,000", "Salon/barber equipment sellers", "Strong frame, comfortable seat and easy-to-clean material"], ["Professional clipper", "KSh 3,000\u20138,000", "Barber equipment shops", "Strong motor, good blades and available spare parts"], ["Trimmer", "KSh 2,000\u20135,000", "Barber equipment shops", "Clean blade alignment and reliable battery"], ["Large mirror", "KSh 2,000\u20136,000", "Glass/furniture shops", "Clear glass and safe wall mounting"], ["Wash sink", "KSh 8,000\u201320,000", "Plumbing/salon equipment sellers", "Good drainage and easy-to-clean basin"]], "advice": "Buy one good professional clipper before buying many cheap machines. Add equipment as customer demand grows."}, "Salon": {"icon": "\ud83d\udc87", "range": "KSh 45,000\u2013150,000", "items": [["Salon chair", "KSh 8,000\u201320,000", "Salon equipment sellers", "Strong frame and easy-to-clean cover"], ["Mirror", "KSh 2,000\u20136,000", "Glass/furniture shops", "Large, clear and safely mounted"], ["Hair dryer", "KSh 3,000\u201310,000", "Beauty/electronics shops", "Reliable motor and warranty if available"], ["Wash basin", "KSh 8,000\u201320,000", "Plumbing/salon equipment sellers", "Good drainage and comfortable height"], ["Starter hair products", "KSh 5,000\u201320,000", "Beauty wholesalers", "Known brands and genuine products"]], "advice": "Start with the services you can deliver well. Do not fill the salon with expensive equipment before knowing what customers want."}, "M-Pesa / Mobile Money": {"icon": "\ud83d\udcb3", "range": "KSh 60,000\u2013150,000+", "items": [["Secure shop/space", "KSh 10,000\u201330,000", "Local commercial spaces", "Choose a visible, secure location"], ["Working float", "KSh 30,000\u2013100,000+", "Your approved business banking/agent arrangements", "Keep enough float for expected customer demand"], ["Counter and security", "KSh 5,000\u201320,000", "Carpenters/security shops", "Protect cash and customer information"], ["Phone", "KSh 5,000\u201320,000", "Authorized phone retailers", "Reliable battery and network support"]], "advice": "Actual agent requirements depend on the provider and current terms. Confirm requirements directly before paying for an agency setup."}, "Poultry": {"icon": "\ud83d\udc14", "range": "KSh 30,000\u2013100,000+", "items": [["Chicken house", "KSh 10,000\u201340,000", "Local fundis/building suppliers", "Dry, ventilated and secure from predators"], ["Feeders and drinkers", "KSh 2,000\u20138,000", "Agrovet shops", "Easy to clean and strong enough for daily use"], ["Chicks", "KSh 3,000\u201315,000", "Reputable hatcheries", "Healthy chicks from a reliable source"], ["Starter feed", "KSh 5,000\u201320,000", "Agrovet/feed suppliers", "Correct feed for the bird's age"], ["Water and cleaning supplies", "KSh 1,000\u20134,000", "Agrovets/general shops", "Keep equipment clean and water available"]], "advice": "Plan feed, water, housing and disease-prevention costs before buying chicks."}, "Car Wash": {"icon": "\ud83d\udebf", "range": "KSh 30,000\u2013120,000", "items": [["Pressure washer", "KSh 12,000\u201335,000", "Hardware/cleaning equipment sellers", "Choose a durable pump with available spare parts"], ["Water tank", "KSh 8,000\u201320,000", "Hardware shops", "Size it for your expected daily customers"], ["Hoses and nozzles", "KSh 3,000\u20138,000", "Hardware shops", "Strong hose and suitable connectors"], ["Vacuum cleaner", "KSh 6,000\u201320,000", "Appliance/cleaning equipment sellers", "Wet/dry model if possible"], ["Soap and cleaning chemicals", "KSh 2,000\u20138,000", "Cleaning/chemical suppliers", "Use products suitable for vehicle surfaces"]], "advice": "Water availability and drainage can determine whether the location works. Check them before renting."}, "Chemist": {"icon": "\ud83d\udc8a", "range": "Varies widely", "items": [["Shop/fit-out", "KSh 20,000\u201360,000+", "Local commercial spaces/furniture makers", "Clean, secure and suitable for the permitted business"], ["Shelves and counter", "KSh 10,000\u201330,000", "Carpenters/furniture shops", "Strong, cleanable shelves with organized storage"], ["Approved stock", "Varies", "Licensed wholesalers", "Buy only lawful products from reputable suppliers"], ["Storage/cooling equipment where required", "Varies", "Approved medical/pharmacy suppliers", "Follow product storage requirements"]], "advice": "A pharmacy/chemist is regulated. Confirm the current licensing, premises and professional requirements before buying stock or opening."}, "Grocery Shop": {"icon": "\ud83d\uded2", "range": "KSh 25,000\u2013100,000", "items": [["Shelves", "KSh 8,000\u201325,000", "Carpenters/wholesale shops", "Strong and easy to clean"], ["Opening stock", "KSh 12,000\u201360,000", "Wholesale distributors", "Compare wholesale prices and expiry dates"], ["Counter", "KSh 4,000\u201312,000", "Carpenter/furniture maker", "Secure and practical"], ["Shopping bags/packaging", "KSh 500\u20132,000", "Wholesale packaging shops", "Suitable sizes for common purchases"]], "advice": "Start with fast-moving products in your area, then increase variety using real sales data."}, "Hardware": {"icon": "\ud83d\udcbc", "range": "Plan required", "items": [["Equipment", "Plan estimate", "Local suppliers / wholesale markets", "Buy durable equipment with spare parts or service available locally."], ["Opening materials/stock", "Plan estimate", "Local suppliers / wholesale markets", "Start with a small amount, test demand and restock from sales."], ["Workspace", "Plan estimate", "Local suppliers / wholesale markets", "Choose a location that matches customer traffic and the work you need to do."], ["Tools and supplies", "Plan estimate", "Local suppliers / wholesale markets", "Compare at least two suppliers before buying expensive items."]], "advice": "Start small, test customer demand and keep a clear record of every cost and sale."}, "Laundry": {"icon": "\ud83d\udcbc", "range": "Plan required", "items": [["Equipment", "Plan estimate", "Local suppliers / wholesale markets", "Buy durable equipment with spare parts or service available locally."], ["Opening materials/stock", "Plan estimate", "Local suppliers / wholesale markets", "Start with a small amount, test demand and restock from sales."], ["Workspace", "Plan estimate", "Local suppliers / wholesale markets", "Choose a location that matches customer traffic and the work you need to do."], ["Tools and supplies", "Plan estimate", "Local suppliers / wholesale markets", "Compare at least two suppliers before buying expensive items."]], "advice": "Start small, test customer demand and keep a clear record of every cost and sale."}, "Food Kiosk": {"icon": "\ud83d\udcbc", "range": "Plan required", "items": [["Equipment", "Plan estimate", "Local suppliers / wholesale markets", "Buy durable equipment with spare parts or service available locally."], ["Opening materials/stock", "Plan estimate", "Local suppliers / wholesale markets", "Start with a small amount, test demand and restock from sales."], ["Workspace", "Plan estimate", "Local suppliers / wholesale markets", "Choose a location that matches customer traffic and the work you need to do."], ["Tools and supplies", "Plan estimate", "Local suppliers / wholesale markets", "Compare at least two suppliers before buying expensive items."]], "advice": "Start small, test customer demand and keep a clear record of every cost and sale."}, "Boda Boda": {"icon": "\ud83d\udcbc", "range": "Plan required", "items": [["Equipment", "Plan estimate", "Local suppliers / wholesale markets", "Buy durable equipment with spare parts or service available locally."], ["Opening materials/stock", "Plan estimate", "Local suppliers / wholesale markets", "Start with a small amount, test demand and restock from sales."], ["Workspace", "Plan estimate", "Local suppliers / wholesale markets", "Choose a location that matches customer traffic and the work you need to do."], ["Tools and supplies", "Plan estimate", "Local suppliers / wholesale markets", "Compare at least two suppliers before buying expensive items."]], "advice": "Start small, test customer demand and keep a clear record of every cost and sale."}, "Restaurant": {"icon": "\ud83d\udcbc", "range": "Plan required", "items": [["Equipment", "Plan estimate", "Local suppliers / wholesale markets", "Buy durable equipment with spare parts or service available locally."], ["Opening materials/stock", "Plan estimate", "Local suppliers / wholesale markets", "Start with a small amount, test demand and restock from sales."], ["Workspace", "Plan estimate", "Local suppliers / wholesale markets", "Choose a location that matches customer traffic and the work you need to do."], ["Tools and supplies", "Plan estimate", "Local suppliers / wholesale markets", "Compare at least two suppliers before buying expensive items."]], "advice": "Start small, test customer demand and keep a clear record of every cost and sale."}, "Printing & Cyber": {"icon": "\ud83d\udda8\ufe0f", "range": "KSh 60,000\u2013180,000", "items": [["Computer", "KSh 25,000\u201360,000", "Computer shops/refurbished dealers", "Enough RAM/storage for your planned software"], ["Printer", "KSh 12,000\u201335,000", "Authorized electronics/computer shops", "Check ink/toner cost and spare parts"], ["Internet connection", "KSh 2,000\u20136,000/month", "Local telecom providers", "Compare speed, reliability and data limits"], ["Desk and chair", "KSh 5,000\u201315,000", "Furniture makers/shops", "Comfortable for long use"], ["Paper and stationery", "KSh 2,000\u20138,000", "Stationery wholesalers", "Buy common paper sizes in bulk"]], "advice": "Printer running costs matter as much as the printer price. Check the cost per page before buying."}, "Phone Accessories": {"icon": "\ud83d\udcbc", "range": "Plan required", "items": [["Equipment", "Plan estimate", "Local suppliers / wholesale markets", "Buy durable equipment with spare parts or service available locally."], ["Opening materials/stock", "Plan estimate", "Local suppliers / wholesale markets", "Start with a small amount, test demand and restock from sales."], ["Workspace", "Plan estimate", "Local suppliers / wholesale markets", "Choose a location that matches customer traffic and the work you need to do."], ["Tools and supplies", "Plan estimate", "Local suppliers / wholesale markets", "Compare at least two suppliers before buying expensive items."]], "advice": "Start small, test customer demand and keep a clear record of every cost and sale."}, "Phone Repair": {"icon": "\ud83d\udcbc", "range": "Plan required", "items": [["Equipment", "Plan estimate", "Local suppliers / wholesale markets", "Buy durable equipment with spare parts or service available locally."], ["Opening materials/stock", "Plan estimate", "Local suppliers / wholesale markets", "Start with a small amount, test demand and restock from sales."], ["Workspace", "Plan estimate", "Local suppliers / wholesale markets", "Choose a location that matches customer traffic and the work you need to do."], ["Tools and supplies", "Plan estimate", "Local suppliers / wholesale markets", "Compare at least two suppliers before buying expensive items."]], "advice": "Start small, test customer demand and keep a clear record of every cost and sale."}, "Welding": {"icon": "\ud83d\udcbc", "range": "Plan required", "items": [["Equipment", "Plan estimate", "Local suppliers / wholesale markets", "Buy durable equipment with spare parts or service available locally."], ["Opening materials/stock", "Plan estimate", "Local suppliers / wholesale markets", "Start with a small amount, test demand and restock from sales."], ["Workspace", "Plan estimate", "Local suppliers / wholesale markets", "Choose a location that matches customer traffic and the work you need to do."], ["Tools and supplies", "Plan estimate", "Local suppliers / wholesale markets", "Compare at least two suppliers before buying expensive items."]], "advice": "Start small, test customer demand and keep a clear record of every cost and sale."}, "Carpentry": {"icon": "\ud83d\udcbc", "range": "Plan required", "items": [["Equipment", "Plan estimate", "Local suppliers / wholesale markets", "Buy durable equipment with spare parts or service available locally."], ["Opening materials/stock", "Plan estimate", "Local suppliers / wholesale markets", "Start with a small amount, test demand and restock from sales."], ["Workspace", "Plan estimate", "Local suppliers / wholesale markets", "Choose a location that matches customer traffic and the work you need to do."], ["Tools and supplies", "Plan estimate", "Local suppliers / wholesale markets", "Compare at least two suppliers before buying expensive items."]], "advice": "Start small, test customer demand and keep a clear record of every cost and sale."}, "Tailoring": {"icon": "\ud83e\uddf5", "range": "KSh 30,000\u2013100,000", "items": [["Sewing machine", "KSh 15,000\u201335,000", "Sewing machine dealers", "Reliable motor, straight stitching and available service"], ["Cutting table", "KSh 5,000\u201315,000", "Carpenter", "Strong, flat work surface"], ["Iron", "KSh 2,000\u20136,000", "Electronics shops", "Good temperature control"], ["Thread, needles and tools", "KSh 2,000\u20138,000", "Textile/sewing wholesalers", "Buy common colours and sizes first"], ["Starter fabric", "KSh 5,000\u201320,000", "Textile/wholesale markets", "Choose fabrics based on local demand"]], "advice": "Start with the clothing types you already know how to make well, then expand."}, "Baking": {"icon": "\ud83d\udcbc", "range": "Plan required", "items": [["Equipment", "Plan estimate", "Local suppliers / wholesale markets", "Buy durable equipment with spare parts or service available locally."], ["Opening materials/stock", "Plan estimate", "Local suppliers / wholesale markets", "Start with a small amount, test demand and restock from sales."], ["Workspace", "Plan estimate", "Local suppliers / wholesale markets", "Choose a location that matches customer traffic and the work you need to do."], ["Tools and supplies", "Plan estimate", "Local suppliers / wholesale markets", "Compare at least two suppliers before buying expensive items."]], "advice": "Start small, test customer demand and keep a clear record of every cost and sale."}, "Farming": {"icon": "\ud83d\udcbc", "range": "Plan required", "items": [["Equipment", "Plan estimate", "Local suppliers / wholesale markets", "Buy durable equipment with spare parts or service available locally."], ["Opening materials/stock", "Plan estimate", "Local suppliers / wholesale markets", "Start with a small amount, test demand and restock from sales."], ["Workspace", "Plan estimate", "Local suppliers / wholesale markets", "Choose a location that matches customer traffic and the work you need to do."], ["Tools and supplies", "Plan estimate", "Local suppliers / wholesale markets", "Compare at least two suppliers before buying expensive items."]], "advice": "Start small, test customer demand and keep a clear record of every cost and sale."}, "Dairy": {"icon": "\ud83d\udcbc", "range": "Plan required", "items": [["Equipment", "Plan estimate", "Local suppliers / wholesale markets", "Buy durable equipment with spare parts or service available locally."], ["Opening materials/stock", "Plan estimate", "Local suppliers / wholesale markets", "Start with a small amount, test demand and restock from sales."], ["Workspace", "Plan estimate", "Local suppliers / wholesale markets", "Choose a location that matches customer traffic and the work you need to do."], ["Tools and supplies", "Plan estimate", "Local suppliers / wholesale markets", "Compare at least two suppliers before buying expensive items."]], "advice": "Start small, test customer demand and keep a clear record of every cost and sale."}, "Fish Selling": {"icon": "\ud83d\udcbc", "range": "Plan required", "items": [["Equipment", "Plan estimate", "Local suppliers / wholesale markets", "Buy durable equipment with spare parts or service available locally."], ["Opening materials/stock", "Plan estimate", "Local suppliers / wholesale markets", "Start with a small amount, test demand and restock from sales."], ["Workspace", "Plan estimate", "Local suppliers / wholesale markets", "Choose a location that matches customer traffic and the work you need to do."], ["Tools and supplies", "Plan estimate", "Local suppliers / wholesale markets", "Compare at least two suppliers before buying expensive items."]], "advice": "Start small, test customer demand and keep a clear record of every cost and sale."}, "Butchery": {"icon": "\ud83d\udcbc", "range": "Plan required", "items": [["Equipment", "Plan estimate", "Local suppliers / wholesale markets", "Buy durable equipment with spare parts or service available locally."], ["Opening materials/stock", "Plan estimate", "Local suppliers / wholesale markets", "Start with a small amount, test demand and restock from sales."], ["Workspace", "Plan estimate", "Local suppliers / wholesale markets", "Choose a location that matches customer traffic and the work you need to do."], ["Tools and supplies", "Plan estimate", "Local suppliers / wholesale markets", "Compare at least two suppliers before buying expensive items."]], "advice": "Start small, test customer demand and keep a clear record of every cost and sale."}, "Water Refill": {"icon": "\ud83d\udcbc", "range": "Plan required", "items": [["Equipment", "Plan estimate", "Local suppliers / wholesale markets", "Buy durable equipment with spare parts or service available locally."], ["Opening materials/stock", "Plan estimate", "Local suppliers / wholesale markets", "Start with a small amount, test demand and restock from sales."], ["Workspace", "Plan estimate", "Local suppliers / wholesale markets", "Choose a location that matches customer traffic and the work you need to do."], ["Tools and supplies", "Plan estimate", "Local suppliers / wholesale markets", "Compare at least two suppliers before buying expensive items."]], "advice": "Start small, test customer demand and keep a clear record of every cost and sale."}, "Solar Services": {"icon": "\ud83d\udcbc", "range": "Plan required", "items": [["Equipment", "Plan estimate", "Local suppliers / wholesale markets", "Buy durable equipment with spare parts or service available locally."], ["Opening materials/stock", "Plan estimate", "Local suppliers / wholesale markets", "Start with a small amount, test demand and restock from sales."], ["Workspace", "Plan estimate", "Local suppliers / wholesale markets", "Choose a location that matches customer traffic and the work you need to do."], ["Tools and supplies", "Plan estimate", "Local suppliers / wholesale markets", "Compare at least two suppliers before buying expensive items."]], "advice": "Start small, test customer demand and keep a clear record of every cost and sale."}, "Cleaning Services": {"icon": "\ud83d\udcbc", "range": "Plan required", "items": [["Equipment", "Plan estimate", "Local suppliers / wholesale markets", "Buy durable equipment with spare parts or service available locally."], ["Opening materials/stock", "Plan estimate", "Local suppliers / wholesale markets", "Start with a small amount, test demand and restock from sales."], ["Workspace", "Plan estimate", "Local suppliers / wholesale markets", "Choose a location that matches customer traffic and the work you need to do."], ["Tools and supplies", "Plan estimate", "Local suppliers / wholesale markets", "Compare at least two suppliers before buying expensive items."]], "advice": "Start small, test customer demand and keep a clear record of every cost and sale."}, "Photography": {"icon": "\ud83d\udcbc", "range": "Plan required", "items": [["Equipment", "Plan estimate", "Local suppliers / wholesale markets", "Buy durable equipment with spare parts or service available locally."], ["Opening materials/stock", "Plan estimate", "Local suppliers / wholesale markets", "Start with a small amount, test demand and restock from sales."], ["Workspace", "Plan estimate", "Local suppliers / wholesale markets", "Choose a location that matches customer traffic and the work you need to do."], ["Tools and supplies", "Plan estimate", "Local suppliers / wholesale markets", "Compare at least two suppliers before buying expensive items."]], "advice": "Start small, test customer demand and keep a clear record of every cost and sale."}, "Graphic Design": {"icon": "\ud83d\udcbc", "range": "Plan required", "items": [["Equipment", "Plan estimate", "Local suppliers / wholesale markets", "Buy durable equipment with spare parts or service available locally."], ["Opening materials/stock", "Plan estimate", "Local suppliers / wholesale markets", "Start with a small amount, test demand and restock from sales."], ["Workspace", "Plan estimate", "Local suppliers / wholesale markets", "Choose a location that matches customer traffic and the work you need to do."], ["Tools and supplies", "Plan estimate", "Local suppliers / wholesale markets", "Compare at least two suppliers before buying expensive items."]], "advice": "Start small, test customer demand and keep a clear record of every cost and sale."}, "Online Selling": {"icon": "\ud83d\udcbc", "range": "Plan required", "items": [["Equipment", "Plan estimate", "Local suppliers / wholesale markets", "Buy durable equipment with spare parts or service available locally."], ["Opening materials/stock", "Plan estimate", "Local suppliers / wholesale markets", "Start with a small amount, test demand and restock from sales."], ["Workspace", "Plan estimate", "Local suppliers / wholesale markets", "Choose a location that matches customer traffic and the work you need to do."], ["Tools and supplies", "Plan estimate", "Local suppliers / wholesale markets", "Compare at least two suppliers before buying expensive items."]], "advice": "Start small, test customer demand and keep a clear record of every cost and sale."}, "Motorbike Repair": {"icon": "\ud83d\udcbc", "range": "Plan required", "items": [["Equipment", "Plan estimate", "Local suppliers / wholesale markets", "Buy durable equipment with spare parts or service available locally."], ["Opening materials/stock", "Plan estimate", "Local suppliers / wholesale markets", "Start with a small amount, test demand and restock from sales."], ["Workspace", "Plan estimate", "Local suppliers / wholesale markets", "Choose a location that matches customer traffic and the work you need to do."], ["Tools and supplies", "Plan estimate", "Local suppliers / wholesale markets", "Compare at least two suppliers before buying expensive items."]], "advice": "Start small, test customer demand and keep a clear record of every cost and sale."}, "Tyre & Puncture Shop": {"icon": "\ud83d\udcbc", "range": "Plan required", "items": [["Equipment", "Plan estimate", "Local suppliers / wholesale markets", "Buy durable equipment with spare parts or service available locally."], ["Opening materials/stock", "Plan estimate", "Local suppliers / wholesale markets", "Start with a small amount, test demand and restock from sales."], ["Workspace", "Plan estimate", "Local suppliers / wholesale markets", "Choose a location that matches customer traffic and the work you need to do."], ["Tools and supplies", "Plan estimate", "Local suppliers / wholesale markets", "Compare at least two suppliers before buying expensive items."]], "advice": "Start small, test customer demand and keep a clear record of every cost and sale."}, "Delivery Business": {"icon": "\ud83d\udcbc", "range": "Plan required", "items": [["Equipment", "Plan estimate", "Local suppliers / wholesale markets", "Buy durable equipment with spare parts or service available locally."], ["Opening materials/stock", "Plan estimate", "Local suppliers / wholesale markets", "Start with a small amount, test demand and restock from sales."], ["Workspace", "Plan estimate", "Local suppliers / wholesale markets", "Choose a location that matches customer traffic and the work you need to do."], ["Tools and supplies", "Plan estimate", "Local suppliers / wholesale markets", "Compare at least two suppliers before buying expensive items."]], "advice": "Start small, test customer demand and keep a clear record of every cost and sale."}, "Juice & Water": {"icon": "\ud83d\udcbc", "range": "Plan required", "items": [["Equipment", "Plan estimate", "Local suppliers / wholesale markets", "Buy durable equipment with spare parts or service available locally."], ["Opening materials/stock", "Plan estimate", "Local suppliers / wholesale markets", "Start with a small amount, test demand and restock from sales."], ["Workspace", "Plan estimate", "Local suppliers / wholesale markets", "Choose a location that matches customer traffic and the work you need to do."], ["Tools and supplies", "Plan estimate", "Local suppliers / wholesale markets", "Compare at least two suppliers before buying expensive items."]], "advice": "Start small, test customer demand and keep a clear record of every cost and sale."}, "Cereal Shop": {"icon": "\ud83d\udcbc", "range": "Plan required", "items": [["Equipment", "Plan estimate", "Local suppliers / wholesale markets", "Buy durable equipment with spare parts or service available locally."], ["Opening materials/stock", "Plan estimate", "Local suppliers / wholesale markets", "Start with a small amount, test demand and restock from sales."], ["Workspace", "Plan estimate", "Local suppliers / wholesale markets", "Choose a location that matches customer traffic and the work you need to do."], ["Tools and supplies", "Plan estimate", "Local suppliers / wholesale markets", "Compare at least two suppliers before buying expensive items."]], "advice": "Start small, test customer demand and keep a clear record of every cost and sale."}, "Egg Distribution": {"icon": "\ud83d\udcbc", "range": "Plan required", "items": [["Equipment", "Plan estimate", "Local suppliers / wholesale markets", "Buy durable equipment with spare parts or service available locally."], ["Opening materials/stock", "Plan estimate", "Local suppliers / wholesale markets", "Start with a small amount, test demand and restock from sales."], ["Workspace", "Plan estimate", "Local suppliers / wholesale markets", "Choose a location that matches customer traffic and the work you need to do."], ["Tools and supplies", "Plan estimate", "Local suppliers / wholesale markets", "Compare at least two suppliers before buying expensive items."]], "advice": "Start small, test customer demand and keep a clear record of every cost and sale."}, "Fresh Juice Kiosk": {"icon": "\ud83d\udcbc", "range": "Plan required", "items": [["Equipment", "Plan estimate", "Local suppliers / wholesale markets", "Buy durable equipment with spare parts or service available locally."], ["Opening materials/stock", "Plan estimate", "Local suppliers / wholesale markets", "Start with a small amount, test demand and restock from sales."], ["Workspace", "Plan estimate", "Local suppliers / wholesale markets", "Choose a location that matches customer traffic and the work you need to do."], ["Tools and supplies", "Plan estimate", "Local suppliers / wholesale markets", "Compare at least two suppliers before buying expensive items."]], "advice": "Start small, test customer demand and keep a clear record of every cost and sale."}, "Carpet Cleaning": {"icon": "\ud83d\udcbc", "range": "Plan required", "items": [["Equipment", "Plan estimate", "Local suppliers / wholesale markets", "Buy durable equipment with spare parts or service available locally."], ["Opening materials/stock", "Plan estimate", "Local suppliers / wholesale markets", "Start with a small amount, test demand and restock from sales."], ["Workspace", "Plan estimate", "Local suppliers / wholesale markets", "Choose a location that matches customer traffic and the work you need to do."], ["Tools and supplies", "Plan estimate", "Local suppliers / wholesale markets", "Compare at least two suppliers before buying expensive items."]], "advice": "Start small, test customer demand and keep a clear record of every cost and sale."}, "Event Decoration": {"icon": "\ud83d\udcbc", "range": "Plan required", "items": [["Equipment", "Plan estimate", "Local suppliers / wholesale markets", "Buy durable equipment with spare parts or service available locally."], ["Opening materials/stock", "Plan estimate", "Local suppliers / wholesale markets", "Start with a small amount, test demand and restock from sales."], ["Workspace", "Plan estimate", "Local suppliers / wholesale markets", "Choose a location that matches customer traffic and the work you need to do."], ["Tools and supplies", "Plan estimate", "Local suppliers / wholesale markets", "Compare at least two suppliers before buying expensive items."]], "advice": "Start small, test customer demand and keep a clear record of every cost and sale."}};
-const COUNTIES = ["All Kenya", "Baringo", "Bomet", "Bungoma", "Busia", "Elgeyo-Marakwet", "Embu", "Garissa", "Homa Bay", "Isiolo", "Kajiado", "Kakamega", "Kericho", "Kiambu", "Kilifi", "Kirinyaga", "Kisii", "Kisumu", "Kitui", "Kwale", "Laikipia", "Lamu", "Machakos", "Makueni", "Mandera", "Marsabit", "Meru", "Migori", "Mombasa", "Murang'a", "Nairobi", "Nakuru", "Nandi", "Narok", "Nyamira", "Nyandarua", "Nyeri", "Samburu", "Siaya", "Taita-Taveta", "Tana River", "Tharaka-Nithi", "Trans Nzoia", "Turkana", "Uasin Gishu", "Vihiga", "Wajir", "West Pokot"];
-const BUSINESS_NAMES = Object.keys(PROFILES);
-let currentUser = JSON.parse(localStorage.getItem('bc_user') || 'null');
+const BACKEND_URL="https://biashara-check-backend.onrender.com";
 
-function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
-function getUsers(){return JSON.parse(localStorage.getItem('bc_users') || '{}')}
-function saveUsers(u){localStorage.setItem('bc_users',JSON.stringify(u))}
-function setup(){business.innerHTML=BUSINESS_NAMES.map(x=>`<option>${esc(x)}</option>`).join('');county.innerHTML=COUNTIES.map(x=>`<option>${esc(x)}</option>`).join('');renderAccount()}
-function openModal(type){const m=document.getElementById('modal'),b=document.getElementById('modalBody');m.classList.add('show');
-if(type==='register') b.innerHTML=`<h3>Create your account</h3><p class="muted">Get 2 detailed business checks free.</p><input id="rname" placeholder="Full name"><input id="remail" type="email" placeholder="Email address"><input id="rpass" type="password" placeholder="Password (8+ characters)"><button class="btn btn-primary" style="width:100%" onclick="register()">Create account</button><div class="notice">Your free checks are tied to your account.</div><p>Already have an account? <a href="#" onclick="openModal('login');return false">Log in</a></p>`;
-if(type==='login') b.innerHTML=`<h3>Log in</h3><input id="lemail" type="email" placeholder="Email address"><input id="lpass" type="password" placeholder="Password"><button class="btn btn-primary" style="width:100%" onclick="login()">Log in</button><p>New here? <a href="#" onclick="openModal('register');return false">Create an account</a></p>`;
-if(type==='subscribe') b.innerHTML=`<h3>Subscribe to BiasharaCheck Plus</h3><p class="muted">Continue after your 2 free checks.</p><div class="big">KSh 299 / month</div><input id="mpesa" inputmode="tel" placeholder="M-Pesa phone number, e.g. 07XXXXXXXX"><button class="btn btn-primary" style="width:100%" onclick="startMpesa()">Pay with M-Pesa</button><div class="notice" id="paymentStatus">Enter your M-Pesa number and continue. BiasharaCheck will wait for payment confirmation before activating Plus.</div>`;
+const COUNTIES=["All Kenya","Baringo","Bomet","Bungoma","Busia","Elgeyo-Marakwet","Embu","Garissa","Homa Bay","Isiolo","Kajiado","Kakamega","Kericho","Kiambu","Kilifi","Kirinyaga","Kisii","Kisumu","Kitui","Kwale","Laikipia","Lamu","Machakos","Makueni","Mandera","Marsabit","Meru","Migori","Mombasa","Murang'a","Nairobi","Nakuru","Nandi","Narok","Nyamira","Nyandarua","Nyeri","Samburu","Siaya","Taita-Taveta","Tana River","Tharaka-Nithi","Trans Nzoia","Turkana","Uasin Gishu","Vihiga","Wajir","West Pokot"];
+
+const BUSINESS_NAMES=[
+"Smokie & Egg Selling","Barbershop","Salon","M-Pesa / Mobile Money","Poultry","Car Wash","Chemist","Grocery Shop","Hardware","Laundry","Food Kiosk","Boda Boda","Restaurant","Printing & Cyber","Phone Accessories","Phone Repair","Welding","Carpentry","Tailoring","Baking","Farming","Dairy","Fish Selling","Butchery","Water Refill","Solar Services","Cleaning Services","Photography","Graphic Design","Online Selling","Motorbike Repair","Tyre & Puncture Shop","Delivery Business","Juice & Water","Cereal Shop","Egg Distribution","Fresh Juice Kiosk","Carpet Cleaning","Event Decoration"
+];
+
+const detailed={
+"Smokie & Egg Selling":{icon:"🌭",range:"KSh 15,000–45,000",items:[
+["Smokie trolley","KSh 8,000–20,000","Local welder/fabricator","Strong frame, easy-moving wheels and covered food area"],
+["Jiko / cooker","KSh 1,500–4,000","Jua kali shops / kitchen shops","Stable cooker suitable for your fuel choice"],
+["Starter smokies","KSh 2,000–5,000","Wholesale food suppliers","Buy from a reputable supplier and keep chilled"],
+["Eggs","KSh 1,500–4,000","Egg wholesalers / farmers","Clean, uncracked eggs"],
+["Serving supplies","KSh 500–2,000","Wholesale packaging shops","Food-safe packaging and clean utensils"]
+],advice:"Start with manageable stock. Keep food covered, clean and at safe temperatures, and confirm local food requirements."},
+"Barbershop":{icon:"✂️",range:"KSh 35,000–100,000",items:[
+["Barber chair","KSh 15,000–35,000","Salon/barber equipment sellers","Strong frame and easy-to-clean material"],
+["Professional clipper","KSh 3,000–8,000","Barber equipment shops","Strong motor, good blades and available spare parts"],
+["Trimmer","KSh 2,000–5,000","Barber equipment shops","Clean blade alignment and reliable battery"],
+["Large mirror","KSh 2,000–6,000","Glass/furniture shops","Clear glass and safe wall mounting"],
+["Wash sink","KSh 8,000–20,000","Plumbing/salon equipment sellers","Good drainage and easy-to-clean basin"]
+],advice:"Buy one reliable professional clipper before buying many cheap machines. Add equipment as demand grows."},
+"Salon":{icon:"💇",range:"KSh 45,000–150,000",items:[
+["Salon chair","KSh 8,000–20,000","Salon equipment sellers","Strong frame and easy-to-clean cover"],
+["Mirror","KSh 2,000–6,000","Glass/furniture shops","Large, clear and safely mounted"],
+["Hair dryer","KSh 3,000–10,000","Beauty/electronics shops","Reliable motor and warranty if available"],
+["Wash basin","KSh 8,000–20,000","Plumbing/salon equipment sellers","Good drainage and comfortable height"],
+["Starter hair products","KSh 5,000–20,000","Beauty wholesalers","Known brands and genuine products"]
+],advice:"Start with services you can deliver well. Add expensive equipment after you understand customer demand."},
+"M-Pesa / Mobile Money":{icon:"💳",range:"KSh 60,000–150,000+",items:[
+["Secure shop/space","KSh 10,000–30,000","Local commercial spaces","Choose a visible, secure location"],
+["Working float","KSh 30,000–100,000+","Approved provider/agent arrangements","Keep enough float for expected demand"],
+["Counter and security","KSh 5,000–20,000","Carpenters/security shops","Protect cash and customer information"],
+["Phone","KSh 5,000–20,000","Authorized phone retailers","Reliable battery and network support"]
+],advice:"Actual agent requirements depend on the provider and current terms. Confirm requirements directly before paying for an agency setup."},
+"Poultry":{icon:"🐔",range:"KSh 30,000–100,000+",items:[
+["Chicken house","KSh 10,000–40,000","Local fundis/building suppliers","Dry, ventilated and secure from predators"],
+["Feeders and drinkers","KSh 2,000–8,000","Agrovet shops","Easy to clean and strong"],
+["Chicks","KSh 3,000–15,000","Reputable hatcheries","Healthy chicks from a reliable source"],
+["Starter feed","KSh 5,000–20,000","Agrovet/feed suppliers","Correct feed for the birds' age"],
+["Water and cleaning supplies","KSh 1,000–4,000","Agrovets/general shops","Keep equipment clean and water available"]
+],advice:"Plan feed, water, housing and disease-prevention costs before buying chicks."},
+"Car Wash":{icon:"🚿",range:"KSh 30,000–120,000",items:[
+["Pressure washer","KSh 12,000–35,000","Hardware/cleaning equipment sellers","Durable pump with available spare parts"],
+["Water tank","KSh 8,000–20,000","Hardware shops","Size it for expected daily customers"],
+["Hoses and nozzles","KSh 3,000–8,000","Hardware shops","Strong hose and suitable connectors"],
+["Vacuum cleaner","KSh 6,000–20,000","Appliance/cleaning equipment sellers","Wet/dry model if possible"],
+["Soap and cleaning chemicals","KSh 2,000–8,000","Cleaning/chemical suppliers","Products suitable for vehicle surfaces"]
+],advice:"Water availability and drainage can determine whether the location works. Check them before renting."},
+"Chemist":{icon:"💊",range:"Varies widely",items:[
+["Shop/fit-out","KSh 20,000–60,000+","Local commercial spaces/furniture makers","Clean, secure and suitable for the permitted business"],
+["Shelves and counter","KSh 10,000–30,000","Carpenters/furniture shops","Strong, cleanable shelves and organized storage"],
+["Approved stock","Varies","Licensed wholesalers","Buy only lawful products from reputable suppliers"],
+["Storage/cooling equipment where required","Varies","Approved medical/pharmacy suppliers","Follow product storage requirements"]
+],advice:"A pharmacy/chemist is regulated. Confirm current licensing, premises and professional requirements before buying stock or opening."},
+"Grocery Shop":{icon:"🛒",range:"KSh 25,000–100,000",items:[
+["Shelves","KSh 8,000–25,000","Carpenters/wholesale shops","Strong and easy to clean"],
+["Opening stock","KSh 12,000–60,000","Wholesale distributors","Compare wholesale prices and expiry dates"],
+["Counter","KSh 4,000–12,000","Carpenter/furniture maker","Secure and practical"],
+["Shopping bags/packaging","KSh 500–2,000","Wholesale packaging shops","Suitable sizes for common purchases"]
+],advice:"Start with fast-moving products in your area, then increase variety using real sales data."},
+"Printing & Cyber":{icon:"🖨️",range:"KSh 60,000–180,000",items:[
+["Computer","KSh 25,000–60,000","Computer shops/refurbished dealers","Enough RAM and storage for planned software"],
+["Printer","KSh 12,000–35,000","Authorized electronics/computer shops","Check ink/toner cost and spare parts"],
+["Internet connection","KSh 2,000–6,000/month","Local telecom providers","Compare speed and reliability"],
+["Desk and chair","KSh 5,000–15,000","Furniture makers/shops","Comfortable for long use"],
+["Paper and stationery","KSh 2,000–8,000","Stationery wholesalers","Buy common sizes in bulk"]
+],advice:"Printer running costs matter as much as the printer price. Check cost per page before buying."},
+"Tailoring":{icon:"🧵",range:"KSh 30,000–100,000",items:[
+["Sewing machine","KSh 15,000–35,000","Sewing machine dealers","Reliable motor and available service"],
+["Cutting table","KSh 5,000–15,000","Carpenter","Strong, flat work surface"],
+["Iron","KSh 2,000–6,000","Electronics shops","Good temperature control"],
+["Thread, needles and tools","KSh 2,000–8,000","Textile/sewing wholesalers","Buy common colours and sizes first"],
+["Starter fabric","KSh 5,000–20,000","Textile/wholesale markets","Choose fabrics based on local demand"]
+],advice:"Start with clothing types you already know how to make well, then expand."}
+};
+
+const iconMap={"Hardware":"🔧","Laundry":"🧺","Food Kiosk":"🍲","Boda Boda":"🏍️","Restaurant":"🍽️","Phone Accessories":"📱","Phone Repair":"🛠️","Welding":"🔩","Carpentry":"🪚","Baking":"🧁","Farming":"🌱","Dairy":"🥛","Fish Selling":"🐟","Butchery":"🥩","Water Refill":"💧","Solar Services":"☀️","Cleaning Services":"🧹","Photography":"📷","Graphic Design":"🎨","Online Selling":"🛍️","Motorbike Repair":"🔧","Tyre & Puncture Shop":"🛞","Delivery Business":"📦","Juice & Water":"🥤","Cereal Shop":"🌾","Egg Distribution":"🥚","Fresh Juice Kiosk":"🍹","Carpet Cleaning":"🧼","Event Decoration":"🎈"};
+
+const PROFILES={...detailed};
+for(const name of BUSINESS_NAMES){
+ if(!PROFILES[name]){
+  PROFILES[name]={icon:iconMap[name]||"💼",range:"Planning estimate required",items:[
+   ["Core equipment","Compare local prices","Equipment shops / local fabricators","Choose durable equipment with available service or spare parts"],
+   ["Opening stock or materials","Compare local prices","Wholesale suppliers / local markets","Start with a manageable amount and restock using sales"],
+   ["Workspace or operating area","Location dependent","Local commercial spaces / home setup","Choose a safe location that fits the work and customer access"],
+   ["Tools and supplies","Compare local prices","Wholesale shops / specialist suppliers","Compare at least two suppliers before buying expensive items"]
+  ],advice:"Start small, test customer demand, record every cost and sale, and expand the parts of the business that customers actually use."};
+ }
 }
-function closeModal(){modal.classList.remove('show')}async function register(){
-  const name = rname.value.trim();
-  const email = remail.value.trim().toLowerCase();
-  const password = rpass.value;
 
-  if(!name || !email || password.length < 8){
-    return alert('Enter your name, a valid email and a password of at least 8 characters.');
-  }
+let currentUser=JSON.parse(localStorage.getItem("bc_user")||"null");
 
-  try{
-    const res = await fetch(BACKEND_URL + '/api/auth/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        name: name,
-        email: email,
-        password: password
-      })
-    });
-
-    const data = await res.json();
-
-    if(!res.ok){
-      return alert(data.error || 'Could not create your account.');
-    }
-
-    currentUser = {
-      id: data.user.id,
-      name: data.user.name,
-      email: data.user.email,
-      freeChecks: Math.max(0, 2 - (data.user.free_checks_used || 0)),
-      plus: !!data.user.plus,
-      saved: []
-    };
-
-    localStorage.setItem('bc_user', JSON.stringify(currentUser));
-    localStorage.setItem('bc_token', data.token);
-
-    closeModal();
-    renderAccount();
-
-    alert('Account created. You have 2 free business checks.');
-
-  }catch(err){
-    console.error(err);
-    alert('Could not connect to BiasharaCheck. Please try again.');
-  }
-}async function login(){
-  const email = lemail.value.trim().toLowerCase();
-  const password = lpass.value;
-
-  if(!email || !password){
-    return alert('Enter your email and password.');
-  }
-
-  try{
-    const res = await fetch(BACKEND_URL + '/api/auth/login', {
-      method:'POST',
-      headers:{
-        'Content-Type':'application/json'
-      },
-      body:JSON.stringify({
-        email:email,
-        password:password
-      })
-    });
-
-    const data = await res.json();
-
-    if(!res.ok){
-      return alert(data.error || 'Email or password is incorrect.');
-    }
-
-    currentUser = {
-      id: data.user.id,
-      name: data.user.name,
-      email: data.user.email,
-      freeChecks: Math.max(0, 2 - (data.user.free_checks_used || 0)),
-      plus: !!data.user.plus,
-      saved: []
-    };
-
-    localStorage.setItem('bc_user', JSON.stringify(currentUser));
-    localStorage.setItem('bc_token', data.token);
-
-    closeModal();
-    renderAccount();
-
-    alert('Welcome back, ' + currentUser.name + '.');
-
-  }catch(err){
-    console.error(err);
-    alert('Could not connect to BiasharaCheck. Please try again.');
-  }
-}function logout(){
-  currentUser=null;
-  localStorage.removeItem('bc_user');
-  localStorage.removeItem('bc_token');
-  renderAccount();
+const $=id=>document.getElementById(id);
+function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]))}
+function token(){return localStorage.getItem("bc_token")||""}
+function headers(){return {"Content-Type":"application/json","Authorization":"Bearer "+token()}}
+function setLocalUser(user){
+ currentUser={id:user.id,name:user.name,email:user.email,freeChecks:Math.max(0,2-(user.free_checks_used||0)),plus:!!user.plus};
+ localStorage.setItem("bc_user",JSON.stringify(currentUser));
 }
-function renderAccount(){if(currentUser){accountStatus.innerHTML=`Logged in as <b>${esc(currentUser.name)}</b> · ${currentUser.plus?'Plus member':'Free account'}`;navAccount.innerHTML=`<button class="btn btn-outline" onclick="renderDashboard()">My account</button>`;trialBadge.textContent=currentUser.plus?'Plus':'Free checks: '+currentUser.freeChecks;checkerLock.innerHTML=currentUser.plus?'Your Plus account is active. You can run detailed checks.':'You have <b>'+currentUser.freeChecks+' free check(s)</b> remaining.'}else{accountStatus.textContent='Not logged in. Create an account to start your 2 free checks.';navAccount.innerHTML=`<button class="btn btn-outline" onclick="openModal('login')">Log in</button><button class="btn btn-primary" onclick="openModal('register')">Create account</button>`;trialBadge.textContent='2 free checks';checkerLock.innerHTML='Create an account to unlock your detailed business checklist. You receive <b>2 free checks</b>.'}}
-async function runCheck(){
-  if(!currentUser){
-    openModal('register');
-    return;
-  }
-
-  const token = localStorage.getItem('bc_token');
-
-  if(!token){
-    alert('Your session has expired. Please log in again.');
-    logout();
-    return;
-  }
-
-  const businessName = business.value;
-  const countyName = county.value;
-  const p = PROFILES[businessName];
-
-  try{
-    const res = await fetch(BACKEND_URL + '/api/checks', {
-      method:'POST',
-      headers:{
-        'Content-Type':'application/json',
-        'Authorization':'Bearer ' + token
-      },
-      body:JSON.stringify({
-        businessName:businessName,
-        county:countyName,
-        planData:p
-      })
-    });
-
-    const data = await res.json().catch(()=>({}));
-
-    if(!res.ok){
-      if(res.status === 403){
-        currentUser.freeChecks = 0;
-        renderAccount();
-        paywall.classList.add('show');
-        return;
-      }
-
-      if(res.status === 401){
-        alert('Your session has expired. Please log in again.');
-        logout();
-        return;
-      }
-
-      alert(data.error || 'Could not create the business check.');
-      return;
-    }
-
-    const rows = p.items.map(i =>
-      `<tr>
-        <td><b>${esc(i[0])}</b></td>
-        <td>${esc(i[1])}</td>
-        <td>${esc(i[2])}</td>
-        <td>${esc(i[3])}</td>
-      </tr>`
-    ).join('');
-
-    result.innerHTML = `
-      <h2>${esc(p.icon)} ${esc(businessName)} — ${esc(countyName)}</h2>
-
-      <p class="muted">
-        Planning estimate: ${esc(p.range)}.
-        Actual costs depend on location, supplier and business size.
-      </p>
-
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>What you need</th>
-              <th>Example cost</th>
-              <th>Where to look</th>
-              <th>What to choose</th>
-            </tr>
-          </thead>
-          <tbody>${rows}</tbody>
-        </table>
-      </div>
-
-      <div class="advice">
-        <b>Short advice:</b> ${esc(p.advice)}
-      </div>
-
-      <div class="plan-grid">
-        <div class="plan-card">
-          <h3>Before you spend</h3>
-          <p>
-            Compare prices from at least two suppliers.
-            Confirm permits or professional requirements that apply to your business.
-          </p>
-        </div>
-
-        <div class="plan-card">
-          <h3>Start smaller</h3>
-          <p>
-            Do not spend all your money at once.
-            Keep some cash available for stock, rent and unexpected costs.
-          </p>
-        </div>
-
-        <div class="plan-card">
-          <h3>Track sales</h3>
-          <p>
-            Write down every sale and expense from day one.
-            Use real numbers to decide what to buy next.
-          </p>
-        </div>
-      </div>
-
-      <button class="btn btn-dark" style="margin-top:18px" onclick="saveCheck()">
-        Save this business check
-      </button>
-    `;
-
-    result.classList.add('show');
-
-    if(data.user){
-      currentUser.freeChecks = Math.max(
-        0,
-        2 - (data.user.free_checks_used || 0)
-      );
-
-      currentUser.plus = !!data.user.plus;
-
-      localStorage.setItem(
-        'bc_user',
-        JSON.stringify(currentUser)
-      );
-    }
-
-    renderAccount();
-
-    if(!currentUser.plus && currentUser.freeChecks === 0){
-      paywall.classList.add('show');
-    }
-
-  }catch(err){
-    console.error(err);
-    alert('Could not connect to the secure business-check server.');
-  }
-}function saveCheck(){if(!currentUser)return openModal('login');currentUser.saved=currentUser.saved||[];currentUser.saved.push({business:business.value,county:county.value,date:new Date().toISOString()});syncUser();alert('Business check saved to your account.');}
-function syncUser(){const u=getUsers();u[currentUser.email]=currentUser;saveUsers(u);localStorage.setItem('bc_user',JSON.stringify(currentUser));renderAccount()}
-function renderDashboard(){const saved=(currentUser.saved||[]).map(x=>`<li>${esc(x.business)} — ${esc(x.county)} — ${new Date(x.date).toLocaleDateString()}</li>`).join('')||'<li>No saved checks yet.</li>';accountPanel.innerHTML=`<div class="account-grid"><div><b>Account</b><p>${esc(currentUser.email)}</p></div><div><b>Status</b><p>${currentUser.plus?'Plus':'Free · '+currentUser.freeChecks+' checks left'}</p></div></div><h3>Saved checks</h3><ul>${saved}</ul><button class="btn btn-dark" onclick="logout()">Log out</button>`;accountPanel.classList.remove('hidden')}
-async function startMpesa(){
-const phone=mpesa.value.trim().replace(/\s+/g,'');
-if(!/^0?7\d{8}$/.test(phone)&&!/^2547\d{8}$/.test(phone))return alert('Enter a valid Kenyan M-Pesa phone number.');
-if(!currentUser)return openModal('login');
-const status=document.getElementById('paymentStatus');
-status.textContent='Starting your M-Pesa payment request…';
-try{
- const res=await fetch('/api/subscription/stkpush',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({phone,plan:'plus_monthly',email:currentUser.email})});
+async function api(path,options={}){
+ const opts={...options,headers:{...(options.headers||{}),...(token()?{"Authorization":"Bearer "+token()}:{}),...(options.body?{"Content-Type":"application/json"}:{})}};
+ const res=await fetch(BACKEND_URL+path,opts);
  const data=await res.json().catch(()=>({}));
- if(!res.ok||!data.checkoutRequestId)throw new Error(data.message||'Payment request could not be started.');
- status.textContent='M-Pesa prompt sent. Enter your M-Pesa PIN on your phone. Waiting for confirmation…';
- pollPayment(data.checkoutRequestId);
-}catch(err){
- status.textContent='Payment service is not connected yet. Your account has not been upgraded.';
- alert('The secure payment server is not connected yet. No Plus access was given.');
-}}
+ return {res,data};
+}
+
+function setup(){
+ $("business").innerHTML=BUSINESS_NAMES.map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join("");
+ $("county").innerHTML=COUNTIES.map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join("");
+ renderAccount();
+ if(token())refreshSession();
+}
+
+function openModal(type){
+ const m=$("modal"),b=$("modalBody");m.classList.add("show");
+ if(type==="register")b.innerHTML=`<h3>Create your account</h3><p class="muted">Get two detailed business checks free.</p><input id="rname" placeholder="Full name" autocomplete="name"><input id="remail" type="email" placeholder="Email address" autocomplete="email"><input id="rpass" type="password" placeholder="Password (8+ characters)" autocomplete="new-password"><button class="btn btn-primary" style="width:100%" onclick="register()">Create account</button><div class="notice">Your checks are tied to your account.</div><p>Already have an account? <a href="#" onclick="openModal('login');return false">Log in</a></p>`;
+ if(type==="login")b.innerHTML=`<h3>Log in</h3><input id="lemail" type="email" placeholder="Email address" autocomplete="email"><input id="lpass" type="password" placeholder="Password" autocomplete="current-password"><button class="btn btn-primary" style="width:100%" onclick="login()">Log in</button><p>New here? <a href="#" onclick="openModal('register');return false">Create an account</a></p>`;
+ if(type==="subscribe")b.innerHTML=`<h3>Subscribe to BiasharaCheck Plus</h3><p class="muted">Continue after your two free checks.</p><div class="big">KSh 299 / month</div><input id="mpesa" inputmode="tel" placeholder="M-Pesa number, e.g. 07XXXXXXXX" autocomplete="tel"><button class="btn btn-primary" style="width:100%" onclick="startMpesa()">Pay with M-Pesa</button><div class="notice" id="paymentStatus">Enter your M-Pesa number and continue. BiasharaCheck will wait for payment confirmation before activating Plus.</div>`;
+}
+function closeModal(){$("modal").classList.remove("show")}
+
+async function register(){
+ const name=$("rname").value.trim(),email=$("remail").value.trim().toLowerCase(),password=$("rpass").value;
+ if(!name||!email||password.length<8)return alert("Enter your name, a valid email and a password of at least 8 characters.");
+ try{
+  const {res,data}=await api("/api/auth/register",{method:"POST",body:JSON.stringify({name,email,password})});
+  if(!res.ok)return alert(data.error||"Could not create your account.");
+  setLocalUser(data.user);localStorage.setItem("bc_token",data.token);closeModal();renderAccount();alert("Account created. You have 2 free business checks.");
+ }catch(e){console.error(e);alert("Could not connect to BiasharaCheck. Please try again.")}
+}
+
+async function login(){
+ const email=$("lemail").value.trim().toLowerCase(),password=$("lpass").value;
+ if(!email||!password)return alert("Enter your email and password.");
+ try{
+  const {res,data}=await api("/api/auth/login",{method:"POST",body:JSON.stringify({email,password})});
+  if(!res.ok)return alert(data.error||"Email or password is incorrect.");
+  setLocalUser(data.user);localStorage.setItem("bc_token",data.token);closeModal();renderAccount();alert("Welcome back, "+currentUser.name+".");
+ }catch(e){console.error(e);alert("Could not connect to BiasharaCheck. Please try again.")}
+}
+
+async function refreshSession(){
+ try{
+  const {res,data}=await api("/api/auth/me");
+  if(!res.ok){logout(false);return}
+  setLocalUser(data.user);renderAccount();
+ }catch(e){console.error(e)}
+}
+
+function logout(show=true){
+ currentUser=null;localStorage.removeItem("bc_user");localStorage.removeItem("bc_token");$("accountPanel").classList.add("hidden");renderAccount();if(show)alert("You have been logged out.");
+}
+
+function renderAccount(){
+ if(currentUser){
+  $("accountStatus").innerHTML=`Logged in as <b>${esc(currentUser.name)}</b> · ${currentUser.plus?"Plus member":"Free account"}`;
+  $("navAccount").innerHTML=`<button class="btn btn-outline" onclick="renderDashboard()">My account</button><button class="btn btn-primary" onclick="logout()">Log out</button>`;
+  $("trialBadge").textContent=currentUser.plus?"Plus":"Free checks: "+currentUser.freeChecks;
+  $("checkerLock").innerHTML=currentUser.plus?"Your Plus account is active. You can run detailed checks.":"You have <b>"+currentUser.freeChecks+" free check(s)</b> remaining.";
+  $("accountActions").innerHTML=`<button class="btn btn-dark" onclick="renderDashboard()">Open account</button>`;
+ }else{
+  $("accountStatus").textContent="Not logged in. Create an account to start your two free checks.";
+  $("navAccount").innerHTML=`<button class="btn btn-outline" onclick="openModal('login')">Log in</button><button class="btn btn-primary" onclick="openModal('register')">Create account</button>`;
+  $("trialBadge").textContent="2 free checks";
+  $("checkerLock").innerHTML="Create an account to unlock your detailed business checklist. You receive <b>2 free checks</b>.";
+  $("accountActions").innerHTML="";
+ }
+}
+
+function showPaywall(){
+ $("paywall").classList.add("show");
+ $("paywall").scrollIntoView({behavior:"smooth",block:"center"});
+}
+
+async function runCheck(){
+ if(!currentUser){openModal("register");return}
+ if(!token()){alert("Your session has expired. Please log in again.");logout(false);return}
+ const businessName=$("business").value,countyName=$("county").value,p=PROFILES[businessName];
+ const button=document.querySelector('#checker button[onclick="runCheck()"]');
+ if(button){button.disabled=true;button.innerHTML='<span class="spinner"></span> Checking…'}
+ try{
+  const {res,data}=await api("/api/checks",{method:"POST",body:JSON.stringify({businessName,county:countyName,planData:p})});
+  if(!res.ok){
+   if(res.status===401){alert("Your session has expired. Please log in again.");logout(false);return}
+   if(res.status===402||res.status===403){currentUser.freeChecks=0;renderAccount();showPaywall();return}
+   return alert(data.error||"Could not create the business check.");
+  }
+  if(data.user)setLocalUser(data.user);
+  else{
+   currentUser.freeChecks=Math.max(0,currentUser.freeChecks-1);
+   localStorage.setItem("bc_user",JSON.stringify(currentUser));
+  }
+  renderResult(businessName,countyName,p,data.check);
+  renderAccount();
+  if(!currentUser.plus&&currentUser.freeChecks===0)setTimeout(showPaywall,500);
+ }catch(e){console.error(e);alert("Could not connect to the secure business-check server.")}finally{
+  if(button){button.disabled=false;button.textContent="Check this business"}
+ }
+}
+
+function renderResult(name,county,p,check){
+ const rows=p.items.map(i=>`<tr><td><b>${esc(i[0])}</b></td><td>${esc(i[1])}</td><td>${esc(i[2])}</td><td>${esc(i[3])}</td></tr>`).join("");
+ $("result").innerHTML=`<h2>${esc(p.icon)} ${esc(name)} — ${esc(county)}</h2>
+ <p class="muted">Planning estimate: <b>${esc(p.range)}</b>. Actual costs depend on location, supplier and business size.</p>
+ <div class="table-wrap"><table><thead><tr><th>What you need</th><th>Example cost</th><th>Where to look</th><th>What to choose</th></tr></thead><tbody>${rows}</tbody></table></div>
+ <div class="advice"><b>Short advice:</b> ${esc(p.advice)}</div>
+ <div class="plan-grid">
+ <div class="plan-card"><h3>Before you spend</h3><p>Compare prices from at least two suppliers. Confirm permits or professional requirements that apply to your business.</p></div>
+ <div class="plan-card"><h3>Start smaller</h3><p>Do not spend all your money at once. Keep cash available for stock, rent and unexpected costs.</p></div>
+ <div class="plan-card"><h3>Track sales</h3><p>Write down every sale and expense from day one. Use real numbers to decide what to buy next.</p></div>
+ </div>
+ <div class="result-actions"><button class="btn btn-dark" onclick="renderDashboard()">Open my saved checks</button></div>`;
+ $("result").classList.add("show");
+ $("result").scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+async function renderDashboard(){
+ if(!currentUser){openModal("login");return}
+ if(!token()){logout(false);openModal("login");return}
+ $("accountPanel").classList.remove("hidden");
+ $("accountPanel").innerHTML=`<div class="notice">Loading your account…</div>`;
+ try{
+  const [{res:meRes,data:meData},{res:checksRes,data:checksData}]=await Promise.all([api("/api/auth/me"),api("/api/checks")]);
+  if(meRes.status===401||checksRes.status===401){logout(false);openModal("login");return}
+  if(!meRes.ok)throw new Error(meData.error||"Account unavailable");
+  setLocalUser(meData.user);renderAccount();
+  const checks=checksRes.ok?(checksData.checks||[]):[];
+  const list=checks.length?checks.map(c=>`<li class="saved-item"><div><b>${esc(c.business_name)}</b><br><small>${esc(c.county)} · ${new Date(c.created_at).toLocaleDateString()}</small></div></li>`).join(""):`<li class="saved-item"><div><b>No saved checks yet.</b><br><small>Your completed checks will appear here.</small></div></li>`;
+  $("accountPanel").innerHTML=`<div class="account-grid"><div class="account-card"><b>Account</b><p>${esc(currentUser.email)}</p></div><div class="account-card"><b>Status</b><p>${currentUser.plus?"Plus member":"Free · "+currentUser.freeChecks+" checks left"}</p></div></div>
+  <h3 style="margin-top:24px">My business checks</h3><ul class="saved-list">${list}</ul>
+  <div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn btn-dark" onclick="document.getElementById('checker').scrollIntoView({behavior:'smooth'})">Create another check</button>${!currentUser.plus?'<button class="btn btn-primary" onclick="openModal(\'subscribe\')">Subscribe to Plus</button>':''}</div>`;
+  $("accountPanel").scrollIntoView({behavior:"smooth",block:"center"});
+ }catch(e){console.error(e);$("accountPanel").innerHTML=`<div class="notice error">Could not load your saved checks. Please try again.</div>`}
+}
+
+async function startMpesa(){
+ if(!currentUser){closeModal();openModal("login");return}
+ const raw=$("mpesa").value.trim().replace(/\s+/g,"");
+ if(!/^(0?7\d{8}|2547\d{8})$/.test(raw))return alert("Enter a valid Kenyan M-Pesa phone number.");
+ const phone=raw.startsWith("254")?raw:"254"+raw.replace(/^0/,"");
+ const status=$("paymentStatus");status.className="notice";status.textContent="Starting your M-Pesa payment request…";
+ try{
+  const {res,data}=await api("/api/subscription/stkpush",{method:"POST",body:JSON.stringify({phone,plan:"plus_monthly"})});
+  if(!res.ok||!data.checkoutRequestId)throw new Error(data.error||data.message||"Payment request could not be started.");
+  status.className="notice success";status.textContent="M-Pesa prompt sent. Enter your M-Pesa PIN. Waiting for confirmation…";
+  pollPayment(data.checkoutRequestId);
+ }catch(e){console.error(e);status.className="notice error";status.textContent="Payment service is not connected or the request could not be started. Your account has not been upgraded."}
+}
+
 async function pollPayment(checkoutRequestId){
  let attempts=0;
  const timer=setInterval(async()=>{
   attempts++;
   try{
-   const res=await fetch('/api/subscription/status/'+encodeURIComponent(checkoutRequestId));
-   const data=await res.json().catch(()=>({}));
-   if(data.status==='paid'){
+   const {res,data}=await api("/api/subscription/status/"+encodeURIComponent(checkoutRequestId));
+   if(res.status===401){clearInterval(timer);return}
+   if(data.status==="paid"){
     clearInterval(timer);
-    currentUser.plus=true;
-    syncUser();
-    closeModal();
-    paywall.classList.remove('show');
-    trialBadge.textContent='Plus';
-    checkerLock.innerHTML='Your Plus account is active. You can run detailed checks.';
-    alert('Payment confirmed. BiasharaCheck Plus is now active.');
-   }else if(data.status==='failed'||data.status==='cancelled'){
-    clearInterval(timer);
-    document.getElementById('paymentStatus').textContent='The M-Pesa payment was not completed. Your account has not been upgraded.';
+    await refreshSession();
+    closeModal();$("paywall").classList.remove("show");renderAccount();
+    alert("Payment confirmed. BiasharaCheck Plus is now active.");
+   }else if(data.status==="failed"||data.status==="cancelled"){
+    clearInterval(timer);$("paymentStatus").className="notice error";$("paymentStatus").textContent="The M-Pesa payment was not completed. Your account has not been upgraded.";
    }else if(attempts>=30){
-    clearInterval(timer);
-    document.getElementById('paymentStatus').textContent='We are still waiting for payment confirmation. Please check your account before trying again.';
+    clearInterval(timer);$("paymentStatus").textContent="We are still waiting for payment confirmation. Check your account before trying again.";
    }
-  }catch(e){
-   if(attempts>=30){clearInterval(timer);document.getElementById('paymentStatus').textContent='We could not confirm the payment yet. Please try again later.';}
-  }
+  }catch(e){if(attempts>=30){clearInterval(timer);$("paymentStatus").className="notice error";$("paymentStatus").textContent="We could not confirm the payment yet. Please check your account later."}}
  },4000);
 }
+
+$("modal").addEventListener("click",e=>{if(e.target===$("modal"))closeModal()});
 setup();
 </script>
 </body>
