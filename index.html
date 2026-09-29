@@ -194,8 +194,151 @@ function closeModal(){modal.classList.remove('show')}async function register(){
   renderAccount();
 }
 function renderAccount(){if(currentUser){accountStatus.innerHTML=`Logged in as <b>${esc(currentUser.name)}</b> · ${currentUser.plus?'Plus member':'Free account'}`;navAccount.innerHTML=`<button class="btn btn-outline" onclick="renderDashboard()">My account</button>`;trialBadge.textContent=currentUser.plus?'Plus':'Free checks: '+currentUser.freeChecks;checkerLock.innerHTML=currentUser.plus?'Your Plus account is active. You can run detailed checks.':'You have <b>'+currentUser.freeChecks+' free check(s)</b> remaining.'}else{accountStatus.textContent='Not logged in. Create an account to start your 2 free checks.';navAccount.innerHTML=`<button class="btn btn-outline" onclick="openModal('login')">Log in</button><button class="btn btn-primary" onclick="openModal('register')">Create account</button>`;trialBadge.textContent='2 free checks';checkerLock.innerHTML='Create an account to unlock your detailed business checklist. You receive <b>2 free checks</b>.'}}
-function runCheck(){if(!currentUser){openModal('register');return}if(!currentUser.plus&&currentUser.freeChecks<=0){paywall.classList.add('show');return}const p=PROFILES[business.value], countyName=county.value;let rows=p.items.map(i=>`<tr><td><b>${esc(i[0])}</b></td><td>${esc(i[1])}</td><td>${esc(i[2])}</td><td>${esc(i[3])}</td></tr>`).join('');result.innerHTML=`<h2>${esc(p.icon)} ${esc(business.value)} — ${esc(countyName)}</h2><p class="muted">Planning estimate: ${esc(p.range)}. Actual costs depend on location, supplier and business size.</p><div class="table-wrap"><table><thead><tr><th>What you need</th><th>Example cost</th><th>Where to look</th><th>What to choose</th></tr></thead><tbody>${rows}</tbody></table></div><div class="advice"><b>Short advice:</b> ${esc(p.advice)}</div><div class="plan-grid"><div class="plan-card"><h3>Before you spend</h3><p>Compare prices from at least two suppliers. Confirm permits or professional requirements that apply to your business.</p></div><div class="plan-card"><h3>Start smaller</h3><p>Do not spend all your money at once. Keep some cash available for stock, rent and unexpected costs.</p></div><div class="plan-card"><h3>Track sales</h3><p>Write down every sale and expense from day one. Use real numbers to decide what to buy next.</p></div></div><button class="btn btn-dark" style="margin-top:18px" onclick="saveCheck()">Save this business check</button>`;result.classList.add('show');if(!currentUser.plus){currentUser.freeChecks--;syncUser();trialBadge.textContent='Free checks: '+currentUser.freeChecks;checkerLock.innerHTML='You have <b>'+currentUser.freeChecks+' free check(s)</b> remaining.';if(currentUser.freeChecks===0)paywall.classList.add('show')}}
-function saveCheck(){if(!currentUser)return openModal('login');currentUser.saved=currentUser.saved||[];currentUser.saved.push({business:business.value,county:county.value,date:new Date().toISOString()});syncUser();alert('Business check saved to your account.');}
+async function runCheck(){
+  if(!currentUser){
+    openModal('register');
+    return;
+  }
+
+  const token = localStorage.getItem('bc_token');
+
+  if(!token){
+    alert('Your session has expired. Please log in again.');
+    logout();
+    return;
+  }
+
+  const businessName = business.value;
+  const countyName = county.value;
+  const p = PROFILES[businessName];
+
+  try{
+    const res = await fetch(BACKEND_URL + '/api/checks', {
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        'Authorization':'Bearer ' + token
+      },
+      body:JSON.stringify({
+        businessName:businessName,
+        county:countyName,
+        planData:p
+      })
+    });
+
+    const data = await res.json().catch(()=>({}));
+
+    if(!res.ok){
+      if(res.status === 403){
+        currentUser.freeChecks = 0;
+        renderAccount();
+        paywall.classList.add('show');
+        return;
+      }
+
+      if(res.status === 401){
+        alert('Your session has expired. Please log in again.');
+        logout();
+        return;
+      }
+
+      alert(data.error || 'Could not create the business check.');
+      return;
+    }
+
+    const rows = p.items.map(i =>
+      `<tr>
+        <td><b>${esc(i[0])}</b></td>
+        <td>${esc(i[1])}</td>
+        <td>${esc(i[2])}</td>
+        <td>${esc(i[3])}</td>
+      </tr>`
+    ).join('');
+
+    result.innerHTML = `
+      <h2>${esc(p.icon)} ${esc(businessName)} — ${esc(countyName)}</h2>
+
+      <p class="muted">
+        Planning estimate: ${esc(p.range)}.
+        Actual costs depend on location, supplier and business size.
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>What you need</th>
+              <th>Example cost</th>
+              <th>Where to look</th>
+              <th>What to choose</th>
+            </tr>
+          </thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </div>
+
+      <div class="advice">
+        <b>Short advice:</b> ${esc(p.advice)}
+      </div>
+
+      <div class="plan-grid">
+        <div class="plan-card">
+          <h3>Before you spend</h3>
+          <p>
+            Compare prices from at least two suppliers.
+            Confirm permits or professional requirements that apply to your business.
+          </p>
+        </div>
+
+        <div class="plan-card">
+          <h3>Start smaller</h3>
+          <p>
+            Do not spend all your money at once.
+            Keep some cash available for stock, rent and unexpected costs.
+          </p>
+        </div>
+
+        <div class="plan-card">
+          <h3>Track sales</h3>
+          <p>
+            Write down every sale and expense from day one.
+            Use real numbers to decide what to buy next.
+          </p>
+        </div>
+      </div>
+
+      <button class="btn btn-dark" style="margin-top:18px" onclick="saveCheck()">
+        Save this business check
+      </button>
+    `;
+
+    result.classList.add('show');
+
+    if(data.user){
+      currentUser.freeChecks = Math.max(
+        0,
+        2 - (data.user.free_checks_used || 0)
+      );
+
+      currentUser.plus = !!data.user.plus;
+
+      localStorage.setItem(
+        'bc_user',
+        JSON.stringify(currentUser)
+      );
+    }
+
+    renderAccount();
+
+    if(!currentUser.plus && currentUser.freeChecks === 0){
+      paywall.classList.add('show');
+    }
+
+  }catch(err){
+    console.error(err);
+    alert('Could not connect to the secure business-check server.');
+  }
+}function saveCheck(){if(!currentUser)return openModal('login');currentUser.saved=currentUser.saved||[];currentUser.saved.push({business:business.value,county:county.value,date:new Date().toISOString()});syncUser();alert('Business check saved to your account.');}
 function syncUser(){const u=getUsers();u[currentUser.email]=currentUser;saveUsers(u);localStorage.setItem('bc_user',JSON.stringify(currentUser));renderAccount()}
 function renderDashboard(){const saved=(currentUser.saved||[]).map(x=>`<li>${esc(x.business)} — ${esc(x.county)} — ${new Date(x.date).toLocaleDateString()}</li>`).join('')||'<li>No saved checks yet.</li>';accountPanel.innerHTML=`<div class="account-grid"><div><b>Account</b><p>${esc(currentUser.email)}</p></div><div><b>Status</b><p>${currentUser.plus?'Plus':'Free · '+currentUser.freeChecks+' checks left'}</p></div></div><h3>Saved checks</h3><ul>${saved}</ul><button class="btn btn-dark" onclick="logout()">Log out</button>`;accountPanel.classList.remove('hidden')}
 async function startMpesa(){
