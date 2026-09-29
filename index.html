@@ -33,13 +33,13 @@ h1{font-size:clamp(42px,7vw,76px);line-height:.96;margin:14px 0 20px;letter-spac
 
 <section class="hero"><div class="hero-inner">
 <div><div class="eyebrow">Built for Kenyan entrepreneurs</div><h1>Know what you need before you spend.</h1>
-<p>Turn a business idea into a practical plan: what you need, example costs, where to look for supplies, how to start and how to grow.</p>
+<p>Turn a business idea into a practical plan: what you need, example costs, where to source and how to start and how to grow.</p>
 <div class="hero-actions"><button class="btn btn-primary" onclick="openModal('register')">Get 2 free business checks</button><a class="btn btn-outline" href="#how">See how it works</a></div></div>
 <div class="hero-card"><div class="mini"><b>01 · Requirements</b><span>See equipment, materials and important setup needs.</span></div><div class="mini"><b>02 · Cost breakdown</b><span>Understand where your starting money can go.</span></div><div class="mini"><b>03 · Sourcing</b><span>See practical places to look for supplies.</span></div><div class="mini"><b>04 · Start & grow</b><span>Get simple next steps for building the business.</span></div></div>
 </div></section>
 
 <section class="section" id="how"><div class="section-head"><div><h2>From idea to action</h2><p class="muted">Simple information instead of complicated business language.</p></div></div>
-<div class="steps"><div class="step"><div class="num">1</div><h3>Create your account</h3><p class="muted">Your checks belong to your account. You get two detailed checks free.</p></div><div class="step"><div class="num">2</div><h3>Choose a business</h3><p class="muted">Pick a practical business idea and choose your county.</p></div><div class="step"><div class="num">3</div><h3>Get your checklist</h3><p class="muted">See what you need, example costs, sourcing options and advice.</p></div><div class="step"><div class="num">4</div><h3>Continue with Plus</h3><p class="muted">After two free checks, subscribe through M-Pesa to continue.</p></div></div></section>
+<div class="steps"><div class="step"><div class="num">1</div><h3>Create your account</h3><p class="muted">Your checks belong to your account. You get two detailed checks free.</p></div><div class="step"><div class="num">2</div><h3>Choose a business</h3><p class="muted">Pick a practical business idea and choose your county.</p></div><div class="step"><div class="num">3</div><h3>Get your checklist</h3><p class="muted">See what you need, example costs, sourcing options and advice.</p></div><div class="step"><div class="num">4</div><h3>Continue with Plus</h3><p class="muted">After two free checks, subscribe through Pesapal to continue.</p></div></div></section>
 
 <section class="section" id="checker"><div class="checker">
 <div class="section-head"><div><div class="eyebrow">Business planner</div><h2>Check your business idea</h2><p style="color:#aebfb5">Choose a business and county to create your practical checklist.</p></div><div id="trialBadge" class="btn btn-dark">2 free checks</div></div>
@@ -47,7 +47,7 @@ h1{font-size:clamp(42px,7vw,76px);line-height:.96;margin:14px 0 20px;letter-spac
 <div class="locked" id="checkerLock">Create an account to unlock your detailed business checklist. You receive <b>2 free checks</b>.</div>
 <button class="btn btn-primary" style="margin-top:14px" onclick="runCheck()">Check this business</button>
 <div class="result" id="result"></div>
-<div class="paywall" id="paywall"><div class="eyebrow">BiasharaCheck Plus</div><h2>Keep building your plan</h2><p>You have used your two free checks. Subscribe to continue using detailed business checks and premium planning features.</p><div class="price">KSh 299 <small style="font-size:14px;color:#b9c9c0">/ month</small></div><button class="btn btn-primary" onclick="openModal('subscribe')">Subscribe with M-Pesa</button></div>
+<div class="paywall" id="paywall"><div class="eyebrow">BiasharaCheck Plus</div><h2>Keep building your plan</h2><p>You have used your two free checks. Subscribe to continue using detailed business checks and premium planning features.</p><div class="price">KSh 299 <small style="font-size:14px;color:#b9c9c0">/ month</small></div><button class="btn btn-primary" onclick="openModal('subscribe')">Subscribe with Pesapal</button></div>
 </div></section>
 
 <section class="section" id="sources"><div class="section-head"><div><h2>Where to look for supplies</h2><p class="muted">Examples of sourcing destinations. Compare prices and confirm supplier details before paying.</p></div></div>
@@ -61,7 +61,7 @@ h1{font-size:clamp(42px,7vw,76px);line-height:.96;margin:14px 0 20px;letter-spac
 </div></section>
 
 <section class="section" id="pricing"><div class="section-head"><div><h2>Simple pricing</h2><p class="muted">Try BiasharaCheck before paying.</p></div></div>
-<div class="plan-grid"><div class="plan-card"><h3>Free</h3><div class="big">2 checks</div><p class="muted">Create an account and receive two detailed business checks.</p></div><div class="plan-card" style="border:2px solid #91c84c"><h3>Plus</h3><div class="big">KSh 299/month</div><p class="muted">Continue checking businesses and access premium planning features.</p><button class="btn btn-dark" onclick="openModal('subscribe')">Subscribe with M-Pesa</button></div><div class="plan-card"><h3>Growing platform</h3><div class="big">More tools</div><p class="muted">Supplier leads, comparisons, reports and other useful features can be added as the platform grows.</p></div></div></section>
+<div class="plan-grid"><div class="plan-card"><h3>Free</h3><div class="big">2 checks</div><p class="muted">Create an account and receive two detailed business checks.</p></div><div class="plan-card" style="border:2px solid #91c84c"><h3>Plus</h3><div class="big">KSh 299/month</div><p class="muted">Continue checking businesses and access premium planning features.</p><button class="btn btn-dark" onclick="openModal('subscribe')">Subscribe with Pesapal</button></div><div class="plan-card"><h3>Growing platform</h3><div class="big">More tools</div><p class="muted">Supplier leads, comparisons, reports and other useful features can be added as the platform grows.</p></div></div></section>
 
 <section class="section"><div class="account"><div class="section-head"><div><h2>Your account</h2><p class="muted" id="accountStatus">Not logged in. Create an account to start your two free checks.</p></div><div id="accountActions"></div></div><div id="accountPanel" class="hidden"></div></div></section>
 <footer class="footer"><b>BiasharaCheck</b><br><span>Before you invest, check the business.</span></footer>
@@ -189,7 +189,7 @@ function openModal(type){
  const m=$("modal"),b=$("modalBody");m.classList.add("show");
  if(type==="register")b.innerHTML=`<h3>Create your account</h3><p class="muted">Get two detailed business checks free.</p><input id="rname" placeholder="Full name" autocomplete="name"><input id="remail" type="email" placeholder="Email address" autocomplete="email"><input id="rpass" type="password" placeholder="Password (8+ characters)" autocomplete="new-password"><button class="btn btn-primary" style="width:100%" onclick="register()">Create account</button><div class="notice">Your checks are tied to your account.</div><p>Already have an account? <a href="#" onclick="openModal('login');return false">Log in</a></p>`;
  if(type==="login")b.innerHTML=`<h3>Log in</h3><input id="lemail" type="email" placeholder="Email address" autocomplete="email"><input id="lpass" type="password" placeholder="Password" autocomplete="current-password"><button class="btn btn-primary" style="width:100%" onclick="login()">Log in</button><p>New here? <a href="#" onclick="openModal('register');return false">Create an account</a></p>`;
- if(type==="subscribe")b.innerHTML=`<h3>Subscribe to BiasharaCheck Plus</h3><p class="muted">Continue after your two free checks.</p><div class="big">KSh 299 / month</div><input id="mpesa" inputmode="tel" placeholder="M-Pesa number, e.g. 07XXXXXXXX" autocomplete="tel"><button class="btn btn-primary" style="width:100%" onclick="startMpesa()">Pay with M-Pesa</button><div class="notice" id="paymentStatus">Enter your M-Pesa number and continue. BiasharaCheck will wait for payment confirmation before activating Plus.</div>`;
+ if(type==="subscribe")b.innerHTML=`<h3>Subscribe to BiasharaCheck Plus</h3><p class="muted">Continue after your two free checks.</p><div class="big">KSh 299 / month</div><input id="mpesa" inputmode="tel" placeholder="Phone number, e.g. 07XXXXXXXX" autocomplete="tel"><button class="btn btn-primary" style="width:100%" onclick="startPesapalPayment()">Pay with Pesapal</button><div class="notice" id="paymentStatus">Enter your phone number and click pay to open the secure Pesapal checkout window.</div>`;
 }
 function closeModal(){$("modal").classList.remove("show")}
 
@@ -307,39 +307,23 @@ async function renderDashboard(){
  }catch(e){console.error(e);$("accountPanel").innerHTML=`<div class="notice error">Could not load your saved checks. Please try again.</div>`}
 }
 
-async function startMpesa(){
+async function startPesapalPayment(){
  if(!currentUser){closeModal();openModal("login");return}
  const raw=$("mpesa").value.trim().replace(/\s+/g,"");
- if(!/^(0?7\d{8}|2547\d{8})$/.test(raw))return alert("Enter a valid Kenyan M-Pesa phone number.");
+ if(!raw)return alert("Please enter a valid phone number.");
  const phone=raw.startsWith("254")?raw:"254"+raw.replace(/^0/,"");
- const status=$("paymentStatus");status.className="notice";status.textContent="Starting your M-Pesa payment request…";
+ const status=$("paymentStatus");status.className="notice";status.textContent="Initiating Pesapal checkout...";
  try{
-  const {res,data}=await api("/api/subscription/stkpush",{method:"POST",body:JSON.stringify({phone,plan:"plus_monthly"})});
-  if(!res.ok||!data.checkoutRequestId)throw new Error(data.error||data.message||"Payment request could not be started.");
-  status.className="notice success";status.textContent="M-Pesa prompt sent. Enter your M-Pesa PIN. Waiting for confirmation…";
-  pollPayment(data.checkoutRequestId);
- }catch(e){console.error(e);status.className="notice error";status.textContent="Payment service is not connected or the request could not be started. Your account has not been upgraded."}
-}
-
-async function pollPayment(checkoutRequestId){
- let attempts=0;
- const timer=setInterval(async()=>{
-  attempts++;
-  try{
-   const {res,data}=await api("/api/subscription/status/"+encodeURIComponent(checkoutRequestId));
-   if(res.status===401){clearInterval(timer);return}
-   if(data.status==="paid"){
-    clearInterval(timer);
-    await refreshSession();
-    closeModal();$("paywall").classList.remove("show");renderAccount();
-    alert("Payment confirmed. BiasharaCheck Plus is now active.");
-   }else if(data.status==="failed"||data.status==="cancelled"){
-    clearInterval(timer);$("paymentStatus").className="notice error";$("paymentStatus").textContent="The M-Pesa payment was not completed. Your account has not been upgraded.";
-   }else if(attempts>=30){
-    clearInterval(timer);$("paymentStatus").textContent="We are still waiting for payment confirmation. Check your account before trying again.";
-   }
-  }catch(e){if(attempts>=30){clearInterval(timer);$("paymentStatus").className="notice error";$("paymentStatus").textContent="We could not confirm the payment yet. Please check your account later."}}
- },4000);
+  const {res,data}=await api("/api/subscription/pesapal",{method:"POST",body:JSON.stringify({phone})});
+  if(!res.ok||!data.redirectUrl)throw new Error(data.error||data.message||"Failed to start payment.");
+  
+  // Redirect user to Pesapal secure payment page window
+  window.location.href=data.redirectUrl;
+ }catch(e){
+  console.error(e);
+  status.className="notice error";
+  status.textContent="Could not start Pesapal checkout. Please try again.";
+ }
 }
 
 $("modal").addEventListener("click",e=>{if(e.target===$("modal"))closeModal()});
