@@ -140,9 +140,59 @@ function closeModal(){modal.classList.remove('show')}async function register(){
     console.error(err);
     alert('Could not connect to BiasharaCheck. Please try again.');
   }
+}async function login(){
+  const email = lemail.value.trim().toLowerCase();
+  const password = lpass.value;
+
+  if(!email || !password){
+    return alert('Enter your email and password.');
+  }
+
+  try{
+    const res = await fetch(BACKEND_URL + '/api/auth/login', {
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      body:JSON.stringify({
+        email:email,
+        password:password
+      })
+    });
+
+    const data = await res.json();
+
+    if(!res.ok){
+      return alert(data.error || 'Email or password is incorrect.');
+    }
+
+    currentUser = {
+      id: data.user.id,
+      name: data.user.name,
+      email: data.user.email,
+      freeChecks: Math.max(0, 2 - (data.user.free_checks_used || 0)),
+      plus: !!data.user.plus,
+      saved: []
+    };
+
+    localStorage.setItem('bc_user', JSON.stringify(currentUser));
+    localStorage.setItem('bc_token', data.token);
+
+    closeModal();
+    renderAccount();
+
+    alert('Welcome back, ' + currentUser.name + '.');
+
+  }catch(err){
+    console.error(err);
+    alert('Could not connect to BiasharaCheck. Please try again.');
+  }
+}function logout(){
+  currentUser=null;
+  localStorage.removeItem('bc_user');
+  localStorage.removeItem('bc_token');
+  renderAccount();
 }
-function login(){const email=lemail.value.trim().toLowerCase(),pass=lpass.value,u=getUsers()[email];if(!u||u.pass!==pass)return alert('Email or password is incorrect.');currentUser=u;localStorage.setItem('bc_user',JSON.stringify(u));closeModal();renderAccount();alert('Welcome back, '+u.name+'.');}
-function logout(){currentUser=null;localStorage.removeItem('bc_user');renderAccount()}
 function renderAccount(){if(currentUser){accountStatus.innerHTML=`Logged in as <b>${esc(currentUser.name)}</b> · ${currentUser.plus?'Plus member':'Free account'}`;navAccount.innerHTML=`<button class="btn btn-outline" onclick="renderDashboard()">My account</button>`;trialBadge.textContent=currentUser.plus?'Plus':'Free checks: '+currentUser.freeChecks;checkerLock.innerHTML=currentUser.plus?'Your Plus account is active. You can run detailed checks.':'You have <b>'+currentUser.freeChecks+' free check(s)</b> remaining.'}else{accountStatus.textContent='Not logged in. Create an account to start your 2 free checks.';navAccount.innerHTML=`<button class="btn btn-outline" onclick="openModal('login')">Log in</button><button class="btn btn-primary" onclick="openModal('register')">Create account</button>`;trialBadge.textContent='2 free checks';checkerLock.innerHTML='Create an account to unlock your detailed business checklist. You receive <b>2 free checks</b>.'}}
 function runCheck(){if(!currentUser){openModal('register');return}if(!currentUser.plus&&currentUser.freeChecks<=0){paywall.classList.add('show');return}const p=PROFILES[business.value], countyName=county.value;let rows=p.items.map(i=>`<tr><td><b>${esc(i[0])}</b></td><td>${esc(i[1])}</td><td>${esc(i[2])}</td><td>${esc(i[3])}</td></tr>`).join('');result.innerHTML=`<h2>${esc(p.icon)} ${esc(business.value)} — ${esc(countyName)}</h2><p class="muted">Planning estimate: ${esc(p.range)}. Actual costs depend on location, supplier and business size.</p><div class="table-wrap"><table><thead><tr><th>What you need</th><th>Example cost</th><th>Where to look</th><th>What to choose</th></tr></thead><tbody>${rows}</tbody></table></div><div class="advice"><b>Short advice:</b> ${esc(p.advice)}</div><div class="plan-grid"><div class="plan-card"><h3>Before you spend</h3><p>Compare prices from at least two suppliers. Confirm permits or professional requirements that apply to your business.</p></div><div class="plan-card"><h3>Start smaller</h3><p>Do not spend all your money at once. Keep some cash available for stock, rent and unexpected costs.</p></div><div class="plan-card"><h3>Track sales</h3><p>Write down every sale and expense from day one. Use real numbers to decide what to buy next.</p></div></div><button class="btn btn-dark" style="margin-top:18px" onclick="saveCheck()">Save this business check</button>`;result.classList.add('show');if(!currentUser.plus){currentUser.freeChecks--;syncUser();trialBadge.textContent='Free checks: '+currentUser.freeChecks;checkerLock.innerHTML='You have <b>'+currentUser.freeChecks+' free check(s)</b> remaining.';if(currentUser.freeChecks===0)paywall.classList.add('show')}}
 function saveCheck(){if(!currentUser)return openModal('login');currentUser.saved=currentUser.saved||[];currentUser.saved.push({business:business.value,county:county.value,date:new Date().toISOString()});syncUser();alert('Business check saved to your account.');}
