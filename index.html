@@ -43,7 +43,17 @@ h1{font-size:clamp(42px,7vw,76px);line-height:.96;margin:14px 0 20px;letter-spac
 
 <section class="section" id="checker"><div class="checker">
 <div class="section-head"><div><div class="eyebrow">Business planner</div><h2>Check your business idea</h2><p style="color:#aebfb5">Choose a business and county to create your practical checklist.</p></div><div id="trialBadge" class="btn btn-dark">2 free checks</div></div>
-<div class="checker-grid"><div class="field"><label>Business idea</label><select id="business"></select></div><div class="field"><label>County</label><select id="county"></select></div></div>
+<div class="checker-grid">
+  <div class="field"><label>Business idea</label><select id="business"></select></div>
+  <div class="field"><label>County</label><select id="county"></select></div>
+</div>
+<!-- Added capital input field inside the checker block -->
+<div class="checker-grid" style="margin-top: 15px;">
+  <div class="field" style="grid-column: span 2;">
+    <label>Your Available Capital (KES) — Optional calculation budget</label>
+    <input type="number" id="userCapitalInput" placeholder="e.g. 50000" min="0">
+  </div>
+</div>
 <div class="locked" id="checkerLock">Create an account to unlock your detailed business checklist. You receive <b>2 free checks</b>.</div>
 <button class="btn btn-primary" style="margin-top:14px" onclick="runCheck()">Check this business</button>
 <div class="result" id="result"></div>
@@ -147,7 +157,7 @@ const detailed={
 ],advice:"Start with clothing types you already know how to make well, then expand."}
 };
 
-const iconMap={"Hardware":"🔧","Laundry":"🧺","Food Kiosk":"🍲","Boda Boda":"🏍️","Restaurant":"🍽️","Phone Accessories":"📱","Phone Repair":"🛠️","Welding":"🔩","Carpentry":"🪚","Baking":"🧁","Farming":"🌱","Dairy":"🥛","Fish Selling":"🐟","Butchery":"🥩","Water Refill":"💧","Solar Services":"☀️","Cleaning Services":"🧹","Photography":"📷","Graphic Design":"🎨","Online Selling":"🛍️","Motorbike Repair":"🔧","Tyre & Puncture Shop":"🛞","Delivery Business":"📦","Juice & Water":"🥤","Cereal Shop":"🌾","Egg Distribution":"🥚","Fresh Juice Kiosk":"🍹","Carpet Cleaning":"🧼","Event Decoration":"🎈"};
+const iconMap={"Hardware":"🔧","Laundry":"🧺","Food Kiosk":"🍲","Boda Boda":"🏍️","Restaurant":"🍽️️","Phone Accessories":"📱","Phone Repair":"🛠️","Welding":"🔩","Carpentry":"🪚","Baking":"🧁","Farming":"🌱","Dairy":"🥛","Fish Selling":"🐟","Butchery":"🥩","Water Refill":"💧","Solar Services":"☀️","Cleaning Services":"🧹","Photography":"📷","Graphic Design":"🎨","Online Selling":"🛍️","Motorbike Repair":"🔧","Tyre & Puncture Shop":"🛞","Delivery Business":"📦","Juice & Water":"🥤","Cereal Shop":"🌾","Egg Distribution":"🥚","Fresh Juice Kiosk":"🍹","Carpet Cleaning":"🧼","Event Decoration":"🎈"};
 
 const PROFILES={...detailed};
 for(const name of BUSINESS_NAMES){
@@ -273,9 +283,27 @@ async function runCheck(){
 }
 
 function renderResult(name,county,p,check){
- const rows=p.items.map(i=>`<tr><td><b>${esc(i[0])}</b></td><td>${esc(i[1])}</td><td>${esc(i[2])}</td><td>${esc(i[3])}</td></tr>`).join("");
+ // Read user capital input to calculate dynamic budget figures if provided
+ const userCapital = parseFloat($("userCapitalInput")?.value) || 0;
+
+ const rows=p.items.map((i, idx)=>{
+  let costText = i[1];
+  if(userCapital > 0){
+   // Dynamic split calculation based on standard ratios (e.g., item 0 gets 40%, item 1 gets 35%, rest split)
+   let calculatedVal = 0;
+   if(idx === 0) calculatedVal = userCapital * 0.40;
+   else if(idx === 1) calculatedVal = userCapital * 0.35;
+   else calculatedVal = (userCapital * 0.25) / Math.max(1, p.items.length - 2);
+   costText = `KES ${Math.round(calculatedVal).toLocaleString()} <small style="display:block;color:#64756b;font-size:11px">Calculated from capital</small>`;
+  }
+  return `<tr><td><b>${esc(i[0])}</b></td><td>${costText}</td><td>${esc(i[2])}</td><td>${esc(i[3])}</td></tr>`;
+ }).join("");
+
+ const capitalSummaryBox = userCapital > 0 ? `<div class="notice success" style="margin-bottom: 15px;"><b>Budget Allocation:</b> Calculated breakdown based on your available capital of <b>KES ${userCapital.toLocaleString()}</b>.</div>` : "";
+
  $("result").innerHTML=`<h2>${esc(p.icon)} ${esc(name)} — ${esc(county)}</h2>
  <p class="muted">Planning estimate: <b>${esc(p.range)}</b>. Actual costs depend on location, supplier and business size.</p>
+ ${capitalSummaryBox}
  <div class="table-wrap"><table><thead><tr><th>What you need</th><th>Example cost</th><th>Where to look</th><th>What to choose</th></tr></thead><tbody>${rows}</tbody></table></div>
  <div class="advice"><b>Short advice:</b> ${esc(p.advice)}</div>
  <div class="plan-grid">
