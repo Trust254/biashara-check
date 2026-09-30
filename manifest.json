@@ -1,6 +1,7 @@
 {
   "name": "BiasharaCheck",
   "short_name": "BiasharaCheck",
+  "description": "Know what you need before you spend with BiasharaCheck.",
   "start_url": "/biashara-check/",
   "display": "standalone",
   "background_color": "#000000",
