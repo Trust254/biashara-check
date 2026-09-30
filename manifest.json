@@ -1,0 +1,15 @@
+{
+  "name": "BiasharaCheck",
+  "short_name": "BiasharaCheck",
+  "start_url": "/biashara-check/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#00ff00",
+  "icons": [
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
