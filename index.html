@@ -286,7 +286,7 @@ async function runCheck(){
 
 function renderResult(name,county,p,check){
  const capital = Math.max(0,Number($("userCapitalInput")?.value)||0);
- const rangeMatch = String(p.range||"").replace(/,/g,"").match(/(?:KSh|KES)\\s*([\\d]+)\\s*[–-]\\s*([\\d]+)/i);
+ const rangeMatch = String(p.range||"").replace(/,/g,"").match(/(?:KSh|KES)\s*([\d]+)\s*[–-]\s*([\d]+)/i);
  const low = rangeMatch ? Number(rangeMatch[1]) : null;
  const high = rangeMatch ? Number(rangeMatch[2]) : null;
  const shortfall = capital>0 && low!==null ? Math.max(0,low-capital) : 0;
