@@ -322,19 +322,44 @@ async function renderDashboard(){
  if(!currentUser){openModal("login");return}
  if(!token()){logout(false);openModal("login");return}
  $("accountPanel").classList.remove("hidden");
- $("accountPanel").innerHTML=`<div class="notice">Loading your account…</div>`;
+ $("accountPanel").innerHTML=`<div class="notice">Loading your BiasharaCheck dashboard…</div>`;
  try{
-  const [{res:meRes,data:meData},{res:checksRes,data:checksData}]=await Promise.all([api("/api/auth/me"),api("/api/checks")]);
-  if(meRes.status===401||checksRes.status===401){logout(false);openModal("login");return}
-  if(!meRes.ok)throw new Error(meData.error||"Account unavailable");
-  setLocalUser(meData.user);renderAccount();
-  const checks=checksRes.ok?(checksData.checks||[]):[];
-  const list=checks.length?checks.map(c=>`<li class="saved-item"><div><b>${esc(c.business_name)}</b><br><small>${esc(c.county)} · ${new Date(c.created_at).toLocaleDateString()}</small></div></li>`).join(""):`<li class="saved-item"><div><b>No saved checks yet.</b><br><small>Your completed checks will appear here.</small></div></li>`;
-  $("accountPanel").innerHTML=`<div class="account-grid"><div class="account-card"><b>Account</b><p>${esc(currentUser.email)}</p></div><div class="account-card"><b>Status</b><p>${currentUser.plus?"Plus member":"Free · "+currentUser.freeChecks+" checks left"}</p></div></div>
-  <h3 style="margin-top:24px">My business checks</h3><ul class="saved-list">${list}</ul>
-  <div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn btn-dark" onclick="document.getElementById('checker').scrollIntoView({behavior:'smooth'})">Create another check</button>${!currentUser.plus?'<button class="btn btn-primary" onclick="openModal(\'subscribe\')">Subscribe to Plus</button>':''}</div>`;
-  $("accountPanel").scrollIntoView({behavior:"smooth",block:"center"});
- }catch(e){console.error(e);$("accountPanel").innerHTML=`<div class="notice error">Could not load your saved checks. Please try again.</div>`}
+  const [me, saved, analytics] = await Promise.all([
+   api("/api/auth/me"), api("/api/checks"), api("/api/dashboard/analytics")
+  ]);
+  if(me.res.status===401||saved.res.status===401){logout(false);openModal("login");return}
+  if(!me.res.ok)throw new Error(me.data.error||"Account unavailable");
+  setLocalUser(me.data.user);renderAccount();
+  if(!saved.res.ok)throw new Error(saved.data.error||"Could not load saved checks");
+  const checks=saved.data.checks||[];
+  const stats=analytics.res.ok?analytics.data:{totalChecks:checks.length,uniqueBusinesses:0,countiesCovered:0,businesses:{},counties:{}};
+  const bars=(obj)=>Object.entries(obj||{}).sort((a,b)=>b[1]-a[1]).slice(0,6).map(([k,v])=>`<div style="display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid #e5ece7"><span>${esc(k)}</span><b>${v}</b></div>`).join("")||'<p class="muted">No data yet.</p>';
+  const cards=checks.map(c=>{
+   const p=c.plan_data||{};
+   const steps=(p.items||[]).map((it,i)=>`<li style="margin:7px 0"><b>Step ${i+1}: ${esc(it[0])}</b><br><span class="muted">Budget guide: ${esc(it[1])} · Source: ${esc(it[2])}</span><br><small>${esc(it[3])}</small></li>`).join("");
+   return `<article style="border:1px solid #dfe8e1;border-radius:14px;padding:16px;margin:12px 0;background:white">
+    <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap"><div><h3 style="margin:0">${esc(c.business_name)}</h3><p class="muted" style="margin:5px 0">${esc(c.county)} County · ${new Date(c.created_at).toLocaleDateString()}</p></div><span class="badge">Business plan</span></div>
+    <p><b>Estimated startup range:</b> ${esc(p.range||"To be researched locally")}</p>
+    <details><summary style="cursor:pointer;font-weight:700">View complete step-by-step requirements</summary><ol style="padding-left:22px">${steps||"<li>Confirm equipment, stock, workspace and local costs.</li>"}</ol><div class="notice"><b>Business advice:</b> ${esc(p.advice||"Validate customer demand, compare suppliers and keep working capital before investing.")}</div></details>
+   </article>`;
+  }).join("");
+  $("accountPanel").innerHTML=`
+   <div style="display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap"><div><h2 style="margin:0">Business dashboard</h2><p class="muted">Welcome back, ${esc(currentUser.name)}. Your saved business plans and activity.</p></div><button class="btn btn-dark" onclick="document.getElementById('checker').scrollIntoView({behavior:'smooth'})">+ New business check</button></div>
+   <div class="account-grid" style="margin:18px 0">
+    <div class="account-card"><small>Total checks</small><h2>${stats.totalChecks??checks.length}</h2></div>
+    <div class="account-card"><small>Business types explored</small><h2>${stats.uniqueBusinesses??0}</h2></div>
+    <div class="account-card"><small>Counties covered</small><h2>${stats.countiesCovered??0}</h2></div>
+    <div class="account-card"><small>Membership</small><h2>${currentUser.plus?"Plus":"Free"}</h2></div>
+   </div>
+   <div class="account-grid">
+    <div class="account-card"><h3>Most selected businesses</h3>${bars(stats.businesses)}</div>
+    <div class="account-card"><h3>County activity</h3>${bars(stats.counties)}</div>
+   </div>
+   <h3 style="margin-top:24px">Your business plans (${checks.length})</h3>
+   ${cards||'<div class="notice">No saved checks yet. Choose a business and county to create your first plan.</div>'}
+   <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px"><button class="btn btn-dark" onclick="document.getElementById('checker').scrollIntoView({behavior:'smooth'})">Create another check</button>${!currentUser.plus?'<button class="btn btn-primary" onclick="openModal(\'subscribe\')">Subscribe to Plus</button>':''}</div>`;
+  $("accountPanel").scrollIntoView({behavior:"smooth",block:"start"});
+ }catch(e){console.error(e);$("accountPanel").innerHTML=`<div class="notice error">Could not load your dashboard: ${esc(e.message||"Please try again.")}</div>`;}
 }
 
 async function startPesapalPayment(){
