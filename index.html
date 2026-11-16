@@ -25,7 +25,7 @@ h1{font-size:clamp(42px,7vw,76px);line-height:.96;margin:14px 0 20px;letter-spac
 @media(max-width:850px){.hero-inner,.checker-grid,.account-grid{grid-template-columns:1fr}.steps,.plan-grid,.source-grid{grid-template-columns:1fr 1fr}.navlinks{display:none}.nav-account .btn{padding:9px 10px;font-size:12px}}
 @media(max-width:560px){.item-cards,.insight-grid,.budget-list{grid-template-columns:1fr}h1{font-size:43px;letter-spacing:-2px}.steps,.plan-grid,.source-grid{grid-template-columns:1fr}.section{padding:50px 15px}.hero{padding:50px 15px 65px}.nav{padding:12px 15px}.nav-account{gap:5px}h2{font-size:28px}.saved-item{align-items:flex-start;flex-direction:column}}
 .supplier-panel{margin:18px 0;background:#eaf4ec;border:1px solid #cfe0d2;border-radius:18px;padding:18px}.supplier-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.supplier-card{background:white;border:1px solid #dce7de;border-radius:13px;padding:13px;min-width:0}.supplier-card a{display:inline-block;margin:6px 10px 0 0;color:#176a3d;font-weight:800;font-size:13px}.advisor-launch{position:fixed;right:18px;bottom:22px;z-index:80;border:0;border-radius:999px;background:#b8f34a;color:#07140f;padding:10px 16px 10px 10px;display:flex;align-items:center;gap:10px;box-shadow:0 8px 28px #0004;font-weight:900}.advisor-logo{width:38px;height:38px;border-radius:50%;background:#07140f;color:#b8f34a;display:grid;place-items:center;font-weight:950;border:2px solid #8fcf38}.advisor-panel{position:fixed;right:18px;bottom:88px;width:min(390px,calc(100vw - 28px));height:min(590px,calc(100dvh - 120px));background:#f7faf7;border:1px solid #cbd9ce;border-radius:22px;box-shadow:0 18px 60px #0004;z-index:81;display:none;overflow:hidden;flex-direction:column}.advisor-panel.open{display:flex}.advisor-head{background:#07140f;color:white;padding:15px;display:flex;align-items:center;gap:10px}.advisor-head b{display:block}.advisor-head small{color:#bdd0c3}.advisor-messages{padding:14px;overflow:auto;flex:1}.advisor-msg{padding:11px 13px;border-radius:14px;margin:8px 0;max-width:94%;white-space:pre-wrap;line-height:1.5;font-size:14px}.advisor-msg.bot{background:white;border:1px solid #e0e9e2}.advisor-msg.user{background:#e4f5d7;margin-left:auto}.advisor-compose{display:flex;gap:8px;padding:11px;border-top:1px solid #dce6de;background:white}.advisor-compose textarea{flex:1;resize:none;min-width:0;border:1px solid #d3ded5;border-radius:12px;padding:10px;font:inherit}.advisor-compose button{background:#b8f34a;border-radius:12px;padding:0 15px;font-weight:900}.town-field{margin-top:14px}.advisor-suggestions{display:flex;gap:6px;flex-wrap:wrap;padding:0 12px 10px}.advisor-suggestions button{font-size:12px;background:#edf5e9;border:1px solid #d6e5d1;border-radius:20px;padding:7px 9px}
-@media(max-width:560px){.supplier-grid{grid-template-columns:1fr}.advisor-launch{right:10px;bottom:12px}.advisor-panel{right:8px;bottom:76px;width:calc(100vw - 16px)}}</style>
+.advisor-rich{white-space:normal;line-height:1.6;color:#203329}.advisor-rich h3{font-size:16px;line-height:1.3;margin:13px 0 7px;color:#123d27}.advisor-rich p{margin:7px 0}.advisor-rich ul,.advisor-rich ol{margin:7px 0 10px;padding-left:22px}.advisor-rich li{margin:6px 0;padding-left:2px}.advisor-rich strong{font-weight:850;color:#164b2d}.advisor-rich .advisor-highlight{display:inline-block;background:#e5f6d8;color:#14552f;border-radius:6px;padding:0 5px;font-weight:900;white-space:nowrap}.advisor-rich .advisor-inline-code{background:#eef2ee;border-radius:5px;padding:1px 5px;font-size:12px}.advisor-rich .advisor-warning{background:#fff5d9;border-left:4px solid #d49b1d;border-radius:8px;padding:9px 11px;margin:9px 0}.advisor-msg.bot{white-space:normal}.advisor-msg.bot .advisor-rich{overflow-wrap:anywhere}@media(max-width:560px){.supplier-grid{grid-template-columns:1fr}.advisor-launch{right:10px;bottom:12px}.advisor-panel{right:8px;bottom:76px;width:calc(100vw - 16px)}}</style>
 </head>
 <body>
 <header class="top"><nav class="nav">
@@ -197,7 +197,43 @@ async function api(path,options={}){
 
 let advisorHistory=[];
 function toggleAdvisor(){ $("advisorPanel").classList.toggle("open"); if($("advisorPanel").classList.contains("open")) $("advisorInput").focus(); }
-function advisorAppend(text,who){const el=document.createElement("div");el.className="advisor-msg "+who;el.textContent=text;$("advisorMessages").appendChild(el);$("advisorMessages").scrollTop=$("advisorMessages").scrollHeight;return el;}
+function advisorInline(parent,text){
+ const tokenPattern=/(\\*\\*[^*]+\\*\\*|__[^_]+__|`[^`]+`|(?:KSh|KES)\\s?[\\d,]+(?:\\s?[–-]\\s?(?:KSh|KES)?\\s?[\\d,]+)?)/g;
+ let last=0,match;
+ while((match=tokenPattern.exec(text))){
+  if(match.index>last)parent.appendChild(document.createTextNode(text.slice(last,match.index)));
+  const token=match[0],node=document.createElement(token.startsWith("`")?"code":"span");
+  if(token.startsWith("**")||token.startsWith("__")){const strong=document.createElement("strong");strong.textContent=token.slice(2,-2);parent.appendChild(strong);}
+  else if(token.startsWith("`")){node.className="advisor-inline-code";node.textContent=token.slice(1,-1);parent.appendChild(node);}
+  else{node.className="advisor-highlight";node.textContent=token;parent.appendChild(node);}
+  last=tokenPattern.lastIndex;
+ }
+ if(last<text.length)parent.appendChild(document.createTextNode(text.slice(last)));
+}
+function renderAdvisorAnswer(target,raw){
+ const normalized=String(raw||"").replace(/\\\\(\\*\\*|__|\\*|_|`)/g,"$1").replace(/\\r\\n?/g,"\\n");
+ const root=document.createElement("div");root.className="advisor-rich";
+ const lines=normalized.split("\\n");let paragraph=[],list=null,listType=null;
+ const flushParagraph=()=>{if(!paragraph.length)return;const p=document.createElement("p");advisorInline(p,paragraph.join(" "));root.appendChild(p);paragraph=[];};
+ const flushList=()=>{if(!list)return;root.appendChild(list);list=null;listType=null;};
+ for(let line of lines){
+  const trimmed=line.trim();
+  if(!trimmed){flushParagraph();flushList();continue;}
+  const heading=trimmed.match(/^#{1,3}\\s+(.+)$/);
+  const boldHeading=trimmed.match(/^\\*\\*(.+)\\*\\*$/);
+  if(heading||boldHeading){flushParagraph();flushList();const h=document.createElement("h3");advisorInline(h,(heading||boldHeading)[1]);root.appendChild(h);continue;}
+  const numbered=trimmed.match(/^\\d+[.)]\\s+(.+)$/),bullet=trimmed.match(/^[-*•]\\s+(.+)$/);
+  if(numbered||bullet){flushParagraph();const type=numbered?"ol":"ul";if(!list||listType!==type){flushList();list=document.createElement(type);listType=type;}const li=document.createElement("li");advisorInline(li,(numbered||bullet)[1]);list.appendChild(li);continue;}
+  flushList();paragraph.push(trimmed);
+ }
+ flushParagraph();flushList();
+ target.replaceChildren(root);
+}
+function advisorAppend(text,who){
+ const el=document.createElement("div");el.className="advisor-msg "+who;
+ if(who==="bot")renderAdvisorAnswer(el,text);else el.textContent=text;
+ $("advisorMessages").appendChild(el);$("advisorMessages").scrollTop=$("advisorMessages").scrollHeight;return el;
+}
 async function advisorAsk(q){$("advisorInput").value=q;await sendAdvisor();}
 async function sendAdvisor(){
  const input=$("advisorInput"),message=input.value.trim();if(!message)return;
