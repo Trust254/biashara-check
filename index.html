@@ -24,7 +24,8 @@ h1{font-size:clamp(42px,7vw,76px);line-height:.96;margin:14px 0 20px;letter-spac
 .spinner{display:inline-block;width:14px;height:14px;border:2px solid #173328;border-top-color:transparent;border-radius:50%;animation:spin .7s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
 @media(max-width:850px){.hero-inner,.checker-grid,.account-grid{grid-template-columns:1fr}.steps,.plan-grid,.source-grid{grid-template-columns:1fr 1fr}.navlinks{display:none}.nav-account .btn{padding:9px 10px;font-size:12px}}
 @media(max-width:560px){.item-cards,.insight-grid,.budget-list{grid-template-columns:1fr}h1{font-size:43px;letter-spacing:-2px}.steps,.plan-grid,.source-grid{grid-template-columns:1fr}.section{padding:50px 15px}.hero{padding:50px 15px 65px}.nav{padding:12px 15px}.nav-account{gap:5px}h2{font-size:28px}.saved-item{align-items:flex-start;flex-direction:column}}
-</style>
+.supplier-panel{margin:18px 0;background:#eaf4ec;border:1px solid #cfe0d2;border-radius:18px;padding:18px}.supplier-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.supplier-card{background:white;border:1px solid #dce7de;border-radius:13px;padding:13px;min-width:0}.supplier-card a{display:inline-block;margin:6px 10px 0 0;color:#176a3d;font-weight:800;font-size:13px}.advisor-launch{position:fixed;right:18px;bottom:22px;z-index:80;border:0;border-radius:999px;background:#b8f34a;color:#07140f;padding:10px 16px 10px 10px;display:flex;align-items:center;gap:10px;box-shadow:0 8px 28px #0004;font-weight:900}.advisor-logo{width:38px;height:38px;border-radius:50%;background:#07140f;color:#b8f34a;display:grid;place-items:center;font-weight:950;border:2px solid #8fcf38}.advisor-panel{position:fixed;right:18px;bottom:88px;width:min(390px,calc(100vw - 28px));height:min(590px,calc(100dvh - 120px));background:#f7faf7;border:1px solid #cbd9ce;border-radius:22px;box-shadow:0 18px 60px #0004;z-index:81;display:none;overflow:hidden;flex-direction:column}.advisor-panel.open{display:flex}.advisor-head{background:#07140f;color:white;padding:15px;display:flex;align-items:center;gap:10px}.advisor-head b{display:block}.advisor-head small{color:#bdd0c3}.advisor-messages{padding:14px;overflow:auto;flex:1}.advisor-msg{padding:11px 13px;border-radius:14px;margin:8px 0;max-width:94%;white-space:pre-wrap;line-height:1.5;font-size:14px}.advisor-msg.bot{background:white;border:1px solid #e0e9e2}.advisor-msg.user{background:#e4f5d7;margin-left:auto}.advisor-compose{display:flex;gap:8px;padding:11px;border-top:1px solid #dce6de;background:white}.advisor-compose textarea{flex:1;resize:none;min-width:0;border:1px solid #d3ded5;border-radius:12px;padding:10px;font:inherit}.advisor-compose button{background:#b8f34a;border-radius:12px;padding:0 15px;font-weight:900}.town-field{margin-top:14px}.advisor-suggestions{display:flex;gap:6px;flex-wrap:wrap;padding:0 12px 10px}.advisor-suggestions button{font-size:12px;background:#edf5e9;border:1px solid #d6e5d1;border-radius:20px;padding:7px 9px}
+@media(max-width:560px){.supplier-grid{grid-template-columns:1fr}.advisor-launch{right:10px;bottom:12px}.advisor-panel{right:8px;bottom:76px;width:calc(100vw - 16px)}}</style>
 </head>
 <body>
 <header class="top"><nav class="nav">
@@ -50,6 +51,7 @@ h1{font-size:clamp(42px,7vw,76px);line-height:.96;margin:14px 0 20px;letter-spac
   <div class="field"><label>County</label><select id="county"></select></div>
 </div>
 <!-- Added capital input field inside the checker block -->
+<div class="field town-field"><label>Town / nearest trading centre (helps find nearby suppliers)</label><input type="text" id="town" placeholder="e.g. Narok Town, Kilgoris, Suswa"></div>
 <div class="checker-grid" style="margin-top: 15px;">
   <div class="field" style="grid-column: span 2;">
     <label>Your Available Capital (KES) — Optional calculation budget</label>
@@ -76,6 +78,8 @@ h1{font-size:clamp(42px,7vw,76px);line-height:.96;margin:14px 0 20px;letter-spac
 <div class="plan-grid"><div class="plan-card"><h3>Free</h3><div class="big">2 checks</div><p class="muted">Create an account and receive two detailed business checks.</p></div><div class="plan-card" style="border:2px solid #91c84c"><h3>Plus</h3><div class="big">KSh 299/month</div><p class="muted">Continue checking businesses and access premium planning features.</p><button class="btn btn-dark" onclick="openModal('subscribe')">Subscribe with Pesapal</button></div><div class="plan-card"><h3>Growing platform</h3><div class="big">More tools</div><p class="muted">Supplier leads, comparisons, reports and other useful features can be added as the platform grows.</p></div></div></section>
 
 <section class="section"><div class="account"><div class="section-head"><div><h2>Your account</h2><p class="muted" id="accountStatus">Not logged in. Create an account to start your two free checks.</p></div><div id="accountActions"></div></div><div id="accountPanel" class="hidden"></div></div></section>
+<button class="advisor-launch" onclick="toggleAdvisor()"><span class="advisor-logo">BC</span><span>Ask Biashara AI</span></button>
+<aside class="advisor-panel" id="advisorPanel"><div class="advisor-head"><span class="advisor-logo">BC</span><div style="flex:1"><b>BiasharaCheck Business Advisor</b><small>Your beginner-friendly business guide</small></div><button onclick="toggleAdvisor()" style="background:transparent;color:white;font-size:22px">×</button></div><div class="advisor-messages" id="advisorMessages"><div class="advisor-msg bot">Hello! I’m your BiasharaCheck business guide. Tell me your idea, county, town and budget. I can help you plan step by step, compare local sourcing options and avoid costly beginner mistakes.</div></div><div class="advisor-suggestions"><button onclick="advisorAsk('I have KSh 10,000. What business can I start in my town?')">Business on a small budget</button><button onclick="advisorAsk('Help me find suppliers near my town.')">Find local suppliers</button><button onclick="advisorAsk('Explain the first 30 days of starting a business.')">My first 30 days</button></div><div class="advisor-compose"><textarea id="advisorInput" rows="2" placeholder="Ask your business question…"></textarea><button id="advisorSend" onclick="sendAdvisor()">Send</button></div></aside>
 <footer class="footer"><b>BiasharaCheck</b><br><span>Before you invest, check the business.</span></footer>
 
 <div class="modal-back" id="modal"><div class="modal"><button class="close" onclick="closeModal()">×</button><div id="modalBody"></div></div></div>
@@ -189,6 +193,27 @@ async function api(path,options={}){
  const data=await res.json().catch(()=>({}));
  return {res,data};
 }
+
+
+let advisorHistory=[];
+function toggleAdvisor(){ $("advisorPanel").classList.toggle("open"); if($("advisorPanel").classList.contains("open")) $("advisorInput").focus(); }
+function advisorAppend(text,who){const el=document.createElement("div");el.className="advisor-msg "+who;el.textContent=text;$("advisorMessages").appendChild(el);$("advisorMessages").scrollTop=$("advisorMessages").scrollHeight;return el;}
+async function advisorAsk(q){$("advisorInput").value=q;await sendAdvisor();}
+async function sendAdvisor(){
+ const input=$("advisorInput"),message=input.value.trim();if(!message)return;
+ input.value="";advisorAppend(message,"user");advisorHistory.push({role:"user",content:message});
+ const pending=advisorAppend("Thinking through your business question…","bot");$("advisorSend").disabled=true;
+ const context={county:$("county")?.value||"",town:$("town")?.value||"",business:$("business")?.value||"",capital:$("userCapitalInput")?.value||""};
+ try{
+  const {res,data}=await api("/api/advisor/chat",{method:"POST",body:JSON.stringify({message,history:advisorHistory.slice(-10),context})});
+  pending.remove();
+  const answer=data.reply||data.error||"I could not prepare an answer just now.";
+  advisorAppend(answer,"bot");
+  if(res.ok)advisorHistory.push({role:"assistant",content:answer});
+ }catch(e){pending.remove();advisorAppend("I can’t reach the advisor service right now. Please try again in a moment.","bot");}
+ finally{$("advisorSend").disabled=false;}
+}
+$("advisorInput")?.addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendAdvisor();}});
 
 function setup(){
  $("business").innerHTML=BUSINESS_NAMES.map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join("");
@@ -304,6 +329,15 @@ function renderResult(name,county,p,check){
  };
  const generalIdeas = ["Test the offer with 10–20 likely customers before committing to rent or bulk stock.","Use WhatsApp Business catalogue, clear prices and quick replies to make ordering easy.","Create a simple daily record of sales, stock, expenses and cash left; review it every week."];
  const ideas = strategies[name] || generalIdeas;
+ const town = $("town")?.value.trim() || "";
+ const place = [town,county==="All Kenya"?"Kenya":county+" County","Kenya"].filter(Boolean).join(", ");
+ const supplierCards=(p.items||[]).map(it=>{
+  const product=it[0],source=it[2]||"suppliers";
+  const query=encodeURIComponent(product+" "+source+" near "+place+" wholesale distributor");
+  const maps="https://www.google.com/maps/search/?api=1&query="+query;
+  const web="https://www.google.com/search?q="+query;
+  return `<div class="supplier-card"><b>${esc(product)}</b><p class="muted" style="font-size:13px;margin:5px 0">Look for ${esc(source)} serving ${esc(place)}.</p><a href="${maps}" target="_blank" rel="noopener">Nearby suppliers & map</a><a href="${web}" target="_blank" rel="noopener">Find phone / WhatsApp listings</a></div>`;
+ }).join("");
  const items = (p.items||[]).map((it,i)=>`<article class="item-card"><h3>${esc(it[0])}</h3><div class="item-cost">${esc(it[1])}</div><div class="item-meta"><b>Where to source:</b> ${esc(it[2])}</div><div class="item-meta">${esc(it[3])}</div></article>`).join("");
  let budget = "";
  if(capital>0){
@@ -323,7 +357,7 @@ function renderResult(name,county,p,check){
  <p class="muted">Planning estimate: <b>${esc(p.range)}</b>. These are indicative planning figures, not live supplier quotes. Actual costs depend on location, supplier, quality and business size.</p>
  ${reality}
  ${capital>0?`<div class="insight-card"><h3>Your capital plan</h3><p>Available capital: <b>${money(capital)}</b>. Protect working cash so the business can operate after opening day.</p>${budget}</div>`:""}
- <h3 style="margin:22px 0 10px">What you need and where to find it</h3><div class="item-cards">${items}</div>
+ <h3 style="margin:22px 0 10px">What you need and where to find it</h3><div class="item-cards">${items}</div><div class="supplier-panel"><h3 style="margin:0 0 6px">📍 Find suppliers near ${esc(place)}</h3><p class="muted" style="font-size:13px">Searches are tailored to your selected town and county. Open a listing to view its published phone number, WhatsApp option, hours and directions. Call to confirm stock, price and delivery before paying.</p><div class="supplier-grid">${supplierCards}</div><div class="notice">Supplier listings and contact details come from live public search results; BiasharaCheck has not independently verified every seller or delivery promise. Never pay a deposit until you have checked the supplier.</div></div>
  <div class="advice"><b>Practical advice:</b> ${esc(p.advice)}</div>
  <div class="insight-grid">
   <div class="insight-card"><h3>💡 Modern ways to win customers</h3><ul>${ideas.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>
